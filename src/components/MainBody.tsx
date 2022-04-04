@@ -2,6 +2,8 @@ import React from 'react';
 
 export function MainBody() {
     return (
-        <div>MainBody</div>
+        <div className="text-primary-100">
+            Ground zero
+        </div>
     );
 }

@@ -2,6 +2,8 @@ import React from 'react';
 
 export function Header() {
     return (
-        <div>Header</div>
+        <div className="text-red-500">
+            Header
+        </div>
     );
 }
