@@ -1,20 +1,32 @@
 @mixin slider-thumb {
     appearance: none;
     display: block;
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
-    background: linear-gradient(120deg, #444 30%, #111 100%);
-    box-shadow: 0 0 0 2px white, 0 0 2px 3px #444;
+    //background: linear-gradient(120deg, #444 30%, #111 100%);
+    background: transparent;
+    box-shadow: 
+        0px 1px 2px 1px #9995, 
+        0 0 0 4px #fff, 
+        0 0 0px 5px #0003;
 }
 
 @mixin non-mono-slider-thumb-focus {
-    background: linear-gradient(
-        120deg,
-        hsl(calc(var(--pos) * 360), 90%, 50%) 30%,
-        hsl(calc(var(--pos) * 360), 100%, 40%) 100%
-    );
-    box-shadow: 0 0 0 3px white, 0 0 2px 4px hsl(calc(var(--pos) * 360), 100%, 50%);
+    // background: linear-gradient(
+    //     120deg,
+    //     hsl(calc(var(--pos) * 360), 90%, 50%) 30%,
+    //     hsl(calc(var(--pos) * 360), 100%, 40%) 100%
+    // );
+    background: transparent;
+    // box-shadow: 
+    //     0 0 0px 3px white, 
+    //     0 0 4px 4px hsl(calc(var(--pos) * 360), 100%, 50%, .5);
+    box-shadow: 
+        // 0 0 0px 3px white, 
+        0 0 0px 1px #f00, 
+        0 0 4px 4px hsl(calc(var(--pos) * 360), 100%, 50%, .5);
+    //box-shadow: 0 0 0px 3px white;
 }
 
 @mixin button-reset {
@@ -33,13 +45,14 @@
 }
 
 .hue-slider {
+    position: relative;
     appearance: none;
     outline: none;
 
-    position: relative;
-    // flex: 1;
-    // height: 48px;
-    // border-radius: 3px;
+    transition: all 0.3s;
+    transform: scale(0.7, 0.6);
+    opacity: 0;
+    animation: appear .3s forwards;
 
     background: linear-gradient(
         to right,
@@ -58,17 +71,7 @@
         hsl(360, 80%, 70%) 100%
     );
 
-    transition: all 0.3s;
-    transform: scale(0.7, 0.6);
-    opacity: 0;
-    animation: appear .3s forwards;
-
-    &.mono {
-        background: linear-gradient(to bottom, #444 0%, #111 100%);
-    }
-
     &:not(.mono):focus {
-        height: 10px;
         background: linear-gradient(
             to right,
             hsl(0, 100%, 50%) 0%,
@@ -85,6 +88,10 @@
             hsl(330, 100%, 50%) 91.6%,
             hsl(360, 100%, 50%) 100%
         );
+    }
+
+    &.mono {
+        background: linear-gradient(to bottom, #444 0%, #111 100%);
     }
 
     &::-webkit-slider-thumb {
