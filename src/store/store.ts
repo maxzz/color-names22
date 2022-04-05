@@ -1,5 +1,6 @@
 import { atom, Getter } from 'jotai';
 import { atomWithCallback } from '../hooks/atomsX';
+import { clearList, ColorItem, groupColors } from '../utils/colors';
 import { debounce } from '../utils/debounce';
 
 //#region LocalStorage
@@ -9,10 +10,12 @@ namespace Storage {
 
     type Store = {
         color: string;
+        hue: number;
     };
 
     export let initialData: Store = {
-        color: 'red',
+        color: 'green',
+        hue: 0,
     };
 
     function load() {
@@ -30,6 +33,7 @@ namespace Storage {
     export const save = debounce(function _save(get: Getter) {
         let newStore: Store = {
             color: get(colorAtom),
+            hue: get(_hueAtom),
         };
         localStorage.setItem(KEY, JSON.stringify(newStore));
     }, 1000);
@@ -37,4 +41,25 @@ namespace Storage {
 
 //#endregion LocalStorage
 
-export const colorAtom = atomWithCallback('blue', ({get}) => Storage.save(get));
+export const colorAtom = atomWithCallback(Storage.initialData.color, ({ get }) => Storage.save(get));
+export const colorsGroupsAtom = atom<ColorItem[][]>([]);
+export const toleranceAtom = atom(0);
+
+const _hueAtom = atomWithCallback(Storage.initialData.hue, ({get}) => Storage.save(get));
+
+export const hueAtom = atom(
+    (get) => get(_hueAtom),
+    (get, set, hue: number) => {
+        const groups = groupColors({
+            colorList: clearList,
+            hue,
+            tolerance: { min: 5 },
+            mono: false,
+        });
+
+        set(colorsGroupsAtom, groups.list);
+        set(toleranceAtom, groups.tolerance);
+        set(colorAtom, '');
+        set(_hueAtom, hue);
+    }
+);
