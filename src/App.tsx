@@ -4,7 +4,7 @@ import { MainBody } from './components/MainBody';
 
 function App() {
     return (
-        <div>
+        <div className="h-screen bg-slate-100">
             <Header />
             <MainBody />
         </div>

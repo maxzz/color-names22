@@ -1071,7 +1071,7 @@ function removeAlternativeColors(colorList: ColorItemRaw[]): ColorItemRaw[] {
         const equivalent = colorList.find(c => c !== color && c.hex === color.hex);
         return !equivalent || color.alt === equivalent.name ? color : null;
     });
-};
+}
 
 function parseColorStrings(color: ColorItemRaw): ColorItem {
     return {

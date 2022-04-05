@@ -1,7 +1,7 @@
 import { atom, Getter } from 'jotai';
 import { atomWithCallback } from '../hooks/atomsX';
-import { clearList, ColorItem, groupColors } from '../utils/colors';
 import { debounce } from '../utils/debounce';
+import { clearList, ColorItem, groupColors } from '../utils/colors';
 
 //#region LocalStorage
 
