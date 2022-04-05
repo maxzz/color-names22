@@ -1067,10 +1067,10 @@ const AllColorItems: ColorItemRaw[] = [
 ];
 
 const removeAlternativeColors = (colorList: ColorItemRaw[]): ColorItemRaw[] => {
-    return colorList.map((color: ColorItemRaw) => {
+    return colorList.filter((color: ColorItemRaw) => {
         const equivalent = colorList.find(c => c !== color && c.hex === color.hex);
         return !equivalent || color.alt === equivalent.name ? color : null;
-    }).filter(Boolean) as ColorItemRaw[];
+    });
 }
 
 export const parseColorStrings = (color: ColorItemRaw): ColorItem => ({
