@@ -1,50 +1,22 @@
 @mixin slider-thumb {
     appearance: none;
     display: block;
+
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    //background: linear-gradient(120deg, #444 30%, #111 100%);
+
     background: hsl(var(--pos), 100%, 50%);
-    // box-shadow: 
-    //     0px -1px 1px 1px #9995, 
-    //     0px 1px 1px 1px #999, 
-    //     0 0 0 4px #fff, 
-    //     0 0 0px 5px #0003;
     box-shadow: 
         0px 0px 1px 2px #9995, 
         0 0 0 4px #fff, 
         0 0 2px 5px #0007;
 }
 
-@mixin non-mono-slider-thumb-focus {
-    // background: linear-gradient(
-    //     120deg,
-    //     hsl(calc(var(--pos) * 360), 90%, 50%) 30%,
-    //     hsl(calc(var(--pos) * 360), 100%, 40%) 100%
-    // );
-    //background: transparent;
-    // box-shadow:
-    //     0 0 0px 3px white,
-    //     0 0 4px 4px hsl(calc(var(--pos) * 360), 100%, 50%, .5);
-    // box-shadow: 
-    //     0px 1px 2px 1px #9995, 
-    //     0 0 0 4px #fff, 
-    //     0 0 0px 5px #0003;
-}
-
-@mixin button-reset {
-    appearance: none;
-    background: none;
-    border: none;
-    color: inherit;
-    margin: 0;
-}
-
 @keyframes appear {
     from {
-        transform: scale(0.7, 0.6);     // initial value before animation
-        opacity: 0;                     // initial value before animation
+        transform: scale(0.7, 0.6);
+        opacity: 0;
     }
     to {
         transform: scale(1, 1);
@@ -57,8 +29,6 @@
     appearance: none;
     outline: none;
 
-    // transform: scale(0.7, 0.6);     // initial value before animation
-    // opacity: 0;                     // initial value before animation
     animation: appear 0.3s forwards;
     transition: all 0.3s;
 
@@ -108,13 +78,5 @@
 
     &::-moz-range-thumb {
         @include slider-thumb;
-    }
-
-    &:not(.mono):focus::-webkit-slider-thumb {
-        @include non-mono-slider-thumb-focus;
-    }
-
-    &:not(.mono):focus::-moz-range-thumb {
-        @include non-mono-slider-thumb-focus;
     }
 }
