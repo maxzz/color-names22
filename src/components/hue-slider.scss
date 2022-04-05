@@ -1,14 +1,46 @@
-@import "./mixins.scss";
+@mixin slider-thumb {
+    appearance: none;
+    display: block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: linear-gradient(120deg, #444 30%, #111 100%);
+    box-shadow: 0 0 0 2px white, 0 0 2px 3px #444;
+}
+
+@mixin non-mono-slider-thumb-focus {
+    background: linear-gradient(
+        120deg,
+        hsl(calc(var(--pos) * 360), 90%, 50%) 30%,
+        hsl(calc(var(--pos) * 360), 100%, 40%) 100%
+    );
+    box-shadow: 0 0 0 3px white, 0 0 2px 4px hsl(calc(var(--pos) * 360), 100%, 50%);
+}
+
+@mixin button-reset {
+    appearance: none;
+    background: none;
+    border: none;
+    color: inherit;
+    margin: 0;
+}
+
+@keyframes appear {
+    to {
+        transform: scale(1, 1);
+        opacity: 1;
+    }
+}
 
 .hue-slider {
     appearance: none;
     outline: none;
+
     position: relative;
-    flex: 1;
-    height: 8px;
-    margin-left: 2vmin;
-    border-radius: 5px;
-    transition: all 0.3s;
+    // flex: 1;
+    // height: 48px;
+    // border-radius: 3px;
+
     background: linear-gradient(
         to right,
         hsl(0, 80%, 70%) 0%,
@@ -25,15 +57,14 @@
         hsl(330, 80%, 70%) 91.6%,
         hsl(360, 80%, 70%) 100%
     );
+
+    transition: all 0.3s;
     transform: scale(0.7, 0.6);
-    opacity: 0.1;
-    animation: appear 0.3s forwards;
+    opacity: 0;
+    animation: appear .3s forwards;
 
     &.mono {
-        background: linear-gradient(
-            to bottom,
-            #444 0%,
-            #111 100%);
+        background: linear-gradient(to bottom, #444 0%, #111 100%);
     }
 
     &:not(.mono):focus {
