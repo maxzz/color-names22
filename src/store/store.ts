@@ -1,7 +1,7 @@
 import { atom, Getter } from 'jotai';
 import { atomWithCallback } from '../hooks/atomsX';
 import { debounce } from '../utils/debounce';
-import { clearList, ColorItem, groupColors } from '../utils/colors';
+import { allColorsWoAlternatives, ColorItem, groupColors } from '../utils/colors';
 
 //#region LocalStorage
 
@@ -51,7 +51,7 @@ export const hueAtom = atom(
     (get) => get(_hueAtom),
     (get, set, hue: number) => {
         const groups = groupColors({
-            colorList: clearList,
+            colorList: allColorsWoAlternatives,
             hue,
             startTolerance: 5,
             mono: false,

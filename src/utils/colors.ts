@@ -21,9 +21,9 @@ export interface ColorItem {
 export const formatRGB = (rgb: ColorTuple3) => `rgb(${rgb.join(', ')})`;
 export const formatHSL = (hsl: ColorTuple3) => `hsl(${hsl.map((item, idx) => !idx ? item : `${item}%`).join(', ')})`;
 
-//#region color items
+//#region All color items
 
-const AllColorItems: ColorItemRaw[] = [
+const allColorsWithAlternatives: ColorItemRaw[] = [
     {
         type: 'light',
         name: 'aliceblue',
@@ -1086,9 +1086,9 @@ function parseColorStrings(color: ColorItemRaw): ColorItem {
     };
 }
 
-export const clearList: ColorItem[] = removeAlternativeColors(AllColorItems).map(parseColorStrings);
+export const allColorsWoAlternatives: ColorItem[] = removeAlternativeColors(allColorsWithAlternatives).map(parseColorStrings);
 
-//#endregion color items
+//#endregion All color items
 
 const { abs } = Math;
 const getNumbersArray = (n: number) => [...Array(n).keys()];
