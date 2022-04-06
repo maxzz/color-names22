@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { globalColorAtom, hueAtom, toleranceAtom } from '../store/store';
+import { formatHSL, formatRGB } from '../utils/colors';
 
 function HueInfo() {
     const hue = useAtomValue(hueAtom);
@@ -40,9 +41,9 @@ function ColorInfo() {
                 <div className="select-none">Hex</div>
                 <div className="">{color.hex}</div>
                 <div className="select-none">RGB</div>
-                <div className="">{`rgb(${color.rgb.join(', ')})`}</div>
+                <div className="">{formatRGB(color.rgb)}</div>
                 <div className="select-none">HSL</div>
-                <div className="">{`hsl(${color.hsl.join(', ')})`}</div>
+                <div className="">{formatHSL(color.hsl)}</div>
             </div>
         }
     </>);

@@ -1,3 +1,5 @@
+export type ColorTuple3 = [number, number, number];
+
 interface ColorItemRaw {
     type: 'light' | 'dark';
     name: string;
@@ -10,11 +12,14 @@ interface ColorItemRaw {
 export interface ColorItem {
     type: 'light' | 'dark';
     name: string;
-    rgb: [number, number, number];
-    hsl: [number, number, number];
+    rgb: ColorTuple3;
+    hsl: ColorTuple3;
     hex: string;
     alt?: string; // Alternative Name
 }
+
+export const formatRGB = (rgb: ColorTuple3) => `rgb(${rgb.join(', ')})`;
+export const formatHSL = (hsl: ColorTuple3) => `hsl(${hsl.map((item, idx) => !idx ? item : `${item}%`).join(', ')})`;
 
 //#region color items
 
