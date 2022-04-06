@@ -59,7 +59,7 @@ export const hueAtom = atom(
 
         set(colorGroupsAtom, groups.list);
         set(toleranceAtom, groups.tolerance);
-        set(globalColorAtom, null);
+        set(globalColorAtom, groups?.list?.[0]?.[0] || null);
         set(_hueAtom, hue);
     }
 );
