@@ -16,7 +16,7 @@ function HueInfo() {
 
 function ColorPreview() {
     const color = useAtomValue(globalColorAtom);
-    const borderColor = () => color ? color.type === 'dark' ? 'white' : 'black' : 'transparent';
+    const borderColor = () => color ? color.dark ? 'white' : 'black' : 'transparent';
     return (
         <div
             className="w-20 h-20 border flex items-center justify-center"
