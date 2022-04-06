@@ -6,7 +6,7 @@ function HueInfo() {
     const hue = useAtomValue(hueAtom);
     const [tolerance] = useAtom(toleranceAtom);
     return (
-        <div className="">
+        <div className="flex space-x-2">
             <div className="">Hue: {hue}</div>
             <div className="">Tolerance: {tolerance}</div>
         </div>
@@ -50,10 +50,14 @@ function ColorInfo() {
 
 export function ColorInfoPanel() {
     return (
-        <div className="p-2 flex space-x-4 text-sm">
+        <div className="px-4 flex items-end justify-between">
+            <div className="flex space-x-4 text-sm">
+                <ColorPreview />
+                <ColorInfo />
+            </div>
             <HueInfo />
-            <ColorPreview />
-            <ColorInfo />
         </div>
     );
 }
+
+//TODO: add tailwind palettes
