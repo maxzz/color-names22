@@ -7,7 +7,9 @@ export function MainBody() {
     return (
         <div className="mt-4 grid gap-4">
             <ColorInfoPanel />
+            <div className="px-4">
             <HueSlider />
+            </div>
             <ColorNeighbors />
         </div>
     );

@@ -15,8 +15,18 @@ function HueInfo() {
 
 function ColorPreview() {
     const color = useAtomValue(globalColorAtom);
+    const borderColor = () => color ? color.type === 'dark' ? 'white' : 'black' : 'transparent';
     return (
-        <div className="w-20 h-20" style={{ backgroundColor: `${color ? color.hex : 'transparent'}` }}></div>
+        <div
+            className="w-20 h-20 border flex items-center justify-center"
+            style={{
+                backgroundColor: `${color ? color.hex : 'transparent'}`,
+                color: borderColor(),
+                borderColor: borderColor()
+            }}
+        >
+            Test
+        </div>
     );
 }
 
