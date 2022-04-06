@@ -12,7 +12,7 @@ export function HueSlider() {
             ref={sliderRef}
             type="range"
             min="0"
-            max="360"
+            max="359"
             value={color}
             onChange={(event) => {
                 const value = +event.target.value;
