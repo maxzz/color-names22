@@ -63,3 +63,4 @@ export const hueAtom = atom(
         set(_hueAtom, hue);
     }
 );
+hueAtom.onMount = (set) => set(Storage.initialData.hue);

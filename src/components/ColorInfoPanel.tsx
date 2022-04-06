@@ -6,7 +6,7 @@ export function ColorInfoPanel() {
     const hue = useAtomValue(hueAtom);
     const [tolerance] = useAtom(toleranceAtom);
     return (
-        <div>
+        <div className="text-sm">
             <div className="">Hue: {hue}</div>
             <div className="">Tolerance: {tolerance}</div>
         </div>
