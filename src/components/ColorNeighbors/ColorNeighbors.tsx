@@ -1,10 +1,12 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { globalColorAtom, colorGroupsAtom } from '../store/store';
+import { useUpdateAtom } from 'jotai/utils';
+import { globalColorAtom, colorGroupsAtom } from '../../store/store';
+import './ColorNeighbors.scss';
 
 export function ColorNeighbors() {
     const [colorsGroups] = useAtom(colorGroupsAtom);
-    const [globalColor, setGlobalColor] = useAtom(globalColorAtom);
+    const setGlobalColor = useUpdateAtom(globalColorAtom);
     return (
         <div className="place-self-center relative w-1/2 max-w-[42rem] aspect-square grid border border-slate-200 shadow-md">
             {colorsGroups.map((group, groupIdx) => (

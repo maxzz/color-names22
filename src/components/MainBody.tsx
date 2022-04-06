@@ -1,5 +1,5 @@
 import { ColorInfoPanel } from './ColorInfoPanel';
-import { ColorNeighbors } from './ColorNeighbors';
+import { ColorNeighbors } from './ColorNeighbors/ColorNeighbors';
 import { HueSlider } from './HueSlider/HueSlider';
 
 
