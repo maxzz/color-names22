@@ -11,7 +11,7 @@ export function ColorNeighbors() {
                 <div className="grid grid-flow-col" key={groupIdx}>
                     {group.map((color, colorIdx) => (
                         <button
-                            className="hover:scale-[1.02] hover:shadow-md"
+                            className="hover:scale-[1.02] hover:shadow-md hover:border-slate-500 hover:border transition-transform"
                             style={{
                                 backgroundColor: color.name,
                                 color: color.type === 'light' ? 'black' : 'white'

@@ -5,7 +5,7 @@ import { HueSlider } from './HueSlider/HueSlider';
 
 export function MainBody() {
     return (
-        <div className="grid gap-4">
+        <div className="mt-4 grid gap-4">
             <ColorInfoPanel />
             <HueSlider />
             <ColorNeighbors />
