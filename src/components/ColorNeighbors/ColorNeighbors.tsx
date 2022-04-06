@@ -17,7 +17,7 @@ export function ColorNeighbors() {
                                 className="hover:scale-[1.02] hover:shadow-md hover:border-slate-500 hover:border transition-transform"
                                 style={{
                                     backgroundColor: color.name,
-                                    color: color.type === 'light' ? 'black' : 'white'
+                                    color: color.dark ? 'white' : 'black',
                                 }}
                                 key={colorIdx}
                                 onClick={() => setGlobalColor(color)}

@@ -1,7 +1,7 @@
 export type ColorTuple3 = [number, number, number];
 
 interface ColorItemRaw {
-    dark: boolean; // vs. type: 'light' | 'dark';
+    dark: boolean; // vs. type: 'light' | 'dark'
     name: string;
     rgb: string;
     hsl: string;
@@ -10,12 +10,11 @@ interface ColorItemRaw {
 }
 
 export interface ColorItem {
-    dark: boolean;
     name: string;
-    rgb: ColorTuple3;
-    hsl: ColorTuple3;
     hex: string;
-    alt?: string; // Alternative Name
+    hsl: ColorTuple3;
+    rgb: ColorTuple3;
+    dark: boolean;
 }
 
 export const formatRGB = (rgb: ColorTuple3) => `rgb(${rgb.join(', ')})`;
@@ -1080,9 +1079,11 @@ function removeAlternativeColors(colorList: ColorItemRaw[]): ColorItemRaw[] {
 
 function parseColorStrings(color: ColorItemRaw): ColorItem {
     return {
-        ...color,
-        rgb: color.rgb.match(/rgb\((\d+),(\d+),(\d+)\)/)?.slice(1).map(Number) as [number, number, number],
+        name: color.name,
+        hex: color.hex,
         hsl: color.hsl.match(/hsl\((.*),(.*)%,(.*)%\)/)?.slice(1).map(Number) as [number, number, number],
+        rgb: color.rgb.match(/rgb\((\d+),(\d+),(\d+)\)/)?.slice(1).map(Number) as [number, number, number],
+        dark: color.dark,
     };
 }
 
