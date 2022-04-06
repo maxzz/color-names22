@@ -1127,19 +1127,17 @@ function groupByLightness(filteredByHue: ColorItem[], tolerance: number): ColorI
 type groupColorsParams = {
     colorList: ColorItem[];
     hue: number;
-    tolerance: {
-        min: number;
-    };
+    startTolerance: number; // as start min tolerance value
     mono: boolean;
 };
 
-export function groupColors({ colorList, hue, tolerance, mono }: groupColorsParams): { list: ColorItem[][]; tolerance: number; } {
+export function groupColors({ colorList, hue, startTolerance, mono }: groupColorsParams): { list: ColorItem[][]; tolerance: number; } {
 
     const baseColors = colorList.filter(mono ? isMonochrome : isNonMonochrome);
     const sortedColors = [...baseColors].sort((a, b) => a.hsl[1] - b.hsl[1]);
-    const byHue = recursiveFilterByHue(sortedColors, (hue || 0) % 360, tolerance.min);
-    const byHueWithLightnessGroups = groupByLightness(byHue.list, tolerance.min);
-    
+    const byHue = recursiveFilterByHue(sortedColors, (hue || 0) % 360, startTolerance);
+    const byHueWithLightnessGroups = groupByLightness(byHue.list, startTolerance);
+
     return {
         list: byHueWithLightnessGroups,
         tolerance: byHue.tolerance

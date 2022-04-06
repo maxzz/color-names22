@@ -53,7 +53,7 @@ export const hueAtom = atom(
         const groups = groupColors({
             colorList: clearList,
             hue,
-            tolerance: { min: 5 },
+            startTolerance: 5,
             mono: false,
         });
 
