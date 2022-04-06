@@ -35,10 +35,10 @@ function ColorInfo() {
     return (<>
         {color &&
             <div className="">
-                <div className="">{color.name}</div>
-                <div className="">{color.hex}</div>
-                <div className="">{`rgb(${color.rgb.join(', ')})`}</div>
-                <div className="">{`hsl(${color.hsl.join(', ')})`}</div>
+                <div className="">Name: {color.name}</div>
+                <div className="">Hex: {color.hex}</div>
+                <div className="">RGB: {`rgb(${color.rgb.join(', ')})`}</div>
+                <div className="">HSL: {`hsl(${color.hsl.join(', ')})`}</div>
             </div>
         }
     </>);
