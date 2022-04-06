@@ -5,7 +5,7 @@ import { HueSlider } from './HueSlider/HueSlider';
 
 export function MainBody() {
     return (
-        <div className="text-primary-100">
+        <div className="grid gap-4">
             <ColorInfoPanel />
             <HueSlider />
             <ColorNeighbors />

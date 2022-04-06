@@ -5,7 +5,7 @@ import { colorGroupsAtom } from '../store/store';
 export function ColorNeighbors() {
     const [colorsGroups] = useAtom(colorGroupsAtom);
     return (
-        <div className="mx-auto w-1/2 aspect-square grid border border-slate-200 shadow-md">
+        <div className="place-self-center w-1/2 max-w-[42rem] aspect-square grid border border-slate-200 shadow-md">
             {colorsGroups.map((group, groupIdx) =>
                 <div className="grid grid-flow-col row" key={groupIdx}>
                     {
