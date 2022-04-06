@@ -1095,7 +1095,8 @@ const getNumbersArray = (n: number) => [...Array(n).keys()];
 const isMonochrome = (color: ColorItem) => color.hsl[1] === 0;
 const isNonMonochrome = (color: ColorItem) => !isMonochrome(color);
 
-function recursiveFilterColorsByHue(colorList: ColorItem[], hue: number, tolerance: number): { list: ColorItem[], tolerance: number; } {
+function recursiveFilterByHue(colorList: ColorItem[], hue: number, tolerance: number): { list: ColorItem[], tolerance: number; } {
+
     const colors = colorList.filter((color: ColorItem) => abs(hue - color.hsl[0]) < tolerance);
     if (colors.length) {
         return {
@@ -1103,13 +1104,14 @@ function recursiveFilterColorsByHue(colorList: ColorItem[], hue: number, toleran
             tolerance
         };
     }
-    return recursiveFilterColorsByHue(colorList, hue, tolerance + 1);
+
+    return recursiveFilterByHue(colorList, hue, tolerance + 1);
 }
 
-function groupColorsByLightness(colorList: ColorItem[], tolerance: number): ColorItem[][] {
+function groupByLightness(filteredByHue: ColorItem[], tolerance: number): ColorItem[][] {
 
-    function isNearbyColor(currentTolerance: number, color: ColorItem): boolean {
-        const difference = 100 - color.hsl[2] - currentTolerance * tolerance;
+    function isNearbyLightness(toleranceIdx: number, color: ColorItem): boolean {
+        const difference = 100 - color.hsl[2] - toleranceIdx * tolerance;
         const differenceLimit = tolerance / 2;
         if (abs(difference) === differenceLimit) {
             return difference > 0;
@@ -1118,17 +1120,28 @@ function groupColorsByLightness(colorList: ColorItem[], tolerance: number): Colo
     }
 
     return getNumbersArray(100 / tolerance + 1)
-        .map((t: number) => colorList.filter((color: ColorItem) => isNearbyColor(t, color)))
+        .map((t: number) => filteredByHue.filter((color: ColorItem) => isNearbyLightness(t, color)))
         .filter((group: ColorItem[]) => !!group.length);
 }
 
-export function groupColors({ colorList, hue, tolerance, mono }: { colorList: ColorItem[], hue: number, tolerance: { min: number; }, mono: boolean; }) {
+type groupColorsParams = {
+    colorList: ColorItem[];
+    hue: number;
+    tolerance: {
+        min: number;
+    };
+    mono: boolean;
+};
+
+export function groupColors({ colorList, hue, tolerance, mono }: groupColorsParams): { list: ColorItem[][]; tolerance: number; } {
+
     const baseColors = colorList.filter(mono ? isMonochrome : isNonMonochrome);
     const sortedColors = [...baseColors].sort((a, b) => a.hsl[1] - b.hsl[1]);
-    const colorsFilteredByHue = recursiveFilterColorsByHue(sortedColors, (hue || 0) % 360, tolerance.min);
-    const lightnessGroups = groupColorsByLightness(colorsFilteredByHue.list, tolerance.min);
+    const byHue = recursiveFilterByHue(sortedColors, (hue || 0) % 360, tolerance.min);
+    const byHueWithLightnessGroups = groupByLightness(byHue.list, tolerance.min);
+    
     return {
-        list: lightnessGroups,
-        tolerance: colorsFilteredByHue.tolerance
+        list: byHueWithLightnessGroups,
+        tolerance: byHue.tolerance
     };
 }
