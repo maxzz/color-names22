@@ -1,8 +1,10 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
+import { useAtom } from "jotai";
+import { hueAtom } from "../../store/store";
 import './HueSlider.scss';
 
 export function HueSlider() {
-    const [color, setColor] = useState(40);
+    const [color, setColor] = useAtom(hueAtom);
     const sliderRef = useRef<HTMLInputElement>(null);
     return (
         <input

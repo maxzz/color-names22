@@ -42,7 +42,7 @@ namespace Storage {
 //#endregion LocalStorage
 
 export const colorAtom = atomWithCallback(Storage.initialData.color, ({ get }) => Storage.save(get));
-export const colorsGroupsAtom = atom<ColorItem[][]>([]);
+export const colorGroupsAtom = atom<ColorItem[][]>([]);
 export const toleranceAtom = atom(0);
 
 const _hueAtom = atomWithCallback(Storage.initialData.hue, ({get}) => Storage.save(get));
@@ -57,7 +57,7 @@ export const hueAtom = atom(
             mono: false,
         });
 
-        set(colorsGroupsAtom, groups.list);
+        set(colorGroupsAtom, groups.list);
         set(toleranceAtom, groups.tolerance);
         set(colorAtom, '');
         set(_hueAtom, hue);
