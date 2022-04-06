@@ -1,26 +1,45 @@
-import { useAtom, useAtomValue } from 'jotai';
 import React from 'react';
+import { useAtom, useAtomValue } from 'jotai';
 import { globalColorAtom, hueAtom, toleranceAtom } from '../store/store';
 
-export function ColorInfoPanel() {
+function HueInfo() {
     const hue = useAtomValue(hueAtom);
     const [tolerance] = useAtom(toleranceAtom);
+    return (
+        <div className="">
+            <div className="">Hue: {hue}</div>
+            <div className="">Tolerance: {tolerance}</div>
+        </div>
+    );
+}
+
+function ColorPreview() {
     const color = useAtomValue(globalColorAtom);
     return (
-        <div className="p-2 flex space-x-4 text-sm">
+        <div className="w-20 h-20" style={{ backgroundColor: `${color ? color.hex : 'transparent'}` }}></div>
+    );
+}
+
+function ColorInfo() {
+    const color = useAtomValue(globalColorAtom);
+    return (<>
+        {color &&
             <div className="">
-                <div className="">Hue: {hue}</div>
-                <div className="">Tolerance: {tolerance}</div>
+                <div className="">{color.name}</div>
+                <div className="">{color.hex}</div>
+                <div className="">{`rgb(${color.rgb.join(', ')})`}</div>
+                <div className="">{`hsl(${color.hsl.join(', ')})`}</div>
             </div>
-            <div className="w-20 h-20" style={{backgroundColor: `${color ? color.hex: 'transparent'}`}}></div>
-            {color &&
-                <div className="">
-                    <div className="">{color.name}</div>
-                    <div className="">{color.hex}</div>
-                    <div className="">{`rgb(${color.rgb.join(', ')})`}</div>
-                    <div className="">{`hsl(${color.hsl.join(', ')})`}</div>
-                </div>
-            }
+        }
+    </>);
+}
+
+export function ColorInfoPanel() {
+    return (
+        <div className="p-2 flex space-x-4 text-sm">
+            <HueInfo />
+            <ColorPreview />
+            <ColorInfo />
         </div>
     );
 }
