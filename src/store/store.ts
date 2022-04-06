@@ -9,12 +9,12 @@ namespace Storage {
     const KEY = 'react-name-colors22-01';
 
     type Store = {
-        color: string;
+        color: ColorItem | null;
         hue: number;
     };
 
     export let initialData: Store = {
-        color: 'green',
+        color: null,
         hue: 0,
     };
 
@@ -32,7 +32,7 @@ namespace Storage {
 
     export const save = debounce(function _save(get: Getter) {
         let newStore: Store = {
-            color: get(colorAtom),
+            color: get(globalColorAtom),
             hue: get(_hueAtom),
         };
         localStorage.setItem(KEY, JSON.stringify(newStore));
@@ -41,7 +41,7 @@ namespace Storage {
 
 //#endregion LocalStorage
 
-export const colorAtom = atomWithCallback(Storage.initialData.color, ({ get }) => Storage.save(get));
+export const globalColorAtom = atomWithCallback(Storage.initialData.color, ({ get }) => Storage.save(get));
 export const colorGroupsAtom = atom<ColorItem[][]>([]);
 export const toleranceAtom = atom(0);
 
@@ -59,7 +59,7 @@ export const hueAtom = atom(
 
         set(colorGroupsAtom, groups.list);
         set(toleranceAtom, groups.tolerance);
-        set(colorAtom, '');
+        set(globalColorAtom, null);
         set(_hueAtom, hue);
     }
 );
