@@ -1092,7 +1092,7 @@ export const allColorsWoAlternatives: ColorItem[] = removeAlternativeColors(allC
 //#endregion All color items
 
 const { abs } = Math;
-const getNumbersArray = (n: number) => [...Array(n).keys()];
+const getNumbersArray = (n: number) => [...Array(Math.floor(n)).keys()];
 const isMonochrome = (color: ColorItem) => color.hsl[1] === 0;
 const isNonMonochrome = (color: ColorItem) => !isMonochrome(color);
 

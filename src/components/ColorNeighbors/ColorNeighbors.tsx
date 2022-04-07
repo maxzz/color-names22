@@ -33,3 +33,18 @@ export function ColorNeighbors() {
         </div>
     );
 }
+
+// :root {
+//     --content-width: max(340px, min(80vmin, 800px));
+//     --font-size: max(14px, min(3vmin, 20px));
+// }
+
+// body {
+//     font: normal var(--font-size)/1.4 helvetica, sans-serif;
+// }
+
+// .chart-container {
+//     position: relative;
+//     width: var(--content-width);
+//     height: var(--content-width);
+// }
