@@ -1093,7 +1093,7 @@ export const allColorsWoAlternatives: ColorItem[] = removeAlternativeColors(allC
 
 const { abs } = Math;
 const getNumbersArray = (n: number) => [...Array(Math.floor(n)).keys()];
-const isMonochrome = (color: ColorItem) => color.hsl[1] === 0;
+const isMonochrome = (color: ColorItem) => color.hsl[1] === 0; //TODO: 'show' is somehow lost here.
 const isNonMonochrome = (color: ColorItem) => !isMonochrome(color);
 
 function recursiveFilterByHue(colorList: ColorItem[], hue: number, tolerance: number): { list: ColorItem[], tolerance: number; } {
