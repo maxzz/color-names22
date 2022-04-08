@@ -12,13 +12,25 @@ interface ColorItemRaw {
 export interface ColorItem {
     name: string;
     hex: string;
-    hsl: ColorTuple3;
-    rgb: ColorTuple3;
+    hsl: ColorTuple3; // h: 0..360, s: 0..100%, l: 0..100%
+    rgb: ColorTuple3; // r: 0..255, g: 0..255, b: 0..255
     dark: boolean;
 }
 
 export const formatRGB = (rgb: ColorTuple3) => `rgb(${rgb.join(', ')})`;
 export const formatHSL = (hsl: ColorTuple3) => `hsl(${hsl.map((item, idx) => !idx ? item : `${item}%`).join(', ')})`;
+
+export function compareName(a: ColorItem, b: ColorItem) {
+    return a.name.localeCompare(b.name);
+}
+
+export function compareRgb(a: ColorTuple3, b: ColorTuple3) {
+    return (a[0] - b[0] || a[1] - b[1] || a[2] - b[2]);
+}
+
+export function compareHsl(a: ColorTuple3, b: ColorTuple3) {
+    return (a[0] - b[0] || a[1] - b[1] || a[2] - b[2]);
+}
 
 //#region All color items
 
