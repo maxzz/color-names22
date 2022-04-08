@@ -20,8 +20,12 @@ export interface ColorItem {
 export const formatRGB = (rgb: ColorTuple3) => `rgb(${rgb.join(', ')})`;
 export const formatHSL = (hsl: ColorTuple3) => `hsl(${hsl.map((item, idx) => !idx ? item : `${item}%`).join(', ')})`;
 
+const compareColors = (a: ColorTuple3, b: ColorTuple3) => (a[0] - b[0] || a[1] - b[1] || a[2] - b[2]); // The same for rgb and hsl
+
 export const compareNames = (a: ColorItem, b: ColorItem) => a.name.localeCompare(b.name);
-export const compareColors = (a: ColorTuple3, b: ColorTuple3) => (a[0] - b[0] || a[1] - b[1] || a[2] - b[2]); // The same for rgb and hsl
+export const compareRgb = (a: ColorItem, b: ColorItem) => compareColors(a.rgb, b.rgb);
+export const compareHsl = (a: ColorItem, b: ColorItem) => compareColors(a.hsl, b.hsl);
+
 
 //#region All color items
 

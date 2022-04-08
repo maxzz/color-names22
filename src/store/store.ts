@@ -1,7 +1,7 @@
 import { atom, Getter } from 'jotai';
 import { atomWithCallback } from '../hooks/atomsX';
 import { debounce } from '../utils/debounce';
-import { allColorsWoAlternatives, ColorItem, compareColors, compareNames, groupColors } from '../utils/colors';
+import { allColorsWoAlternatives, ColorItem, compareHsl, compareNames, compareRgb, groupColors } from '../utils/colors';
 
 //#region LocalStorage
 
@@ -86,8 +86,8 @@ export const colorListSortByAtom = atom(
         let list = allColorsWoAlternatives;
         switch (value) {
             case SortBy.name: list = [...list].sort(compareNames);
-            case SortBy.rgb: list = [...list].sort((a, b) => compareColors(a.rgb, b.rgb));
-            case SortBy.hsl: list = [...list].sort((a, b) => compareColors(a.hsl, b.hsl));
+            case SortBy.rgb: list = [...list].sort(compareRgb);
+            case SortBy.hsl: list = [...list].sort(compareHsl);
         }
         set(colorListAtom, list);
     }
