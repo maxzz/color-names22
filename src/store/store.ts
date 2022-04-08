@@ -69,6 +69,8 @@ hueAtom.onMount = (set) => set(Storage.initialData.hue);
 
 //#endregion By Hue
 
+//#region Sorted colors list
+
 export const colorListAtom = atom<ColorItem[]>([]);
 
 export const _colorListSortByAtom = atom(SortBy.none);
@@ -82,3 +84,5 @@ export const colorListSortByAtom = atom(
     }
 );
 colorListSortByAtom.onMount = (set) => set(SortBy.none);
+
+//#endregion Sorted colors list

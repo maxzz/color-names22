@@ -1,3 +1,5 @@
+import { useAtomValue } from 'jotai';
+import { colorListSortByAtom } from '../store/store';
 import { ColorInfoPanel } from './ColorInfoPanel';
 import { ColorNeighbors } from './ColorNeighbors/ColorNeighbors';
 import { ColorsList } from './ColorsList';
@@ -6,6 +8,7 @@ import { MonochromeSwitch } from './MonochromeSwitch';
 
 
 export function MainBody() {
+    useAtomValue(colorListSortByAtom);
     return (
         <div className="">
             <ColorsList />
