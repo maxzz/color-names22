@@ -1,7 +1,7 @@
 import { atom, Getter } from 'jotai';
 import { atomWithCallback } from '../hooks/atomsX';
 import { debounce } from '../utils/debounce';
-import { allColorsWoAlternatives, ColorItem, compareHsl, compareNames, compareRgb, groupColors } from '../utils/colors';
+import { allColorsWoAlternatives, ColorItem, compareHsl, compareNames, compareRgb, groupColors, SortBy, sortColorItemsFn } from '../utils/colors';
 
 //#region LocalStorage
 
@@ -69,13 +69,6 @@ hueAtom.onMount = (set) => set(Storage.initialData.hue);
 
 //#endregion By Hue
 
-export enum SortBy {
-    none,
-    name,
-    rgb,
-    hsl,
-}
-
 export const colorListAtom = atom<ColorItem[]>([]);
 
 export const _colorListSortByAtom = atom(SortBy.none);
@@ -83,12 +76,9 @@ export const _colorListSortByAtom = atom(SortBy.none);
 export const colorListSortByAtom = atom(
     (get) => get(_colorListSortByAtom),
     (get, set, value: SortBy) => {
-        let list = allColorsWoAlternatives;
-        switch (value) {
-            case SortBy.name: list = [...list].sort(compareNames);
-            case SortBy.rgb: list = [...list].sort(compareRgb);
-            case SortBy.hsl: list = [...list].sort(compareHsl);
-        }
+        const fn = sortColorItemsFn(value);
+        const list = fn ? [...allColorsWoAlternatives].sort(fn) : allColorsWoAlternatives;
         set(colorListAtom, list);
     }
 );
+colorListSortByAtom.onMount = (set) => set(SortBy.none);
