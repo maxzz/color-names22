@@ -21,8 +21,8 @@ export function ColorsList() {
                 {colorList.map((color) => (
                     <Fragment key={color.name}>
                         <div className="" style={{ backgroundColor: color.name }} />
-                        <div className=""><span className="text-xs front-mono">{formatHSL(color.hsl)}</span></div>
-                        <div className="">{color.name}</div>
+                        <div className="text-xs leading-5 front-mono">{formatHSL(color.hsl)}</div>
+                        <div className="text-sm">{color.name}</div>
                     </Fragment>
                 ))}
             </div>
