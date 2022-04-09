@@ -8,6 +8,9 @@ module.exports = {
                 primary: {
                     100: colors.blue['500'],
                 }
+            },
+            fontFamily: {
+                header: ['Merriweather Bold', 'sans-serif']
             }
         },
     },
