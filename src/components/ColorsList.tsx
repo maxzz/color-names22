@@ -17,11 +17,12 @@ export function ColorsList() {
                     <label className="flex items-center"><input className="mr-1" type="radio" value={SortBy.hsl} name="sortby" />hsl</label>
                 </ul>
             </div>
-            <div className="grid grid-cols-[8rem,1fr] gap-x-2">
+            <div className="grid grid-cols-[8rem,auto,1fr] gap-x-2">
                 {colorList.map((color) => (
                     <Fragment key={color.name}>
                         <div className="" style={{ backgroundColor: color.name }} />
-                        <div className="h-10"><span className="text-xs front-mono">{formatHSL(color.hsl)}</span> {color.name}</div>
+                        <div className=""><span className="text-xs front-mono">{formatHSL(color.hsl)}</span></div>
+                        <div className="">{color.name}</div>
                     </Fragment>
                 ))}
             </div>
