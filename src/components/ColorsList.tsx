@@ -10,11 +10,11 @@ export function ColorsList() {
         <div className="">
             <div className="">
                 <div className="">ColorsList</div>
-                <ul className="flex items-center space-x-2">
-                    <label><input className="mr-1" type="radio" value={SortBy.none} name="sortby" onChange={(event) => setSortBy(+event.target.value)} />none</label>
-                    <label><input className="mr-1" type="radio" value={SortBy.name} name="sortby" onChange={(event) => setSortBy(+event.target.value)} />name</label>
-                    <label><input className="mr-1" type="radio" value={SortBy.rgb} name="sortby" onChange={(event) => setSortBy(+event.target.value)} />rgb</label>
-                    <label><input className="mr-1" type="radio" value={SortBy.hsl} name="sortby" onChange={(event) => setSortBy(+event.target.value)} />hsl</label>
+                <ul className="flex items-center space-x-2" onChange={(event) => setSortBy(+(event.target as HTMLInputElement).value)}>
+                    <label><input className="mr-1" type="radio" value={SortBy.none} name="sortby" />none</label>
+                    <label><input className="mr-1" type="radio" value={SortBy.name} name="sortby" />name</label>
+                    <label><input className="mr-1" type="radio" value={SortBy.rgb} name="sortby" />rgb</label>
+                    <label><input className="mr-1" type="radio" value={SortBy.hsl} name="sortby" />hsl</label>
                 </ul>
             </div>
             <div className="grid grid-cols-[8rem,1fr]">
