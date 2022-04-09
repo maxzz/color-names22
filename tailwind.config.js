@@ -10,7 +10,7 @@ module.exports = {
                 }
             },
             fontFamily: {
-                header: ['Merriweather Bold', 'sans-serif']
+                header: ['Merriweather', 'sans-serif']
             }
         },
     },
