@@ -13,7 +13,7 @@ export function MainBody() {
         <div className="">
             <ColorsList />
             
-            <div className="border-slate-700 border-b">Section two</div>
+            <div className="px-4 mt-8 text-xl font-header border-slate-700 border-b">Section two: sorted groups</div>
 
             <div className="mt-4 grid gap-4">
                 <ColorInfoPanel />
