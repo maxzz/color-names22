@@ -11,7 +11,6 @@ export function ColorsList() {
         <div className="space-y-4">
             <div className="px-4 border-slate-700 border-b flex items-center justify-between space-x-4">
                 <div className="text-xl font-header">Section one: colors list</div>
-                {/* <ul className="flex items-center space-x-2" onChange={(event) => setSortBy(+(event.target as HTMLInputElement).value)}> */}
                 <ul className="flex items-center space-x-2">
                     <label className="flex items-center"><input className="mr-1" type="radio" onChange={onChange} checked={sortBy === SortBy.none} value={SortBy.none} name="sortby" />none</label>
                     <label className="flex items-center"><input className="mr-1" type="radio" onChange={onChange} checked={sortBy === SortBy.name} value={SortBy.name} name="sortby" />name</label>
@@ -22,9 +21,9 @@ export function ColorsList() {
             <div className="px-4 grid grid-cols-[8rem,auto,1fr] gap-x-2">
                 {colorList.map((color) => (
                     <Fragment key={color.name}>
-                        <div className="" style={{ backgroundColor: color.name }} />
                         <div className="text-xs leading-5 front-mono">{formatHSL(color.hsl)}</div>
                         <div className="text-sm">{color.name}</div>
+                        <div className="" style={{ backgroundColor: color.name }} />
                     </Fragment>
                 ))}
             </div>
