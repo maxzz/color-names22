@@ -7,7 +7,7 @@ export function Header() {
             style={{textShadow: '#ff000069 1px 1px 2px, #afafafc4 0px 0px 2px'}}
             // style={{textShadow: '1px 1px red, -1px -1px white'}}
         >
-            <div className="scale-y-[1.5]">Color Names</div>
+            <div className="mx-auto scale-y-[1.5]">Color Names</div>
         </div>
     );
 }
