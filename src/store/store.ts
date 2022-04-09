@@ -11,11 +11,13 @@ namespace Storage {
     type Store = {
         color: ColorItem | null;
         hue: number;
+        sort: SortBy;
     };
 
     export let initialData: Store = {
         color: null,
         hue: 0,
+        sort: SortBy.hsl,
     };
 
     function load() {
@@ -34,6 +36,7 @@ namespace Storage {
         let newStore: Store = {
             color: get(globalColorAtom),
             hue: get(_hueAtom),
+            sort: get(colorListSortByAtom),
         };
         localStorage.setItem(KEY, JSON.stringify(newStore));
     }, 1000);
@@ -73,7 +76,7 @@ hueAtom.onMount = (set) => set(Storage.initialData.hue);
 
 export const colorListAtom = atom<ColorItem[]>([]);
 
-export const _colorListSortByAtom = atom(SortBy.none);
+export const _colorListSortByAtom = atomWithCallback(Storage.initialData.sort, ({ get }) => Storage.save(get));
 
 export const colorListSortByAtom = atom(
     (get) => get(_colorListSortByAtom),
@@ -81,8 +84,9 @@ export const colorListSortByAtom = atom(
         const fn = sortColorItemsFn(value);
         const list = fn ? [...allColorsWoAlternatives].sort(fn) : allColorsWoAlternatives;
         set(colorListAtom, list);
+        set(_colorListSortByAtom, value);
     }
 );
-colorListSortByAtom.onMount = (set) => set(SortBy.none);
+colorListSortByAtom.onMount = (set) => set(Storage.initialData.sort);
 
 //#endregion Sorted colors list
