@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { colorListAtom, colorListSortByAtom } from '../store/store';
-import { SortBy } from '../utils/colors';
+import { formatHSL, SortBy } from '../utils/colors';
 
 export function ColorsList() {
     const colorList = useAtomValue(colorListAtom);
@@ -17,11 +17,11 @@ export function ColorsList() {
                     <label><input className="mr-1" type="radio" value={SortBy.hsl} name="sortby" />hsl</label>
                 </ul>
             </div>
-            <div className="grid grid-cols-[8rem,1fr]">
+            <div className="grid grid-cols-[8rem,1fr] gap-x-2">
                 {colorList.map((color) => (
                     <Fragment key={color.name}>
                         <div className="" style={{ backgroundColor: color.name }} />
-                        <div className="h-16">{color.name}</div>
+                        <div className="h-10"><span className="text-xs front-mono">{formatHSL(color.hsl)}</span> {color.name}</div>
                     </Fragment>
                 ))}
             </div>
