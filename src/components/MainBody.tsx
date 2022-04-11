@@ -5,15 +5,20 @@ import { ColorNeighbors } from './ColorNeighbors/ColorNeighbors';
 import { ColorsList } from './ColorsList';
 import { HueSlider } from './HueSlider/HueSlider';
 import { MonochromeSwitch } from './MonochromeSwitch';
+
 import { UISwitch } from './UI/UISwitch';
+import { UISwitchCheck } from './UI/UISwitchCheck';
+import { UISwitchRadio } from './UI/UISwitchRadio';
 
 
 export function MainBody() {
     useAtomValue(colorListSortByAtom);
     return (
         <div className="">
-            <div className="px-4">
+            <div className="px-4 flex space-x-4">
                 <UISwitch />
+                <UISwitchCheck />
+                <UISwitchRadio />
             </div>
             {/* <ColorsList /> */}
 

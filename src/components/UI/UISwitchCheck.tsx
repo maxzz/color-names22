@@ -1,7 +1,7 @@
 import React, { useState } from 'react'; //https://codepen.io/raphaelgoetter/pen/rGjOOg
 import styles from './UISwitch.module.scss';
 
-export function UISwitch() {
+export function UISwitchCheck() {
     const [on, setOn] = useState(false);
     const label = "Name";
     return (<>
