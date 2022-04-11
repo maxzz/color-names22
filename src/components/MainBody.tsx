@@ -5,13 +5,15 @@ import { ColorNeighbors } from './ColorNeighbors/ColorNeighbors';
 import { ColorsList } from './ColorsList';
 import { HueSlider } from './HueSlider/HueSlider';
 import { MonochromeSwitch } from './MonochromeSwitch';
+import { UISwitch } from './UI/UISwitch';
 
 
 export function MainBody() {
     useAtomValue(colorListSortByAtom);
     return (
         <div className="">
-            <ColorsList />
+            <UISwitch />
+            {/* <ColorsList /> */}
             
             <div className="px-4 mt-8 text-xl font-header border-slate-700 border-b">Section two: sorted groups</div>
 
