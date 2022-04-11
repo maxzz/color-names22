@@ -8,8 +8,8 @@ export function UISwitch() {
     const [on, setOn] = useState(false);
     const label = "Name";
     return (
-        <label className="flex items-center space-x-2">
-            <input type="checkbox" className={`${styles.switch}`} />
+        <label className="flex items-center space-x-2 cursor-pointer select-none">
+            <input type="checkbox" className={`${styles.switch} cursor-pointer`} />
             <span>{label}</span>
         </label>
     );
