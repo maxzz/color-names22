@@ -1,11 +1,11 @@
-import { Header } from './components/Header';
-import { MainBody } from './components/MainBody';
+import { AppHeader } from './components/App1Header';
+import { MainBody } from './components/App2Frontpage';
 import './App.scss';
 
 function App() {
     return (
         <div className="min-h-screen bg-orange-50">
-            <Header />
+            <AppHeader />
             <MainBody />
         </div>
     );

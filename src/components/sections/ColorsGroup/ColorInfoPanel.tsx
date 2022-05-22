@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtom, useAtomValue } from 'jotai';
-import { globalColorAtom, hueAtom, toleranceAtom } from '../store/store';
-import { formatHSL, formatRGB } from '../utils/colors';
+import { globalColorAtom, hueAtom, toleranceAtom } from '../../../store/store';
+import { formatHSL, formatRGB } from '../../../utils/colors';
 
 function HueInfo() {
     const hue = useAtomValue(hueAtom);

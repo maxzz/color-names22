@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
-import { globalColorAtom, colorGroupsAtom } from '../../store/store';
+import { globalColorAtom, colorGroupsAtom } from '../../../../store/store';
 import './ColorNeighbors.scss';
 
 export function ColorNeighbors() {
