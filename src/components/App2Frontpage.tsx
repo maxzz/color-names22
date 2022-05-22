@@ -7,12 +7,12 @@ import { Experiments } from './UI/experiments/Experiments';
 export function MainBody() {
     const currentSection = useAtomValue(currentSectionAtom);
     return (
-        <div className="">
+        <div className="flex-1 overflow-auto">
             {/* <Experiments /> */}
 
             {currentSection === SectionName.groups &&
                 <>
-                    <div className="px-4 mt-8 text-xl font-header border-slate-700 border-b">
+                    <div className="mt-8 px-4 text-xl font-header border-slate-700 border-b">
                         Section two: sorted groups
                     </div>
 
@@ -22,7 +22,7 @@ export function MainBody() {
 
             {currentSection === SectionName.list &&
                 <>
-                    <div className="px-4 border-slate-700 border-b flex items-center justify-between space-x-4">
+                    <div className="mt-8 px-4 border-slate-700 border-b flex items-center justify-between space-x-4">
                         <div className="text-xl font-header">
                             Section one: colors list
                         </div>
@@ -30,7 +30,7 @@ export function MainBody() {
                         <SortOrderSwitch className="px-4" />
                     </div>
 
-                    <ColorsList />
+                    <ColorsList className="" />
                 </>
             }
         </div>

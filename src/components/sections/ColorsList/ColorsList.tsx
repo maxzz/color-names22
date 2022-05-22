@@ -33,9 +33,9 @@ function List() {
     );
 }
 
-export function ColorsList() {
+export function ColorsList({className}: React.HTMLAttributes<HTMLUListElement>) {
     return (
-        <div className="space-y-4">
+        <div className={classNames("space-y-4", className)}>
             <List />
         </div>
 
