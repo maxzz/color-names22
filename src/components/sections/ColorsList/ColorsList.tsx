@@ -4,7 +4,7 @@ import { colorListAtom, colorListSortByAtom } from '../../../store/store';
 import { formatHSL, SortBy } from '../../../utils/colors';
 import { classNames } from '../../../utils/classnames';
 
-function SortOrderSwitch({className}: React.HTMLAttributes<HTMLUListElement>) {
+export function SortOrderSwitch({className}: React.HTMLAttributes<HTMLUListElement>) {
     const [sortBy, setSortBy] = useAtom(colorListSortByAtom);
     const onChange = (event: ChangeEvent<HTMLInputElement>) => setSortBy(+event.target.value);
     return (
@@ -36,17 +36,6 @@ function List() {
 export function ColorsList() {
     return (
         <div className="space-y-4">
-
-            <div className="px-4 border-slate-700 border-b flex items-center justify-between space-x-4">
-
-                <div className="text-xl font-header">
-                    Section one: colors list
-                </div>
-                
-            </div>
-            
-            <SortOrderSwitch className="px-4" />
-
             <List />
         </div>
 

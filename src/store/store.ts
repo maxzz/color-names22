@@ -90,3 +90,10 @@ export const colorListSortByAtom = atom(
 colorListSortByAtom.onMount = (set) => set(Storage.initialData.sort);
 
 //#endregion Sorted colors list
+
+export enum SectionName {
+    groups,
+    list,
+}
+
+export const currentSectionAtom = atom<SectionName>(SectionName.groups);

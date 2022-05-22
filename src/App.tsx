@@ -4,7 +4,7 @@ import './App.scss';
 
 function App() {
     return (
-        <div className="min-h-screen bg-orange-50">
+        <div className="min-h-screen flex flex-col bg-orange-500">
             <AppHeader />
             <MainBody />
         </div>
