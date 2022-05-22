@@ -1,13 +1,14 @@
 import { useAtomValue } from 'jotai';
 import { currentSectionAtom, SectionName } from '../store/store';
+import { classNames } from '../utils/classnames';
 import { ColorsGroup } from './sections/ColorsGroup/ColorsGroup';
 import { ColorsList, SortOrderSwitch } from './sections/ColorsList/ColorsList';
 import { Experiments } from './UI/experiments/Experiments';
 
-export function MainBody() {
+export function MainBody({ className }: React.HTMLAttributes<HTMLDivElement>) {
     const currentSection = useAtomValue(currentSectionAtom);
     return (
-        <div className="flex-1 overflow-auto">
+        <div className={classNames("main min-h-0", className)}>
             {/* <Experiments /> */}
 
             {currentSection === SectionName.groups &&
@@ -21,7 +22,7 @@ export function MainBody() {
             }
 
             {currentSection === SectionName.list &&
-                <>
+                <div className="sec h-full flex flex-col">
                     <div className="mt-8 px-4 border-slate-700 border-b flex items-center justify-between space-x-4">
                         <div className="text-xl font-header">
                             Section one: colors list
@@ -30,8 +31,8 @@ export function MainBody() {
                         <SortOrderSwitch className="px-4" />
                     </div>
 
-                    <ColorsList className="" />
-                </>
+                    <ColorsList className="list overflow-auto" />
+                </div>
             }
         </div>
     );
