@@ -8,8 +8,8 @@ function LinkButton({ label, sectionName }: { label: string, sectionName: Sectio
     return (
         <li
             className={classNames(
-                " text-right cursor-pointer",
-                currentSection === sectionName ? "text-green-700" : "",
+                " text-right select-none cursor-pointer",
+                currentSection === sectionName ? "font-bold underline" : "text-slate-500",
             )}
             onClick={() => setCurrentSection(sectionName)}
         >

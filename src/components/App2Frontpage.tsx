@@ -8,21 +8,21 @@ import { Experiments } from './UI/experiments/Experiments';
 export function MainBody({ className }: React.HTMLAttributes<HTMLDivElement>) {
     const currentSection = useAtomValue(currentSectionAtom);
     return (
-        <div className={classNames("main min-h-0", className)}>
+        <div className={classNames("min-h-0", className)}>
             {/* <Experiments /> */}
 
             {currentSection === SectionName.groups &&
-                <>
+                <div className="h-full flex flex-col">
                     <div className="mt-8 px-4 text-xl font-header border-slate-700 border-b">
                         Section two: sorted groups
                     </div>
 
-                    <ColorsGroup />
-                </>
+                    <ColorsGroup className="overflow-auto" />
+                </div>
             }
 
             {currentSection === SectionName.list &&
-                <div className="sec h-full flex flex-col">
+                <div className="h-full flex flex-col">
                     <div className="mt-8 px-4 border-slate-700 border-b flex items-center justify-between space-x-4">
                         <div className="text-xl font-header">
                             Section one: colors list
@@ -31,9 +31,10 @@ export function MainBody({ className }: React.HTMLAttributes<HTMLDivElement>) {
                         <SortOrderSwitch className="px-4" />
                     </div>
 
-                    <ColorsList className="list overflow-auto" />
+                    <ColorsList className="overflow-auto" />
                 </div>
             }
+
         </div>
     );
 }

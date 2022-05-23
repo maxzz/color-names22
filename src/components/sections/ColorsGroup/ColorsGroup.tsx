@@ -5,11 +5,12 @@ import { ColorInfoPanel } from './ColorInfoPanel';
 import { ColorNeighbors } from './ColorNeighbors/ColorNeighbors';
 import { HueSlider } from './HueSlider/HueSlider';
 import { MonochromeSwitch } from './MonochromeSwitch';
+import { classNames } from '../../../utils/classnames';
 
-export function ColorsGroup() {
+export function ColorsGroup({className}: React.HTMLAttributes<HTMLUListElement>) {
     useAtomValue(colorListSortByAtom);
     return (
-        <div className="mt-4 grid gap-4">
+        <div className={classNames("mt-4 grid gap-4", className)}>
             <ColorInfoPanel />
             <div className="px-4">
                 <div className="">
