@@ -1,12 +1,12 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
-import { globalColorAtom, colorGroupsAtom } from '../../../../store/store';
+import { viewHueAtoms } from '../../../../store/store';
 import './ColorNeighbors.scss';
 
 export function ColorNeighbors() {
-    const [colorsGroups] = useAtom(colorGroupsAtom);
-    const setGlobalColor = useUpdateAtom(globalColorAtom);
+    const [colorsGroups] = useAtom(viewHueAtoms.colorGroupsAtom);
+    const setGlobalColor = useUpdateAtom(viewHueAtoms.colorAtom);
     return (
         <div className="place-self-center relative w-1/2 max-w-[42rem] aspect-square">
             <div className="w-full h-full grid border border-slate-200 shadow-md">

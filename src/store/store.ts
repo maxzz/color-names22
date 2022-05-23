@@ -1,4 +1,4 @@
-import { atom, Getter } from 'jotai';
+import { atom, Getter, SetStateAction } from 'jotai';
 import { Atomize, atomWithCallback } from '../hooks/atomsX';
 import { debounce } from '../utils/debounce';
 import { allColorsWoAlternatives, ColorItem, groupColors, SortBy, sortColorItemsFn } from '../utils/colors';
@@ -9,14 +9,15 @@ namespace Storage {
     const KEY = 'react-name-colors22-01';
 
     type Store = {
-        color: ColorItem | null;
-        hue: number;
+        viewHueOptions: ViewHueOptions;
         sort: SortBy;
     };
 
     export let initialData: Store = {
-        color: null,
-        hue: 0,
+        viewHueOptions: {
+            color: null,
+            hue: 0,
+        },
         sort: SortBy.hsl,
     };
 
@@ -34,8 +35,10 @@ namespace Storage {
 
     export const saveDebounced = debounce(function _save(get: Getter) {
         let newStore: Store = {
-            color: get(globalColorAtom),
-            hue: get(_hueAtom),
+            viewHueOptions: {
+                color: get(viewHueAtoms.colorAtom),
+                hue: get(_hueAtom),
+            },
             sort: get(colorListSortByAtom),
         };
         localStorage.setItem(KEY, JSON.stringify(newStore));
@@ -57,36 +60,31 @@ export const viewHueAtoms: Atomize<ViewHueOptions & {
     colorGroups: ColorItem[][];
     tolerance: number;
 }> = {
-    colorAtom: atomWithCallback(Storage.initialData.color, Storage.save),
-    hueAtom: atomWithCallback(Storage.initialData.hue, Storage.save),
+    colorAtom: atomWithCallback(Storage.initialData.viewHueOptions.color, Storage.save),
+    hueAtom: atom(
+        (get) => get(_hueAtom),
+        (get, set, hue: SetStateAction<number>) => {
+            const v = typeof hue === 'function' ? hue(get(_hueAtom)) : hue;
+            const groups = groupColors({
+                colorList: allColorsWoAlternatives,
+                hue: v,
+                startTolerance: 5,
+                mono: false,
+            });
+    
+            set(viewHueAtoms.colorGroupsAtom, groups.list);
+            set(viewHueAtoms.toleranceAtom, groups.tolerance);
+            set(viewHueAtoms.colorAtom, groups?.list?.[0]?.[0] || null);
+            set(_hueAtom, hue);
+        }
+    ),
 
     colorGroupsAtom: atom<ColorItem[][]>([]),
     toleranceAtom: atom(0),
 };
+viewHueAtoms.hueAtom.onMount = (set) => set(Storage.initialData.viewHueOptions.hue);
 
-export const globalColorAtom = atomWithCallback(Storage.initialData.color, Storage.save);
-export const colorGroupsAtom = atom<ColorItem[][]>([]);
-export const toleranceAtom = atom(0);
-
-const _hueAtom = atomWithCallback(Storage.initialData.hue, Storage.save);
-
-export const hueAtom = atom(
-    (get) => get(_hueAtom),
-    (get, set, hue: number) => {
-        const groups = groupColors({
-            colorList: allColorsWoAlternatives,
-            hue,
-            startTolerance: 5,
-            mono: false,
-        });
-
-        set(colorGroupsAtom, groups.list);
-        set(toleranceAtom, groups.tolerance);
-        set(globalColorAtom, groups?.list?.[0]?.[0] || null);
-        set(_hueAtom, hue);
-    }
-);
-hueAtom.onMount = (set) => set(Storage.initialData.hue);
+const _hueAtom = atomWithCallback(Storage.initialData.viewHueOptions.hue, Storage.save);
 
 //#endregion By Hue
 

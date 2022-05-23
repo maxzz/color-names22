@@ -1,11 +1,11 @@
 import React from 'react';
 import { useAtom, useAtomValue } from 'jotai';
-import { globalColorAtom, hueAtom, toleranceAtom } from '../../../store/store';
+import { viewHueAtoms } from '../../../store/store';
 import { formatHSL, formatRGB } from '../../../utils/colors';
 
 function HueInfo() {
-    const hue = useAtomValue(hueAtom);
-    const [tolerance] = useAtom(toleranceAtom);
+    const hue = useAtomValue(viewHueAtoms.hueAtom);
+    const [tolerance] = useAtom(viewHueAtoms.toleranceAtom);
     return (
         <div className="flex space-x-2">
             <div className="">Hue: {hue}</div>
@@ -15,7 +15,7 @@ function HueInfo() {
 }
 
 function ColorPreview() {
-    const color = useAtomValue(globalColorAtom);
+    const color = useAtomValue(viewHueAtoms.colorAtom);
     const borderColor = () => color ? color.dark ? 'white' : 'black' : 'transparent';
     return (
         <div
@@ -32,7 +32,7 @@ function ColorPreview() {
 }
 
 function ColorInfo() {
-    const color = useAtomValue(globalColorAtom);
+    const color = useAtomValue(viewHueAtoms.colorAtom);
     return (<>
         {color &&
             <div className="grid grid-cols-[auto,1fr] gap-x-2">
