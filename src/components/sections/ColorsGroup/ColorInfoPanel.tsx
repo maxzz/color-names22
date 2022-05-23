@@ -37,11 +37,21 @@ function ColorInfo() {
         {color &&
             <div className="grid grid-cols-[auto,1fr] gap-x-2">
                 <div className="select-none">Name</div>
-                <div className="">{color.name}</div>
+                <div className="flex items-center cursor-pointer">
+                    <div className="peer">{color.name}</div>
+                    <div className="hidden peer-hover:inline-block ml-2">Copy</div>
+                </div>
+
                 <div className="select-none">Hex</div>
-                <div className="">{color.hex}</div>
+                <div className="focus-within:[--my:red] hover:[--my:red]" tabIndex={0}>
+                    <div className="">{color.hex}</div>
+                    <div className="[background-color:var(--my)]">Copy</div>
+                    {/* <div className="bg-[var(--my)]">Copy</div> */}
+                </div>
+
                 <div className="select-none">RGB</div>
                 <div className="">{formatRGB(color.rgb)}</div>
+
                 <div className="select-none">HSL</div>
                 <div className="">{formatHSL(color.hsl)}</div>
             </div>
