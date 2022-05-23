@@ -34,7 +34,7 @@ function Links({ className }: React.HTMLAttributes<HTMLDivElement>) {
 //const textShadow = {textShadow: '1px 1px red, -1px -1px white', color: 'transparent', 'WebkitTextStroke': '0.5px green',};
 const textShadow = { textShadow: '1px 1px red, -1px -1px white', 'WebkitTextStroke': '0.5px #f3e8ff', };
 
-export function AppHeader() {
+export function App1_Header() {
     return (
         <div className="relative py-4 bg-orange-200 border-slate-400 border-b shadow-[0px_1px_2px_1px_#ffc16d69]">
             <div className="text-3xl flex items-center text-purple-300 uppercase font-header" style={textShadow}>

@@ -8,7 +8,7 @@ import { MonochromeSwitch } from './MonochromeSwitch';
 import { classNames } from '../../../utils/classnames';
 import LabeledSwitch from '../../UI/UiSwitch';
 
-export function ColorsGroup({ className }: React.HTMLAttributes<HTMLUListElement>) {
+export function Section1_ColorsByHue({ className }: React.HTMLAttributes<HTMLUListElement>) {
     useAtomValue(viewListAtoms.sortByAtom);
     const [on, setOn] = React.useState(false);
     return (

@@ -33,7 +33,7 @@ function List() {
     );
 }
 
-export function ColorsList({className}: React.HTMLAttributes<HTMLUListElement>) {
+export function Section2_ColorsList({className}: React.HTMLAttributes<HTMLUListElement>) {
     return (
         <div className={classNames("space-y-4", className)}>
             <List />

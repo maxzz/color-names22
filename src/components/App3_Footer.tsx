@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconGithubLogo } from './UI/UIIcons';
 
-export function AppFooter() {
+export function App3_Footer() {
     return (
         <div className="px-4 py-2 bg-orange-200 border-slate-400 border-t shadow-[0px_-1px_2px_1px_#b69a7950] text-orange-400/75">
             <div className="flex items-center justify-end space-x-4">

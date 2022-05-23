@@ -1,11 +1,11 @@
 import { useAtomValue } from 'jotai';
 import { AppAtoms, SectionName } from '../store/store';
 import { classNames } from '../utils/classnames';
-import { ColorsGroup } from './sections/ColorsGroup/ColorsGroup';
-import { ColorsList, SortOrderSwitch } from './sections/ColorsList/ColorsList';
+import { Section1_ColorsByHue } from './sections/Section1_ColorsByHue/Section1_ColorsByHue';
+import { Section2_ColorsList, SortOrderSwitch } from './sections/Section2_ColorsList/Section2_ColorsList';
 import { Experiments } from './UI/experiments/Experiments';
 
-export function MainBody({ className }: React.HTMLAttributes<HTMLDivElement>) {
+export function App2_Main({ className }: React.HTMLAttributes<HTMLDivElement>) {
     const currentSection = useAtomValue(AppAtoms.currentSectionAtom);
     return (
         <div className={classNames("min-h-0", className)}>
@@ -17,7 +17,7 @@ export function MainBody({ className }: React.HTMLAttributes<HTMLDivElement>) {
                         Section two: sorted groups
                     </div>
 
-                    <ColorsGroup className="overflow-auto" />
+                    <Section1_ColorsByHue className="overflow-auto" />
                 </div>
             }
 
@@ -31,7 +31,7 @@ export function MainBody({ className }: React.HTMLAttributes<HTMLDivElement>) {
                         <SortOrderSwitch className="px-4" />
                     </div>
 
-                    <ColorsList className="overflow-auto" />
+                    <Section2_ColorsList className="overflow-auto" />
                 </div>
             }
 

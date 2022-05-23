@@ -1,14 +1,14 @@
-import { AppHeader } from './components/App1Header';
-import { MainBody } from './components/App2Frontpage';
+import { App1_Header } from './components/App1_Header';
+import { App2_Main } from './components/App2_Main';
 import './App.scss';
-import { AppFooter } from './components/App3Footer';
+import { App3_Footer } from './components/App3_Footer';
 
 function App() {
     return (
         <div className="h-screen flex flex-col bg-orange-100">
-            <AppHeader />
-            <MainBody className="flex-1" />
-            <AppFooter />
+            <App1_Header />
+            <App2_Main className="flex-1" />
+            <App3_Footer />
         </div>
     );
 }
