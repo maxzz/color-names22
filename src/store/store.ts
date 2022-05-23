@@ -1,7 +1,7 @@
 import { atom, Getter } from 'jotai';
-import { atomWithCallback } from '../hooks/atomsX';
+import { Atomize, atomWithCallback } from '../hooks/atomsX';
 import { debounce } from '../utils/debounce';
-import { allColorsWoAlternatives, ColorItem, compareHsl, compareNames, compareRgb, groupColors, SortBy, sortColorItemsFn } from '../utils/colors';
+import { allColorsWoAlternatives, ColorItem, groupColors, SortBy, sortColorItemsFn } from '../utils/colors';
 
 //#region LocalStorage
 
@@ -32,7 +32,7 @@ namespace Storage {
     }
     load();
 
-    export const save = debounce(function _save(get: Getter) {
+    export const saveDebounced = debounce(function _save(get: Getter) {
         let newStore: Store = {
             color: get(globalColorAtom),
             hue: get(_hueAtom),
@@ -40,17 +40,35 @@ namespace Storage {
         };
         localStorage.setItem(KEY, JSON.stringify(newStore));
     }, 1000);
+
+    export const save = ({ get }: { get: Getter; }) => Storage.saveDebounced(get);
 }
 
 //#endregion LocalStorage
 
 //#region By Hue
 
-export const globalColorAtom = atomWithCallback(Storage.initialData.color, ({ get }) => Storage.save(get));
+type ViewHueOptions = {
+    color: ColorItem | null;
+    hue: number;
+};
+
+export const viewHueAtoms: Atomize<ViewHueOptions & {
+    colorGroups: ColorItem[][];
+    tolerance: number;
+}> = {
+    colorAtom: atomWithCallback(Storage.initialData.color, Storage.save),
+    hueAtom: atomWithCallback(Storage.initialData.hue, Storage.save),
+
+    colorGroupsAtom: atom<ColorItem[][]>([]),
+    toleranceAtom: atom(0),
+};
+
+export const globalColorAtom = atomWithCallback(Storage.initialData.color, Storage.save);
 export const colorGroupsAtom = atom<ColorItem[][]>([]);
 export const toleranceAtom = atom(0);
 
-const _hueAtom = atomWithCallback(Storage.initialData.hue, ({ get }) => Storage.save(get));
+const _hueAtom = atomWithCallback(Storage.initialData.hue, Storage.save);
 
 export const hueAtom = atom(
     (get) => get(_hueAtom),
@@ -74,9 +92,21 @@ hueAtom.onMount = (set) => set(Storage.initialData.hue);
 
 //#region Sorted colors list
 
+type ViewListOptions = {
+    sort: SortBy;
+};
+
+export const viewListAtoms: Atomize<ViewListOptions & {
+    colorList: ColorItem[];
+}> = {
+    sortAtom: atomWithCallback(Storage.initialData.sort, Storage.save),
+
+    colorListAtom: atom<ColorItem[]>([]),
+};
+
 export const colorListAtom = atom<ColorItem[]>([]);
 
-export const _colorListSortByAtom = atomWithCallback(Storage.initialData.sort, ({ get }) => Storage.save(get));
+export const _colorListSortByAtom = atomWithCallback(Storage.initialData.sort, Storage.save);
 
 export const colorListSortByAtom = atom(
     (get) => get(_colorListSortByAtom),
@@ -92,8 +122,8 @@ colorListSortByAtom.onMount = (set) => set(Storage.initialData.sort);
 //#endregion Sorted colors list
 
 export enum SectionName {
-    groups,
+    hue,
     list,
 }
 
-export const currentSectionAtom = atom<SectionName>(SectionName.groups);
+export const currentSectionAtom = atom<SectionName>(SectionName.hue);

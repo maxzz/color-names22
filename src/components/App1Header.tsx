@@ -22,7 +22,7 @@ function Links({ className }: React.HTMLAttributes<HTMLDivElement>) {
     return (
         <div className={classNames("flex items-center", className)}>
             <ul>
-                <LinkButton label="Hue groups" sectionName={SectionName.groups} />
+                <LinkButton label="Hue groups" sectionName={SectionName.hue} />
                 <LinkButton label="Named colors" sectionName={SectionName.list} />
             </ul>
         </div>
@@ -36,7 +36,7 @@ const textShadow = { textShadow: '1px 1px red, -1px -1px white', 'WebkitTextStro
 
 export function AppHeader() {
     return (
-        <div className="relative py-4 shadow-[0px_1px_2px_1px_#ffc16d69]">
+        <div className="relative py-4 bg-orange-200 border-slate-400 border-b shadow-[0px_1px_2px_1px_#ffc16d69]">
             <div className="text-3xl flex items-center text-purple-300 uppercase font-header" style={textShadow}>
                 <div className="mx-auto scale-y-[1.5]">CSS Color Names</div>
             </div>

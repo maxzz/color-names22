@@ -1,4 +1,4 @@
-import { atom, Getter, SetStateAction, Setter, WritableAtom } from 'jotai';
+import { atom, Getter, PrimitiveAtom, SetStateAction, Setter, WritableAtom } from 'jotai';
 
 export type OnValueChange<Value> = ({ get, set, nextValue }: { get: Getter; set: Setter; nextValue: Value; }) => void;
 
@@ -16,6 +16,10 @@ export function atomWithCallback<Value>(initialValue: Value, onValueChange: OnVa
     );
     return derivedAtom;
 }
+
+export type Atomize<T> = {
+    [key in keyof T & string as `${key}Atom`]: PrimitiveAtom<T[key]>;
+};
 
 export type LoadingDataState<T> = { loading: boolean, error: unknown | null, data: T | null; };
 export const loadingDataStateInit = () => ({ loading: true, error: null, data: null });

@@ -11,7 +11,7 @@ export function MainBody({ className }: React.HTMLAttributes<HTMLDivElement>) {
         <div className={classNames("min-h-0", className)}>
             {/* <Experiments /> */}
 
-            {currentSection === SectionName.groups &&
+            {currentSection === SectionName.hue &&
                 <div className="h-full flex flex-col">
                     <div className="mt-8 px-4 text-xl font-header border-slate-700 border-b">
                         Section two: sorted groups
