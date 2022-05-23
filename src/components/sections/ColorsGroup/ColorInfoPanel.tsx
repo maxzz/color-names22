@@ -35,30 +35,43 @@ function ColorPreview() {
 }
 
 function Mount({ show, setShow, children }: { show: boolean; setShow: (v: boolean) => void; } & React.HTMLAttributes<HTMLDivElement>) {
-    const transitions = useTransition(Number(show), {
+    const transitions = useTransition(Number(!show), {
         // const transitions = useTransition(show, {
         from: { x: 0, opacity: 0, },
         enter: { x: 0, opacity: 1, config: { duration: 500, easing: easings.easeOutCubic }, },
-        leave: { x: 200, opacity: 0, config: { duration: 12400, easing: easings.easeOutQuad }, /* onRest: () => console.log('done') */ },
-        //exitBeforeEnter: true,
+        leave: {
+            x: 20, opacity: 0, config: { duration: 1400, easing: easings.easeOutQuad },
+            // onRest: () => console.log('done'),
+            // onRest: {
+            //     opacity: ({ finished }, val) => {
+            //         console.log('done', finished);
+            //         if (show && finished) {
+            //             console.log('done opacity show= ', val.id, show);
 
-        // onRest: (result, ctrl, item) => {
-        //     //console.log('done', finished);
-        //     console.log('done show= ', show, result, ctrl, item);
-
-        //     show && setShow(false);
-        // },
-
-        onRest: {
-            opacity: ({finished}, val) => {
-                //console.log('done', finished);
+            //             show && setShow(false);
+            //         }
+            //     }
+            // },
+            onRest: ({ finished }, val) => {
+                console.log('done', finished);
                 if (show && finished) {
                     console.log('done opacity show= ', val.id, show);
 
                     show && setShow(false);
                 }
-            }
+            },
         },
+
+        // onRest: {
+        //     opacity: ({finished}, val) => {
+        //         //console.log('done', finished);
+        //         if (show && finished) {
+        //             console.log('done opacity show= ', val.id, show);
+
+        //             show && setShow(false);
+        //         }
+        //     }
+        // },
 
         // onRest: () => setShow(false),
         //config: { duration: 200, },
@@ -73,7 +86,7 @@ function Mount({ show, setShow, children }: { show: boolean; setShow: (v: boolea
 
 function CopyNotice() {
     return (
-        <div className="">Copied</div>
+        <div className="text-green-500 font-bold">Copied</div>
     );
 }
 
@@ -82,8 +95,9 @@ function ValueWithCopy({ name, label }: { name: string; label: string; }) {
     const [showNotice, setShowNotice] = useState(false);
     return (<>
         <div className="py-0.5 select-none">{name}</div>
+
         <div
-            className="flex items-center space-x-2"
+            className="flex items-center space-x-2 select-none"
             onPointerEnter={() => setFocus(true)}
             onPointerLeave={() => setFocus(false)}
             onClick={async () => {
@@ -117,9 +131,9 @@ function ColorInfo() {
         {color &&
             <div className="grid grid-cols-[auto,1fr] gap-x-2 gap-y-0.5">
                 <ValueWithCopy name={"Name"} label={color.name} />
-                {/* <ValueWithCopy name={"Hex"} label={color.hex} />
+                <ValueWithCopy name={"Hex"} label={color.hex} />
                 <ValueWithCopy name={"RGB"} label={formatRGB(color.rgb)} />
-                <ValueWithCopy name={"HSL"} label={formatHSL(color.hsl)} /> */}
+                <ValueWithCopy name={"HSL"} label={formatHSL(color.hsl)} />
             </div>
         }
     </>);
