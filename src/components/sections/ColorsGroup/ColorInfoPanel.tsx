@@ -38,17 +38,14 @@ function Mount({ show, setShow, children }: { show: boolean; setShow: (v: boolea
     const transitions = useTransition(Number(show), {
         from: { x: 0, opacity: 0, },
         enter: { x: 0, opacity: 1, },
-        leave: {
-            x: 20, opacity: 0, config: { duration: 1400, easing: easings.easeOutQuad },
-            onRest: ({ finished }) => show && finished && setShow(false),
-        },
+        leave: { x: 20, opacity: 0, config: { duration: 400, easing: easings.easeOutQuad }, onRest: ({ finished }) => show && finished && setShow(false), },
     });
     return transitions((styles, item) => item ? <a.div style={styles}> {children} </a.div> : null);
 }
 
 function CopyNotice() {
     return (
-        <div className="text-green-500 font-bold">Copied</div>
+        <div className="px-2 py-px bg-green-500 text-green-50 rounded font-bold">Copied</div>
     );
 }
 
@@ -56,8 +53,10 @@ function ValueWithCopy({ name, label }: { name: string; label: string; }) {
     const [focus, setFocus] = useState(false);
     const [showNotice, setShowNotice] = useState(false);
     return (<>
+        {/* Column name */}
         <div className="py-0.5 select-none">{name}</div>
-
+        
+        {/* Column value */}
         <div
             className="flex items-center space-x-2 select-none"
             onPointerEnter={() => setFocus(true)}
