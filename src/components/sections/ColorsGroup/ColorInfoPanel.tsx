@@ -39,7 +39,7 @@ function Mount({ show, setShow, children }: { show: boolean; setShow: (v: boolea
         // const transitions = useTransition(show, {
         from: { x: 0, opacity: 0, },
         enter: { x: 0, opacity: 1, config: { duration: 500, easing: easings.easeOutCubic }, },
-        leave: { x: 200, opacity: 0, config: { duration: 2400, easing: easings.easeOutQuad }, /* onRest: () => console.log('done') */ },
+        leave: { x: 200, opacity: 0, config: { duration: 12400, easing: easings.easeOutQuad }, /* onRest: () => console.log('done') */ },
         //exitBeforeEnter: true,
 
         // onRest: (result, ctrl, item) => {
@@ -50,10 +50,10 @@ function Mount({ show, setShow, children }: { show: boolean; setShow: (v: boolea
         // },
 
         onRest: {
-            opacity: (result, ctrl, item) => {
+            opacity: ({finished}, val) => {
                 //console.log('done', finished);
-                if (show) {
-                    console.log('done opacity show= ', show, result, ctrl, item);
+                if (show && finished) {
+                    console.log('done opacity show= ', val.id, show);
 
                     show && setShow(false);
                 }
