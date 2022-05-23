@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { viewHueAtoms } from '../../../store/store';
 import { formatHSL, formatRGB } from '../../../utils/colors';
+import { classNames } from '../../../utils/classnames';
+import { IconClipboard } from '../../UI/UIIcons';
 
 function HueInfo() {
     const hue = useAtomValue(viewHueAtoms.hueAtom);
@@ -19,7 +21,7 @@ function ColorPreview() {
     const borderColor = () => color ? color.dark ? 'white' : 'black' : 'transparent';
     return (
         <div
-            className="w-20 h-20 border flex items-center justify-center"
+            className="w-24 h-24 border flex items-center justify-center"
             style={{
                 backgroundColor: `${color ? color.hex : 'transparent'}`,
                 color: borderColor(),
@@ -31,29 +33,38 @@ function ColorPreview() {
     );
 }
 
+function ValueWithCopy({ name, label }: { name: string; label: string; }) {
+    const [focus, setFocus] = useState(false);
+    return (<>
+        <div className="py-0.5 select-none">{name}</div>
+        <div onPointerEnter={() => setFocus(true)} onPointerLeave={() => setFocus(false)}
+            onClick={async () => {
+                await navigator.clipboard.writeText(label);
+                //toastSucceeded('Link copied to clipboard');
+            }}
+        >
+            <div className={classNames(
+                "inline-flex items-center space-x-1 cursor-pointer",
+                focus ? "px-1 py-0.5 bg-slate-100 outline-slate-500 outline-1 outline rounded shadow active:scale-[.97]" : "px-1 py-0.5"
+            )}>
+                <div className="">{label}</div>
+                <div className={classNames(focus ? "visible" : "invisible")}>
+                    <IconClipboard className="w-4 h-4 text-slate-500" />
+                </div>
+            </div>
+        </div>
+    </>);
+}
+
 function ColorInfo() {
     const color = useAtomValue(viewHueAtoms.colorAtom);
     return (<>
         {color &&
-            <div className="grid grid-cols-[auto,1fr] gap-x-2">
-                <div className="select-none">Name</div>
-                <div className="flex items-center cursor-pointer">
-                    <div className="peer">{color.name}</div>
-                    <div className="hidden peer-hover:inline-block ml-2">Copy</div>
-                </div>
-
-                <div className="select-none">Hex</div>
-                <div className="focus-within:[--my:red] hover:[--my:red]" tabIndex={0}>
-                    <div className="">{color.hex}</div>
-                    <div className="[background-color:var(--my)]">Copy</div>
-                    {/* <div className="bg-[var(--my)]">Copy</div> */}
-                </div>
-
-                <div className="select-none">RGB</div>
-                <div className="">{formatRGB(color.rgb)}</div>
-
-                <div className="select-none">HSL</div>
-                <div className="">{formatHSL(color.hsl)}</div>
+            <div className="grid grid-cols-[auto,1fr] gap-x-2 gap-y-0.5">
+                <ValueWithCopy name={"Name"} label={color.name} />
+                <ValueWithCopy name={"Hex"} label={color.hex} />
+                <ValueWithCopy name={"RGB"} label={formatRGB(color.rgb)} />
+                <ValueWithCopy name={"HSL"} label={formatHSL(color.hsl)} />
             </div>
         }
     </>);
@@ -62,7 +73,7 @@ function ColorInfo() {
 export function ColorInfoPanel() {
     return (
         <div className="px-4 flex items-end justify-between">
-            <div className="flex space-x-4 text-sm">
+            <div className="py-1 flex space-x-4 text-sm">
                 <ColorPreview />
                 <ColorInfo />
             </div>
