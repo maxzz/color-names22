@@ -35,53 +35,15 @@ function ColorPreview() {
 }
 
 function Mount({ show, setShow, children }: { show: boolean; setShow: (v: boolean) => void; } & React.HTMLAttributes<HTMLDivElement>) {
-    const transitions = useTransition(Number(!show), {
-        // const transitions = useTransition(show, {
+    const transitions = useTransition(Number(show), {
         from: { x: 0, opacity: 0, },
-        enter: { x: 0, opacity: 1, config: { duration: 500, easing: easings.easeOutCubic }, },
+        enter: { x: 0, opacity: 1, },
         leave: {
             x: 20, opacity: 0, config: { duration: 1400, easing: easings.easeOutQuad },
-            // onRest: () => console.log('done'),
-            // onRest: {
-            //     opacity: ({ finished }, val) => {
-            //         console.log('done', finished);
-            //         if (show && finished) {
-            //             console.log('done opacity show= ', val.id, show);
-
-            //             show && setShow(false);
-            //         }
-            //     }
-            // },
-            onRest: ({ finished }, val) => {
-                console.log('done', finished);
-                if (show && finished) {
-                    console.log('done opacity show= ', val.id, show);
-
-                    show && setShow(false);
-                }
-            },
+            onRest: ({ finished }) => show && finished && setShow(false),
         },
-
-        // onRest: {
-        //     opacity: ({finished}, val) => {
-        //         //console.log('done', finished);
-        //         if (show && finished) {
-        //             console.log('done opacity show= ', val.id, show);
-
-        //             show && setShow(false);
-        //         }
-        //     }
-        // },
-
-        // onRest: () => setShow(false),
-        //config: { duration: 200, },
     });
-    return transitions((styles, item) => item
-        ? <a.div style={styles}>
-            {children}
-        </a.div>
-        : null
-    );
+    return transitions((styles, item) => item ? <a.div style={styles}> {children} </a.div> : null);
 }
 
 function CopyNotice() {
@@ -100,11 +62,7 @@ function ValueWithCopy({ name, label }: { name: string; label: string; }) {
             className="flex items-center space-x-2 select-none"
             onPointerEnter={() => setFocus(true)}
             onPointerLeave={() => setFocus(false)}
-            onClick={async () => {
-                await navigator.clipboard.writeText(label);
-                setShowNotice(true);
-                //toastSucceeded('Link copied to clipboard');
-            }}
+            onClick={async () => { await navigator.clipboard.writeText(label); setShowNotice(true); }}
         >
             <div
                 className={classNames(
@@ -118,9 +76,7 @@ function ValueWithCopy({ name, label }: { name: string; label: string; }) {
                 </div>
             </div>
 
-            {/* <Mount show={showNotice} setShow={setShowNotice} ><CopyNotice /></Mount> */}
-            <Mount show={showNotice} setShow={setShowNotice} >{showNotice && <CopyNotice />}</Mount>
-            {/* {showNotice && <CopyNotice />} */}
+            <Mount show={showNotice} setShow={setShowNotice} ><CopyNotice /></Mount>
         </div>
     </>);
 }
