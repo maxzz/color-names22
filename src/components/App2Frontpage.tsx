@@ -1,12 +1,12 @@
 import { useAtomValue } from 'jotai';
-import { currentSectionAtom, SectionName } from '../store/store';
+import { AppAtoms, SectionName } from '../store/store';
 import { classNames } from '../utils/classnames';
 import { ColorsGroup } from './sections/ColorsGroup/ColorsGroup';
 import { ColorsList, SortOrderSwitch } from './sections/ColorsList/ColorsList';
 import { Experiments } from './UI/experiments/Experiments';
 
 export function MainBody({ className }: React.HTMLAttributes<HTMLDivElement>) {
-    const currentSection = useAtomValue(currentSectionAtom);
+    const currentSection = useAtomValue(AppAtoms.currentSectionAtom);
     return (
         <div className={classNames("min-h-0", className)}>
             {/* <Experiments /> */}

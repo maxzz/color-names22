@@ -5,7 +5,7 @@ import { formatHSL, SortBy } from '../../../utils/colors';
 import { classNames } from '../../../utils/classnames';
 
 export function SortOrderSwitch({className}: React.HTMLAttributes<HTMLUListElement>) {
-    const [sortBy, setSortBy] = useAtom(viewListAtoms.sortAtom);
+    const [sortBy, setSortBy] = useAtom(viewListAtoms.sortByAtom);
     const onChange = (event: ChangeEvent<HTMLInputElement>) => setSortBy(+event.target.value);
     return (
         <ul className={classNames("flex items-center space-x-2", className)}>

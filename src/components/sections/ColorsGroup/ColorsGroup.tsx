@@ -8,7 +8,7 @@ import { MonochromeSwitch } from './MonochromeSwitch';
 import { classNames } from '../../../utils/classnames';
 
 export function ColorsGroup({className}: React.HTMLAttributes<HTMLUListElement>) {
-    useAtomValue(viewListAtoms.sortAtom);
+    useAtomValue(viewListAtoms.sortByAtom);
     return (
         <div className={classNames("mt-4 grid gap-4", className)}>
             <ColorInfoPanel />

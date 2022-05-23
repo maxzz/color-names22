@@ -1,10 +1,10 @@
 import { useAtom } from 'jotai';
 import React from 'react';
-import { currentSectionAtom, SectionName } from '../store/store';
+import { AppAtoms, SectionName } from '../store/store';
 import { classNames } from '../utils/classnames';
 
 function LinkButton({ label, sectionName }: { label: string, sectionName: SectionName; }) {
-    const [currentSection, setCurrentSection] = useAtom(currentSectionAtom);
+    const [currentSection, setCurrentSection] = useAtom(AppAtoms.currentSectionAtom);
     return (
         <li
             className={classNames(

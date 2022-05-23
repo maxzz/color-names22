@@ -3,23 +3,32 @@ import { Atomize, atomWithCallback } from '../hooks/atomsX';
 import { debounce } from '../utils/debounce';
 import { allColorsWoAlternatives, ColorItem, groupColors, SortBy, sortColorItemsFn } from '../utils/colors';
 
+export enum SectionName {
+    hue,
+    list,
+}
+
 //#region LocalStorage
 
 namespace Storage {
     const KEY = 'react-name-colors22-01';
 
     type Store = {
+        appOptions: AppOptions;
         viewHueOptions: ViewHueOptions;
         viewListOptions: ViewListOptions;
     };
 
     export let initialData: Store = {
+        appOptions: {
+            currentSection: SectionName.hue,
+        },
         viewHueOptions: {
             color: null,
             hue: 0,
         },
         viewListOptions : {
-            sort: SortBy.hsl,
+            sortBy: SortBy.hsl,
         },
     };
 
@@ -37,12 +46,15 @@ namespace Storage {
 
     export const saveDebounced = debounce(function _save(get: Getter) {
         let newStore: Store = {
+            appOptions: {
+                currentSection: get(AppAtoms.currentSectionAtom),
+            },
             viewHueOptions: {
                 color: get(viewHueAtoms.colorAtom),
                 hue: get(_hueAtom),
             },
             viewListOptions:{
-                sort: get(viewListAtoms.sortAtom),
+                sortBy: get(viewListAtoms.sortByAtom),
             },
         };
         localStorage.setItem(KEY, JSON.stringify(newStore));
@@ -94,13 +106,13 @@ const _hueAtom = atomWithCallback(Storage.initialData.viewHueOptions.hue, Storag
 //#region Sorted colors list
 
 type ViewListOptions = {
-    sort: SortBy;
+    sortBy: SortBy;
 };
 
 export const viewListAtoms: Atomize<ViewListOptions & {
     colorList: ColorItem[];
 }> = {
-    sortAtom: atom(
+    sortByAtom: atom(
         (get) => get(_colorListSortByAtom),
         (get, set, value: SetStateAction<SortBy>) => {
             const v = typeof value === 'function' ? value(get(_colorListSortByAtom)) : value;
@@ -113,15 +125,20 @@ export const viewListAtoms: Atomize<ViewListOptions & {
     colorListAtom: atom<ColorItem[]>([]),
 
 };
-viewListAtoms.sortAtom.onMount = (set) => set(Storage.initialData.viewListOptions.sort);
+viewListAtoms.sortByAtom.onMount = (set) => set(Storage.initialData.viewListOptions.sortBy);
 
-export const _colorListSortByAtom = atomWithCallback(Storage.initialData.viewListOptions.sort, Storage.save);
+const _colorListSortByAtom = atomWithCallback(Storage.initialData.viewListOptions.sortBy, Storage.save);
 
 //#endregion Sorted colors list
 
-export enum SectionName {
-    hue,
-    list,
+//#region App options
+
+type AppOptions = {
+    currentSection: SectionName;
+};
+
+export const AppAtoms: Atomize<AppOptions> = {
+    currentSectionAtom: atomWithCallback(Storage.initialData.appOptions.currentSection, Storage.save),
 }
 
-export const currentSectionAtom = atom<SectionName>(SectionName.hue);
+//#endregion App options
