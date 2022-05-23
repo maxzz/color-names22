@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtomValue } from 'jotai';
-import { colorListSortByAtom } from '../../../store/store';
+import { viewListAtoms } from '../../../store/store';
 import { ColorInfoPanel } from './ColorInfoPanel';
 import { ColorNeighbors } from './ColorNeighbors/ColorNeighbors';
 import { HueSlider } from './HueSlider/HueSlider';
@@ -8,7 +8,7 @@ import { MonochromeSwitch } from './MonochromeSwitch';
 import { classNames } from '../../../utils/classnames';
 
 export function ColorsGroup({className}: React.HTMLAttributes<HTMLUListElement>) {
-    useAtomValue(colorListSortByAtom);
+    useAtomValue(viewListAtoms.sortAtom);
     return (
         <div className={classNames("mt-4 grid gap-4", className)}>
             <ColorInfoPanel />

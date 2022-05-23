@@ -1,11 +1,11 @@
 import React, { ChangeEvent, Fragment } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
-import { colorListAtom, colorListSortByAtom } from '../../../store/store';
+import { viewListAtoms } from '../../../store/store';
 import { formatHSL, SortBy } from '../../../utils/colors';
 import { classNames } from '../../../utils/classnames';
 
 export function SortOrderSwitch({className}: React.HTMLAttributes<HTMLUListElement>) {
-    const [sortBy, setSortBy] = useAtom(colorListSortByAtom);
+    const [sortBy, setSortBy] = useAtom(viewListAtoms.sortAtom);
     const onChange = (event: ChangeEvent<HTMLInputElement>) => setSortBy(+event.target.value);
     return (
         <ul className={classNames("flex items-center space-x-2", className)}>
@@ -18,7 +18,7 @@ export function SortOrderSwitch({className}: React.HTMLAttributes<HTMLUListEleme
 }
 
 function List() {
-    const colorList = useAtomValue(colorListAtom);
+    const colorList = useAtomValue(viewListAtoms.colorListAtom);
     return (
         <div className="px-4 grid grid-cols-[8rem,auto,1fr] gap-x-2">
             {colorList.map((color) => (
@@ -38,6 +38,5 @@ export function ColorsList({className}: React.HTMLAttributes<HTMLUListElement>) 
         <div className={classNames("space-y-4", className)}>
             <List />
         </div>
-
     );
 }

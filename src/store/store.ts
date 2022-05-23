@@ -10,7 +10,7 @@ namespace Storage {
 
     type Store = {
         viewHueOptions: ViewHueOptions;
-        sort: SortBy;
+        viewListOptions: ViewListOptions;
     };
 
     export let initialData: Store = {
@@ -18,7 +18,9 @@ namespace Storage {
             color: null,
             hue: 0,
         },
-        sort: SortBy.hsl,
+        viewListOptions : {
+            sort: SortBy.hsl,
+        },
     };
 
     function load() {
@@ -39,7 +41,9 @@ namespace Storage {
                 color: get(viewHueAtoms.colorAtom),
                 hue: get(_hueAtom),
             },
-            sort: get(colorListSortByAtom),
+            viewListOptions:{
+                sort: get(viewListAtoms.sortAtom),
+            },
         };
         localStorage.setItem(KEY, JSON.stringify(newStore));
     }, 1000);
@@ -78,7 +82,6 @@ export const viewHueAtoms: Atomize<ViewHueOptions & {
             set(_hueAtom, hue);
         }
     ),
-
     colorGroupsAtom: atom<ColorItem[][]>([]),
     toleranceAtom: atom(0),
 };
@@ -97,25 +100,22 @@ type ViewListOptions = {
 export const viewListAtoms: Atomize<ViewListOptions & {
     colorList: ColorItem[];
 }> = {
-    sortAtom: atomWithCallback(Storage.initialData.sort, Storage.save),
-
+    sortAtom: atom(
+        (get) => get(_colorListSortByAtom),
+        (get, set, value: SetStateAction<SortBy>) => {
+            const v = typeof value === 'function' ? value(get(_colorListSortByAtom)) : value;
+            const fn = sortColorItemsFn(v);
+            const list = fn ? [...allColorsWoAlternatives].sort(fn) : allColorsWoAlternatives;
+            set(viewListAtoms.colorListAtom, list);
+            set(_colorListSortByAtom, v);
+        }
+    ),
     colorListAtom: atom<ColorItem[]>([]),
+
 };
+viewListAtoms.sortAtom.onMount = (set) => set(Storage.initialData.viewListOptions.sort);
 
-export const colorListAtom = atom<ColorItem[]>([]);
-
-export const _colorListSortByAtom = atomWithCallback(Storage.initialData.sort, Storage.save);
-
-export const colorListSortByAtom = atom(
-    (get) => get(_colorListSortByAtom),
-    (get, set, value: SortBy) => {
-        const fn = sortColorItemsFn(value);
-        const list = fn ? [...allColorsWoAlternatives].sort(fn) : allColorsWoAlternatives;
-        set(colorListAtom, list);
-        set(_colorListSortByAtom, value);
-    }
-);
-colorListSortByAtom.onMount = (set) => set(Storage.initialData.sort);
+export const _colorListSortByAtom = atomWithCallback(Storage.initialData.viewListOptions.sort, Storage.save);
 
 //#endregion Sorted colors list
 
