@@ -11,17 +11,22 @@ import { UISwitch, UISwitchWithLabel } from '../../UI/UiSwitch';
 export function Section1_ColorsByHue({ className }: React.HTMLAttributes<HTMLUListElement>) {
     useAtomValue(viewListAtoms.sortByAtom);
     const [on, setOn] = React.useState(false);
+    const [on2, setOn2] = React.useState(false);
     return (
         <div className={classNames("mt-4 grid gap-4", className)}>
             <ColorInfoPanel />
             <div className="px-4">
                 <div className="">
                     <HueSlider />
-                    <UISwitchWithLabel value={on} onChange={() => setOn((v) => !v)}>Monochrome</UISwitchWithLabel>
 
-                    <div className="flex items-center space-x-2">
-                        <UISwitch value={on} onChange={() => setOn((v) => !v)} />
-                        <div className="">Monochrome</div>
+                    <UISwitchWithLabel value={on} onChange={() => setOn((v) => !v)}>Monochrome</UISwitchWithLabel>
+                    <div className="flex flex-col space-y-1.5">
+                        <UISwitchWithLabel value={on} onChange={() => setOn((v) => !v)} onLeft className="space-x-2">Monochrome</UISwitchWithLabel>
+
+                        <div className="flex items-center space-x-2">
+                            <UISwitch value={on2} onChange={setOn2} />
+                            <div className="">Monochrome</div>
+                        </div>
                     </div>
 
                     <MonochromeSwitch />

@@ -61,9 +61,7 @@ const SwitchThumb = StyledThumb;
 // );
 //#7b899d
 
-type LabeledSwitchProps = {
-    children?: React.ReactNode;
-    title?: string;
+type SetValueProps = {
     value: boolean;
     onChange: (checked: boolean) => void;
 } & React.HTMLAttributes<HTMLLabelElement>;
@@ -71,7 +69,7 @@ type LabeledSwitchProps = {
 export function UISwitch({ value, onChange }: { value: boolean; onChange: (checked: boolean) => void; }) {
     return (
         <Switch
-            className="relative ml-2 w-[46px] h-[28px] flex items-center data-state-checked:bg-orange-300 bg-orange-200/50 ring-orange-300/70 focus:ring-offset-orange-50 focus:ring-orange-300 ring-2 focus:ring-offset-2 rounded-full shadow"
+            className="relative ml-2 w-[46px] h-[28px] flex items-center data-state-checked:bg-orange-300 bg-orange-200/50 ring-orange-400/30 focus:ring-offset-orange-50 focus:ring-orange-300 ring-1 focus:ring-2 focus:ring-offset-2 outline-none rounded-full shadow"
             checked={value}
             onCheckedChange={onChange}
         >
@@ -81,11 +79,14 @@ export function UISwitch({ value, onChange }: { value: boolean; onChange: (check
     );
 }
 
-export function UISwitchWithLabel({ children, className, title, value, onChange }: LabeledSwitchProps) {
+export function UISwitchWithLabel({ value, onChange, children, className, onLeft, ...rest }: { onLeft?: boolean; } & SetValueProps & React.HTMLAttributes<HTMLLabelElement>) {
     return (
-        <label className={classNames("flex flex-row items-center md:flex-col md:text-[.65rem] md:pb-2 lg:flex-row lg:text-sm lg:pb-0 select-none", className)} title={title}>
-            {children}
-            <UISwitch value={value} onChange={onChange} />
+        <label className={classNames("flex items-center md:flex-col md:text-[.65rem] md:pb-2 lg:flex-row lg:text-sm lg:pb-0 select-none", className)} {...rest}>
+            {onLeft && <UISwitch value={value} onChange={onChange} />}
+            <div className="">
+                {children}
+            </div>
+            {!onLeft && <UISwitch value={value} onChange={onChange} />}
         </label>
     );
 }
