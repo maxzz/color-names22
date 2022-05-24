@@ -65,21 +65,27 @@ type LabeledSwitchProps = {
     children?: React.ReactNode;
     title?: string;
     value: boolean;
-    onChange: () => void;
+    onChange: (checked: boolean) => void;
 } & React.HTMLAttributes<HTMLLabelElement>;
 
-export function UISwitch({ children, className, title, value, onChange }: LabeledSwitchProps) {
+export function UISwitch({ value, onChange }: { value: boolean; onChange: (checked: boolean) => void; }) {
+    return (
+        <Switch
+            className="relative ml-2 w-[46px] h-[28px] flex items-center data-state-checked:bg-orange-300 bg-orange-200/50 ring-orange-300/70 focus:ring-offset-orange-50 focus:ring-orange-300 ring-2 focus:ring-offset-2 rounded-full shadow"
+            checked={value}
+            onCheckedChange={onChange}
+        >
+            {/* <Switch className="ml-2 w-[42px] h-6 flex items-center bg-gray-700 rounded-full relative shadow ring-2 ring-gray-400 focus:ring-gray-900"> */}
+            <SwitchThumb className="mb-px w-[22px] h-[22px]" />
+        </Switch>
+    );
+}
+
+export function UISwitchWithLabel({ children, className, title, value, onChange }: LabeledSwitchProps) {
     return (
         <label className={classNames("flex flex-row items-center md:flex-col md:text-[.65rem] md:pb-2 lg:flex-row lg:text-sm lg:pb-0 select-none", className)} title={title}>
             {children}
-            <Switch
-                className="relative ml-2 w-[46px] h-[28px] flex items-center data-state-checked:bg-orange-300 bg-orange-200/50 ring-orange-300/70 focus:ring-offset-orange-50 focus:ring-orange-300 ring-2 focus:ring-offset-2 rounded-full shadow"
-                checked={value}
-                onCheckedChange={onChange}
-            >
-                {/* <Switch className="ml-2 w-[42px] h-6 flex items-center bg-gray-700 rounded-full relative shadow ring-2 ring-gray-400 focus:ring-gray-900"> */}
-                <SwitchThumb className="mb-px w-[22px] h-[22px]" />
-            </Switch>
+            <UISwitch value={value} onChange={onChange} />
         </label>
     );
 }

@@ -6,7 +6,7 @@ import { ColorInfoPanel } from './ColorInfoPanel';
 import { ColorNeighbors } from './ColorNeighbors/ColorNeighbors';
 import { HueSlider } from './HueSlider/HueSlider';
 import { MonochromeSwitch } from './MonochromeSwitch';
-import { UISwitch } from '../../UI/UiSwitch';
+import { UISwitch, UISwitchWithLabel } from '../../UI/UiSwitch';
 
 export function Section1_ColorsByHue({ className }: React.HTMLAttributes<HTMLUListElement>) {
     useAtomValue(viewListAtoms.sortByAtom);
@@ -17,7 +17,13 @@ export function Section1_ColorsByHue({ className }: React.HTMLAttributes<HTMLULi
             <div className="px-4">
                 <div className="">
                     <HueSlider />
-                    <UISwitch value={on} onChange={() => setOn((v) => !v)}>11</UISwitch>
+                    <UISwitchWithLabel value={on} onChange={() => setOn((v) => !v)}>Monochrome</UISwitchWithLabel>
+
+                    <div className="flex items-center space-x-2">
+                        <UISwitch value={on} onChange={() => setOn((v) => !v)} />
+                        <div className="">Monochrome</div>
+                    </div>
+
                     <MonochromeSwitch />
                 </div>
             </div>
