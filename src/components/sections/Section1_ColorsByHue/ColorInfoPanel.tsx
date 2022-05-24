@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { HTMLAttributes, useState } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { viewHueAtoms } from '../../../store/store';
 import { formatHSL, formatRGB } from '../../../utils/colors';
@@ -6,11 +6,11 @@ import { classNames } from '../../../utils/classnames';
 import { IconClipboard } from '../../UI/UIIcons';
 import { a, easings, useTransition } from '@react-spring/web';
 
-function HueInfo() {
+export function HueInfo({className}: HTMLAttributes<HTMLDivElement>) {
     const hue = useAtomValue(viewHueAtoms.hueAtom);
     const [tolerance] = useAtom(viewHueAtoms.toleranceAtom);
     return (
-        <div className="flex space-x-2">
+        <div className={classNames("flex space-x-2", className)}>
             <div className="">Hue: {hue}</div>
             <div className="">Tolerance: {tolerance}</div>
         </div>
@@ -101,7 +101,6 @@ export function ColorInfoPanel() {
                 <ColorPreview />
                 <ColorInfo />
             </div>
-            <HueInfo />
         </div>
     );
 }
