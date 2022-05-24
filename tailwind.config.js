@@ -1,4 +1,5 @@
 const colors = require('tailwindcss/colors');
+const dataState = require('./tailwind-plugin-data-state');
 
 module.exports = {
     content: ['./index.html', './src/**/*.{tsx,ts,js,jsx}'],
@@ -15,6 +16,7 @@ module.exports = {
         },
     },
     plugins: [
+        ...dataState.plugins,
         require('@tailwindcss/forms')({ strategy: 'class' })
     ],
 };

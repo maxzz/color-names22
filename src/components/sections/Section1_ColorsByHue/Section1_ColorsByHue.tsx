@@ -1,12 +1,12 @@
 import React from 'react';
 import { useAtomValue } from 'jotai';
 import { viewListAtoms } from '../../../store/store';
+import { classNames } from '../../../utils/classnames';
 import { ColorInfoPanel } from './ColorInfoPanel';
 import { ColorNeighbors } from './ColorNeighbors/ColorNeighbors';
 import { HueSlider } from './HueSlider/HueSlider';
 import { MonochromeSwitch } from './MonochromeSwitch';
-import { classNames } from '../../../utils/classnames';
-import LabeledSwitch from '../../UI/UiSwitch';
+import { UISwitch } from '../../UI/UiSwitch';
 
 export function Section1_ColorsByHue({ className }: React.HTMLAttributes<HTMLUListElement>) {
     useAtomValue(viewListAtoms.sortByAtom);
@@ -17,7 +17,7 @@ export function Section1_ColorsByHue({ className }: React.HTMLAttributes<HTMLULi
             <div className="px-4">
                 <div className="">
                     <HueSlider />
-                    <LabeledSwitch value={on} onChange={() => setOn((v)=>!v)} />
+                    <UISwitch value={on} onChange={() => setOn((v) => !v)}>11</UISwitch>
                     <MonochromeSwitch />
                 </div>
             </div>

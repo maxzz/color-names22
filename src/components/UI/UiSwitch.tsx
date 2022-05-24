@@ -1,6 +1,7 @@
 import React from 'react';
 import { styled } from '../../stitches.config';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
+import { classNames } from '../../utils/classnames';
 
 const blackA = {
     blackA7: '#00000080',
@@ -17,7 +18,8 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
     //boxShadow: `0 2px 10px ${blackA.blackA7}`,
     WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
     //'&:focus': { boxShadow: `0 0 0 2px black` },
-    '&[data-state="checked"]': { backgroundColor: 'rgb(156, 163, 175)' }, //bg-gray-400
+
+    //'&[data-state="checked"]': { backgroundColor: 'rgb(156, 163, 175)' }, //bg-gray-400
 });
 
 const StyledThumb = styled(SwitchPrimitive.Thumb, {
@@ -66,20 +68,18 @@ type LabeledSwitchProps = {
     onChange: () => void;
 } & React.HTMLAttributes<HTMLLabelElement>;
 
-function LabeledSwitch({ children, className, title, value, onChange }: LabeledSwitchProps) {
+export function UISwitch({ children, className, title, value, onChange }: LabeledSwitchProps) {
     return (
-        <label className={`flex flex-row items-center md:flex-col md:text-[.65rem] md:pb-2 lg:flex-row lg:text-sm lg:pb-0 select-none ${className}`} title={title}>
+        <label className={classNames("flex flex-row items-center md:flex-col md:text-[.65rem] md:pb-2 lg:flex-row lg:text-sm lg:pb-0 select-none", className)} title={title}>
             {children}
             <Switch
-                className="ml-2 w-[46px] h-[28px] flex items-center bg-gray-700 rounded-full relative shadow border-2 ring-gray-400 focus:ring-gray-900"
+                className="relative ml-2 w-[46px] h-[28px] flex items-center data-state-checked:bg-orange-300 bg-orange-200/50 ring-orange-300/70 focus:ring-offset-orange-50 focus:ring-orange-300 ring-2 focus:ring-offset-2 rounded-full shadow"
                 checked={value}
                 onCheckedChange={onChange}
             >
                 {/* <Switch className="ml-2 w-[42px] h-6 flex items-center bg-gray-700 rounded-full relative shadow ring-2 ring-gray-400 focus:ring-gray-900"> */}
-                <SwitchThumb className="mb-px w-5 h-5" />
+                <SwitchThumb className="mb-px w-[22px] h-[22px]" />
             </Switch>
         </label>
     );
 }
-
-export default LabeledSwitch;
