@@ -153,5 +153,5 @@ export const AppAtoms: Atomize<AppOptions> = {
 
 export const dataLoadAtom = atomLoader((get: Getter, set: Setter) => {
     setColorList(get(_hueAtom), get(_monoAtom), set);
-    set(viewListAtoms.sortByAtom, Storage.initialData.viewListOptions.sortBy);
+    set(viewListAtoms.sortByAtom, get(_colorListSortByAtom));
 });
