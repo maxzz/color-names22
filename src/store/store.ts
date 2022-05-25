@@ -114,11 +114,20 @@ function dataLoader(get: Getter, set: Setter) {
     setColorList(get(_hueAtom), get(_monoAtom), set);
 }
 
-const _dataLoadOnceAtom = atom<boolean>(false); // to get around <React.StrictMode> during development.
-export const dataLoadAtom = atom(
-    null, (get, set) => { !get(_dataLoadOnceAtom) && (dataLoader(get, set), set(_dataLoadOnceAtom, true)); }
-);
-dataLoadAtom.onMount = (run) => run();
+// const _dataLoadOnceAtom = atom<boolean>(false); // to get around <React.StrictMode> during development.
+// export const dataLoadAtom3 = atom(
+//     null, (get, set) => { !get(_dataLoadOnceAtom) && (dataLoader(get, set), set(_dataLoadOnceAtom, true)); }
+// );
+// dataLoadAtom3.onMount = (run) => run();
+
+export const dataLoadAtom = ((dataLoader2) => {
+    const once = atom<boolean>(false); // to get around <React.StrictMode> during development.
+    const dataLoadAtom = atom(
+        null, (get, set) => { !get(once) && (dataLoader2(get, set), set(once, true)); }
+    );
+    dataLoadAtom.onMount = (run) => run();
+    return dataLoadAtom;
+})(dataLoader);
 
 //#endregion By Hue
 
