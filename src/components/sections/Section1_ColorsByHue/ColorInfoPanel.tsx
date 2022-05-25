@@ -5,6 +5,8 @@ import { formatHSL, formatRGB } from '../../../utils/colors';
 import { classNames } from '../../../utils/classnames';
 import { IconClipboard } from '../../UI/UIIcons';
 import { a, easings, useTransition } from '@react-spring/web';
+import { UISwitch } from '../../UI/UiSwitch';
+import { HueSlider } from './HueSlider/HueSlider';
 
 export function HueInfo({className}: HTMLAttributes<HTMLDivElement>) {
     const hue = useAtomValue(viewHueAtoms.hueAtom);
@@ -95,11 +97,25 @@ function ColorInfo() {
 }
 
 export function ColorInfoPanel() {
+    const [on, setOn] = React.useState(false);
+
     return (
-        <div className="px-4 flex items-end justify-between">
-            <div className="py-1 flex space-x-4 text-sm">
-                <ColorPreview />
-                <ColorInfo />
+        <div className="">
+            <div className="px-4 flex items-end justify-between">
+                <div className="py-1 flex space-x-4 text-sm">
+                    <ColorPreview />
+                    <ColorInfo />
+                </div>
+            </div>
+            <div className="px-4">
+                <div className="flex flex-col">
+                    <div className="mb-2 self-end flex items-center space-x-2">
+                        <div className="">Monochrome</div>
+                        <UISwitch value={on} onChange={setOn} />
+                    </div>
+                    <HueSlider />
+                    <HueInfo className="self-end" />
+                </div>
             </div>
         </div>
     );

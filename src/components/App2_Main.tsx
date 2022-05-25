@@ -17,7 +17,7 @@ export function App2_Main({ className }: React.HTMLAttributes<HTMLDivElement>) {
                         Section two: sorted groups
                     </div>
 
-                    <Section1_ColorsByHue className="overflow-auto" />
+                    <Section1_ColorsByHue className="flex-1 overflow-auto" />
                 </div>
             }
 
@@ -31,7 +31,7 @@ export function App2_Main({ className }: React.HTMLAttributes<HTMLDivElement>) {
                         <SortOrderSwitch className="px-4" />
                     </div>
 
-                    <Section2_ColorsList className="overflow-auto" />
+                    <Section2_ColorsList className="flex-1 overflow-auto" />
                 </div>
             }
 
