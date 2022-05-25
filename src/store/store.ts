@@ -26,6 +26,7 @@ namespace Storage {
         viewHueOptions: {
             color: null,
             hue: 0,
+            mono: false,
         },
         viewListOptions : {
             sortBy: SortBy.hsl,
@@ -52,6 +53,7 @@ namespace Storage {
             viewHueOptions: {
                 color: get(viewHueAtoms.colorAtom),
                 hue: get(_hueAtom),
+                mono: get(_monoAtom),
             },
             viewListOptions:{
                 sortBy: get(viewListAtoms.sortByAtom),
@@ -70,6 +72,7 @@ namespace Storage {
 type ViewHueOptions = {
     color: ColorItem | null;
     hue: number;
+    mono: boolean; // monochrome vs. color
 };
 
 export const viewHueAtoms: Atomize<ViewHueOptions & {
@@ -85,7 +88,7 @@ export const viewHueAtoms: Atomize<ViewHueOptions & {
                 colorList: allColorsWoAlternatives,
                 hue: v,
                 startTolerance: 5,
-                mono: false,
+                mono: get(_monoAtom),
             });
     
             set(viewHueAtoms.colorGroupsAtom, groups.list);
@@ -94,12 +97,30 @@ export const viewHueAtoms: Atomize<ViewHueOptions & {
             set(_hueAtom, hue);
         }
     ),
+    monoAtom: atom(
+        (get) => get(_monoAtom),
+        (get, set, mono: SetStateAction<boolean>) => {
+            const v = typeof mono === 'function' ? mono(get(_monoAtom)) : mono;
+            const groups = groupColors({
+                colorList: allColorsWoAlternatives,
+                hue: get(_hueAtom),
+                startTolerance: 5,
+                mono: v,
+            });
+    
+            set(viewHueAtoms.colorGroupsAtom, groups.list);
+            set(viewHueAtoms.toleranceAtom, groups.tolerance);
+            set(viewHueAtoms.colorAtom, groups?.list?.[0]?.[0] || null);
+            set(_monoAtom, mono);
+        }
+    ),
     colorGroupsAtom: atom<ColorItem[][]>([]),
     toleranceAtom: atom(0),
 };
 viewHueAtoms.hueAtom.onMount = (set) => set(Storage.initialData.viewHueOptions.hue);
 
 const _hueAtom = atomWithCallback(Storage.initialData.viewHueOptions.hue, Storage.save);
+const _monoAtom = atomWithCallback(Storage.initialData.viewHueOptions.mono, Storage.save);
 
 //#endregion By Hue
 

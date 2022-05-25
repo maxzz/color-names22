@@ -97,8 +97,7 @@ function ColorInfo() {
 }
 
 export function ColorInfoPanel() {
-    const [on, setOn] = React.useState(false);
-
+    const [mono, setMono] = useAtom(viewHueAtoms.monoAtom);
     return (
         <div className="">
             <div className="px-4 flex items-end justify-between">
@@ -111,7 +110,7 @@ export function ColorInfoPanel() {
                 <div className="flex flex-col">
                     <div className="mb-2 self-end flex items-center space-x-2">
                         <div className="">Monochrome</div>
-                        <UISwitch value={on} onChange={setOn} />
+                        <UISwitch value={mono} onChange={setMono} />
                     </div>
                     <HueSlider />
                     <HueInfo className="self-end" />
