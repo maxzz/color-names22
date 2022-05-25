@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtomValue } from 'jotai';
 import { viewListAtoms } from '../../../store/store';
 import { classNames } from '../../../utils/classnames';
-import { ColorInfoPanel, HueInfo } from './ColorInfoPanel';
+import { ColorInfoPanel } from './ColorInfoPanel';
 import { ColorNeighbors } from './ColorNeighbors/ColorNeighbors';
 
 export function Section1_ColorsByHue({ className }: React.HTMLAttributes<HTMLUListElement>) {

@@ -8,17 +8,6 @@ import { a, easings, useTransition } from '@react-spring/web';
 import { UISwitch } from '../../UI/UiSwitch';
 import { HueSlider } from './HueSlider/HueSlider';
 
-export function HueInfo({className}: HTMLAttributes<HTMLDivElement>) {
-    const hue = useAtomValue(viewHueAtoms.hueAtom);
-    const [tolerance] = useAtom(viewHueAtoms.toleranceAtom);
-    return (
-        <div className={classNames("flex space-x-2", className)}>
-            <div className="">Hue: {hue}</div>
-            <div className="">Tolerance: {tolerance}</div>
-        </div>
-    );
-}
-
 function ColorPreview() {
     const color = useAtomValue(viewHueAtoms.colorAtom);
     const borderColor = () => color ? color.dark ? 'white' : 'black' : 'transparent';
@@ -57,7 +46,7 @@ function ValueWithCopy({ name, label }: { name: string; label: string; }) {
     return (<>
         {/* Column name */}
         <div className="py-0.5 select-none">{name}</div>
-        
+
         {/* Column value */}
         <div
             className="flex items-center space-x-2 select-none"
@@ -82,7 +71,7 @@ function ValueWithCopy({ name, label }: { name: string; label: string; }) {
     </>);
 }
 
-function ColorInfo() {
+function ColorValueInfo() {
     const color = useAtomValue(viewHueAtoms.colorAtom);
     return (<>
         {color &&
@@ -96,6 +85,17 @@ function ColorInfo() {
     </>);
 }
 
+export function HueToleranceInfo({ className }: HTMLAttributes<HTMLDivElement>) {
+    const hue = useAtomValue(viewHueAtoms.hueAtom);
+    const [tolerance] = useAtom(viewHueAtoms.toleranceAtom);
+    return (
+        <div className={classNames("text-xs flex space-x-2", className)}>
+            <div className="">Hue: {hue}</div>
+            <div className="">Tolerance: {tolerance}</div>
+        </div>
+    );
+}
+
 export function ColorInfoPanel() {
     const [mono, setMono] = useAtom(viewHueAtoms.monoAtom);
     return (
@@ -103,17 +103,24 @@ export function ColorInfoPanel() {
             <div className="px-4 flex items-end justify-between">
                 <div className="py-1 flex space-x-4 text-sm">
                     <ColorPreview />
-                    <ColorInfo />
+                    <ColorValueInfo />
                 </div>
             </div>
+
             <div className="px-4">
                 <div className="flex flex-col">
+
                     <div className="mb-2 self-end flex items-center space-x-2">
                         <div className="">Monochrome</div>
-                        <UISwitch value={mono} onChange={setMono} />
+                        <UISwitch value={!mono} onChange={(v) => setMono(!v)} />
+                        <div className="">Color</div>
                     </div>
-                    <HueSlider />
-                    <HueInfo className="self-end" />
+
+                    <div className={classNames("", mono ? "invisible": "")}>
+                        <HueSlider />
+                        <HueToleranceInfo className="self-end" />
+                    </div>
+
                 </div>
             </div>
         </div>
