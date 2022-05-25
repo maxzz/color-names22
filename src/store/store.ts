@@ -1,4 +1,4 @@
-import { atom, Getter, SetStateAction } from 'jotai';
+import { atom, Getter, SetStateAction, Setter } from 'jotai';
 import { Atomize, atomWithCallback } from '../hooks/atomsX';
 import { debounce } from '../utils/debounce';
 import { allColorsWoAlternatives, ColorItem, groupColors, SortBy, sortColorItemsFn } from '../utils/colors';
@@ -28,7 +28,7 @@ namespace Storage {
             hue: 0,
             mono: false,
         },
-        viewListOptions : {
+        viewListOptions: {
             sortBy: SortBy.hsl,
         },
     };
@@ -55,7 +55,7 @@ namespace Storage {
                 hue: get(_hueAtom),
                 mono: get(_monoAtom),
             },
-            viewListOptions:{
+            viewListOptions: {
                 sortBy: get(viewListAtoms.sortByAtom),
             },
         };
@@ -87,46 +87,38 @@ export const viewHueAtoms: Atomize<ViewHueOptions & {
         (get) => get(_hueAtom),
         (get, set, hue: SetStateAction<number>) => {
             const v = typeof hue === 'function' ? hue(get(_hueAtom)) : hue;
-            console.log('set hueAtom, hue = ', get(_hueAtom), ', new hue = ', v);
-            const groups = groupColors({
-                colorList: allColorsWoAlternatives,
-                hue: v,
-                startTolerance: 5,
-                mono: get(_monoAtom),
-            });
-    
-            set(viewHueAtoms.colorGroupsAtom, groups.list);
-            set(viewHueAtoms.toleranceAtom, groups.tolerance);
-            set(viewHueAtoms.colorAtom, groups?.list?.[0]?.[0] || null);
-            set(_hueAtom, hue);
+            setColorList(v, get(_monoAtom), set);
+            set(_hueAtom, v);
         }
     ),
     monoAtom: atom(
         (get) => get(_monoAtom),
         (get, set, mono: SetStateAction<boolean>) => {
             const v = typeof mono === 'function' ? mono(get(_monoAtom)) : mono;
-            console.log('set monoAtom, hue = ', get(_hueAtom));
-            const groups = groupColors({
-                colorList: allColorsWoAlternatives,
-                hue: get(_hueAtom),
-                startTolerance: 5,
-                mono: v,
-            });
-    
-            set(viewHueAtoms.colorGroupsAtom, groups.list);
-            set(viewHueAtoms.toleranceAtom, groups.tolerance);
-            set(viewHueAtoms.colorAtom, groups?.list?.[0]?.[0] || null);
-            set(_monoAtom, mono);
+            setColorList(get(_hueAtom), v, set);
+            set(_monoAtom, v);
         }
     ),
     colorGroupsAtom: atom<ColorItem[][]>([]),
     toleranceAtom: atom(0),
 };
-// viewHueAtoms.hueAtom.onMount = (set) => set(Storage.initialData.viewHueOptions.hue);
-viewHueAtoms.hueAtom.onMount = (set) => {
-    console.log('init mount');
-    set(Storage.initialData.viewHueOptions.hue)
-};
+
+function setColorList(hue: number, mono: boolean, set: Setter) {
+    const groups = groupColors({ colorList: allColorsWoAlternatives, hue, startTolerance: 5, mono, });
+    set(viewHueAtoms.colorGroupsAtom, groups.list);
+    set(viewHueAtoms.toleranceAtom, groups.tolerance);
+    set(viewHueAtoms.colorAtom, groups?.list?.[0]?.[0] || null);
+}
+
+function dataLoader(get: Getter, set: Setter) {
+    setColorList(get(_hueAtom), get(_monoAtom), set);
+}
+
+const _dataLoadOnceAtom = atom<boolean>(false); // to get around <React.StrictMode> during development.
+export const dataLoadAtom = atom(
+    null, (get, set) => { !get(_dataLoadOnceAtom) && (dataLoader(get, set), set(_dataLoadOnceAtom, true)); }
+);
+dataLoadAtom.onMount = (run) => run();
 
 //#endregion By Hue
 
@@ -166,6 +158,6 @@ type AppOptions = {
 
 export const AppAtoms: Atomize<AppOptions> = {
     currentSectionAtom: atomWithCallback(Storage.initialData.appOptions.currentSection, Storage.save),
-}
+};
 
 //#endregion App options
