@@ -85,6 +85,17 @@ function ColorValueInfo() {
     </>);
 }
 
+export function MonoSwitch({ className }: HTMLAttributes<HTMLDivElement>) {
+    const [mono, setMono] = useAtom(viewHueAtoms.monoAtom);
+    return (
+        <div className="mb-2 self-end flex items-center space-x-2">
+            <div className="">Monochrome</div>
+            <UISwitch value={!mono} onChange={(v) => setMono(!v)} />
+            <div className="">Color</div>
+        </div>
+    );
+}
+
 export function HueToleranceInfo({ className }: HTMLAttributes<HTMLDivElement>) {
     const hue = useAtomValue(viewHueAtoms.hueAtom);
     const [tolerance] = useAtom(viewHueAtoms.toleranceAtom);
@@ -97,7 +108,7 @@ export function HueToleranceInfo({ className }: HTMLAttributes<HTMLDivElement>) 
 }
 
 export function ColorInfoPanel() {
-    const [mono, setMono] = useAtom(viewHueAtoms.monoAtom);
+    const mono = useAtomValue(viewHueAtoms.monoAtom);
     return (
         <div className="">
             <div className="px-4 flex items-end justify-between">
@@ -109,16 +120,15 @@ export function ColorInfoPanel() {
 
             <div className="px-4">
                 <div className="flex flex-col">
+                    <MonoSwitch />
 
-                    <div className="mb-2 self-end flex items-center space-x-2">
-                        <div className="">Monochrome</div>
-                        <UISwitch value={!mono} onChange={(v) => setMono(!v)} />
-                        <div className="">Color</div>
-                    </div>
-
-                    <div className={classNames("", mono ? "invisible": "")}>
-                        <HueSlider />
-                        <HueToleranceInfo className="self-end" />
+                    <div className="h-14">
+                        {!mono &&
+                            <div className="flex flex-col">
+                                <HueSlider />
+                                <HueToleranceInfo className="self-end" />
+                            </div>
+                        }
                     </div>
 
                 </div>
