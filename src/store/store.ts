@@ -110,8 +110,6 @@ function setColorList(hue: number, mono: boolean, set: Setter) {
     set(viewHueAtoms.colorAtom, groups?.list?.[0]?.[0] || null);
 }
 
-export const dataLoadAtom = atomLoader((get: Getter, set: Setter) => setColorList(get(_hueAtom), get(_monoAtom), set));
-
 //#endregion By Hue
 
 //#region Sorted colors list
@@ -119,6 +117,8 @@ export const dataLoadAtom = atomLoader((get: Getter, set: Setter) => setColorLis
 type ViewListOptions = {
     sortBy: SortBy;
 };
+
+const _colorListSortByAtom = atomWithCallback(Storage.initialData.viewListOptions.sortBy, Storage.save);
 
 export const viewListAtoms: Atomize<ViewListOptions & {
     colorList: ColorItem[];
@@ -136,9 +136,6 @@ export const viewListAtoms: Atomize<ViewListOptions & {
     colorListAtom: atom<ColorItem[]>([]),
 
 };
-viewListAtoms.sortByAtom.onMount = (set) => set(Storage.initialData.viewListOptions.sortBy);
-
-const _colorListSortByAtom = atomWithCallback(Storage.initialData.viewListOptions.sortBy, Storage.save);
 
 //#endregion Sorted colors list
 
@@ -153,3 +150,8 @@ export const AppAtoms: Atomize<AppOptions> = {
 };
 
 //#endregion App options
+
+export const dataLoadAtom = atomLoader((get: Getter, set: Setter) => {
+    setColorList(get(_hueAtom), get(_monoAtom), set);
+    set(viewListAtoms.sortByAtom, Storage.initialData.viewListOptions.sortBy);
+});
