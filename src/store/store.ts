@@ -1,5 +1,5 @@
 import { atom, Getter, SetStateAction, Setter } from 'jotai';
-import { Atomize, atomWithCallback } from '../hooks/atomsX';
+import { Atomize, atomLoader, atomWithCallback } from '../hooks/atomsX';
 import { debounce } from '../utils/debounce';
 import { allColorsWoAlternatives, ColorItem, groupColors, SortBy, sortColorItemsFn } from '../utils/colors';
 
@@ -114,12 +114,7 @@ function dataLoader(get: Getter, set: Setter) {
     setColorList(get(_hueAtom), get(_monoAtom), set);
 }
 
-export const dataLoadAtom = ((loader: (get: Getter, set: Setter) => void) => {
-    const onceAtom = atom<boolean>(false); // to get around <React.StrictMode> during development.
-    const baseAtom = atom(null, (get, set) => { !get(onceAtom) && (loader(get, set), set(onceAtom, true)); });
-    baseAtom.onMount = (run) => run();
-    return baseAtom;
-})(dataLoader);
+export const dataLoadAtom = atomLoader(dataLoader);
 
 //#endregion By Hue
 
