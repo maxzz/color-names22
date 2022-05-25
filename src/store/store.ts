@@ -75,6 +75,9 @@ type ViewHueOptions = {
     mono: boolean; // monochrome vs. color
 };
 
+const _hueAtom = atomWithCallback(Storage.initialData.viewHueOptions.hue, Storage.save);
+const _monoAtom = atomWithCallback(Storage.initialData.viewHueOptions.mono, Storage.save);
+
 export const viewHueAtoms: Atomize<ViewHueOptions & {
     colorGroups: ColorItem[][];
     tolerance: number;
@@ -84,6 +87,7 @@ export const viewHueAtoms: Atomize<ViewHueOptions & {
         (get) => get(_hueAtom),
         (get, set, hue: SetStateAction<number>) => {
             const v = typeof hue === 'function' ? hue(get(_hueAtom)) : hue;
+            console.log('set hueAtom, hue = ', get(_hueAtom), ', new hue = ', v);
             const groups = groupColors({
                 colorList: allColorsWoAlternatives,
                 hue: v,
@@ -101,6 +105,7 @@ export const viewHueAtoms: Atomize<ViewHueOptions & {
         (get) => get(_monoAtom),
         (get, set, mono: SetStateAction<boolean>) => {
             const v = typeof mono === 'function' ? mono(get(_monoAtom)) : mono;
+            console.log('set monoAtom, hue = ', get(_hueAtom));
             const groups = groupColors({
                 colorList: allColorsWoAlternatives,
                 hue: get(_hueAtom),
@@ -117,10 +122,11 @@ export const viewHueAtoms: Atomize<ViewHueOptions & {
     colorGroupsAtom: atom<ColorItem[][]>([]),
     toleranceAtom: atom(0),
 };
-viewHueAtoms.hueAtom.onMount = (set) => set(Storage.initialData.viewHueOptions.hue);
-
-const _hueAtom = atomWithCallback(Storage.initialData.viewHueOptions.hue, Storage.save);
-const _monoAtom = atomWithCallback(Storage.initialData.viewHueOptions.mono, Storage.save);
+// viewHueAtoms.hueAtom.onMount = (set) => set(Storage.initialData.viewHueOptions.hue);
+viewHueAtoms.hueAtom.onMount = (set) => {
+    console.log('init mount');
+    set(Storage.initialData.viewHueOptions.hue)
+};
 
 //#endregion By Hue
 

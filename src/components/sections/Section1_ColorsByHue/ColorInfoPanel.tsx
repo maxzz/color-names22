@@ -110,28 +110,28 @@ export function HueToleranceInfo({ className }: HTMLAttributes<HTMLDivElement>) 
 export function ColorInfoPanel() {
     const mono = useAtomValue(viewHueAtoms.monoAtom);
     return (
-        <div className="">
-            <div className="px-4 flex items-end justify-between">
-                <div className="py-1 flex space-x-4 text-sm">
+        <div className="bg-slate-50">
+            <div className="px-4 mx-auto max-w-[42rem] flex items-center justify-between">
+                <div className="py-1 flex items-center space-x-4 text-sm">
                     <ColorPreview />
                     <ColorValueInfo />
                 </div>
-            </div>
 
-            <div className="px-4">
-                <div className="flex flex-col">
-                    <MonoSwitch />
+                <div className="">
+                    <div className="flex flex-col">
+                        <MonoSwitch />
 
-                    <div className="h-14">
-                        {!mono &&
-                            <div className="flex flex-col">
-                                <HueSlider />
-                                <HueToleranceInfo className="self-end" />
-                            </div>
-                        }
+                        <div className="h-14">
+                            {!mono &&
+                                <div className="flex flex-col">
+                                    <HueSlider />
+                                    <HueToleranceInfo className="self-end" />
+                                </div>
+                            }
+                        </div>
                     </div>
-
                 </div>
+
             </div>
         </div>
     );
