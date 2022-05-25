@@ -110,11 +110,7 @@ function setColorList(hue: number, mono: boolean, set: Setter) {
     set(viewHueAtoms.colorAtom, groups?.list?.[0]?.[0] || null);
 }
 
-function dataLoader(get: Getter, set: Setter) {
-    setColorList(get(_hueAtom), get(_monoAtom), set);
-}
-
-export const dataLoadAtom = atomLoader(dataLoader);
+export const dataLoadAtom = atomLoader((get: Getter, set: Setter) => setColorList(get(_hueAtom), get(_monoAtom), set));
 
 //#endregion By Hue
 
