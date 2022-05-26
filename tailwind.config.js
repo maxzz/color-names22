@@ -33,21 +33,8 @@ module.exports = {
         },
     },
     plugins: [
-        ...dataState.plugins,
-
-        // function ({ theme, addBase }) {
-        //     const bridge = buildColorsToBridge(theme('colors'), 'primary', 'primary');
-        //     addBase({
-        //         ':root': {
-        //             ...bridge
-        //         },
-        //     });
-        // },
-        
-        //...colorsBridge.plugins,
-        
-        colorsBridge({prefix: '--aa-', groupName: 'green'}),
-
+        dataState,
+        colorsBridge({ prefix: '--tm-', groupName: 'primary' },),
         require('@tailwindcss/forms')({ strategy: 'class' })
     ],
 };
