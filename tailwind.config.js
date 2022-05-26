@@ -45,7 +45,7 @@ module.exports = {
         
         //...colorsBridge.plugins,
         
-        colorsBridge({opt: 4}),
+        colorsBridge({prefix: '--aa-', groupName: 'green'}),
 
         require('@tailwindcss/forms')({ strategy: 'class' })
     ],
