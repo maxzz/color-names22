@@ -8,26 +8,14 @@ function buildColorsToBridge(allColors, groupName, groupNameOut) {
     return bridge;
 }
 
-function colorsBridge({ theme, addBase }) {
-    const bridge = buildColorsToBridge(theme('colors'), 'primary', 'primary');
-    addBase({
-        ':root': {
-            ...bridge
-        },
-    });
-}
-
-// module.exports = {
-//     plugins: [
-//         plugin(function(helpers) {
-//             colorsBridge(helpers);
-//         })
-//     ]
-// };
-
-//module.exports = plugin(colorsBridge);
-
 module.exports = plugin.withOptions(function (options) {
     console.log('options', options);
-    return colorsBridge;
+    return function({ theme, addBase }) {
+        const bridge = buildColorsToBridge(theme('colors'), 'primary', 'primary');
+        addBase({
+            ':root': {
+                ...bridge
+            },
+        });
+    };
 });
