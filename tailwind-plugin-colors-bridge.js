@@ -24,4 +24,10 @@ function colorsBridge({ theme, addBase }) {
 //         })
 //     ]
 // };
-module.exports = plugin(colorsBridge);
+
+//module.exports = plugin(colorsBridge);
+
+module.exports = plugin.withOptions(function (options) {
+    console.log('options', options);
+    return colorsBridge;
+});
