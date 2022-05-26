@@ -85,34 +85,34 @@ function ColorValueInfo() {
     </>);
 }
 
-// export function MonoSwitch({ className }: HTMLAttributes<HTMLDivElement>) {
-//     const [mono, setMono] = useAtom(viewHueAtoms.monoAtom);
-//     return (
-//         <div className="mb-2 self-end flex items-center space-x-2">
-//             <div className="">Monochrome</div>
-//             <UISwitch value={!mono} onChange={(v) => setMono(!v)} />
-//             <div className="">Color</div>
-//         </div>
-//     );
-// }
+export function MonoSwitch0({ className }: HTMLAttributes<HTMLDivElement>) {
+    const [mono, setMono] = useAtom(viewHueAtoms.monoAtom);
+    return (
+        <div className="mb-2 self-end flex items-center space-x-2 text-xs">
+            <div className="">Monochrome</div>
+            <UISwitch value={!mono} onChange={(v) => setMono(!v)} />
+            <div className="">Color</div>
+        </div>
+    );
+}
 
-// export function MonoSwitch({ className }: HTMLAttributes<HTMLDivElement>) {
-//     const [mono, setMono] = useAtom(viewHueAtoms.monoAtom);
-//     return (
-//         <div className="mb-2 pt-2 self-end flex flex-col items-center space-x-2 border border-red-500 rounded">
-//             <UISwitch value={!mono} onChange={(v) => setMono(!v)} />
-//             <div className="flex">
-//                 <div className="" title="Monochrome">Mono</div>
-//                 <div className="border-l border-red-400">Color</div>
-//             </div>
-//         </div>
-//     );
-// }
+export function MonoSwitch1({ className }: HTMLAttributes<HTMLDivElement>) {
+    const [mono, setMono] = useAtom(viewHueAtoms.monoAtom);
+    return (
+        <div className="mb-2 pt-2 self-end flex flex-col items-center space-x-2 border border-red-500 rounded text-xs">
+            <div className="flex">
+                <div className="" title="Monochrome">Mono</div>
+                <div className="border-l border-red-400">Color</div>
+            </div>
+            <UISwitch value={!mono} onChange={(v) => setMono(!v)} />
+        </div>
+    );
+}
 
 export function MonoSwitch({ className }: HTMLAttributes<HTMLDivElement>) {
     const [mono, setMono] = useAtom(viewHueAtoms.monoAtom);
     return (
-        <div className="mb-2 self-end relative border border-red-500 rounded">
+        <div className="mb-2 self-end relative border border-red-500 rounded text-xs">
             <div className="absolute pt-2 inset-0 flex items-start justify-center">
                 <UISwitch value={!mono} onChange={(v) => setMono(!v)} />
             </div>
@@ -147,6 +147,8 @@ export function ColorInfoPanel() {
 
                 <div className="">
                     <div className="flex flex-col">
+                        <MonoSwitch0 />
+                        <MonoSwitch1 />
                         <MonoSwitch />
 
                         <div className="h-14">
