@@ -85,13 +85,26 @@ function ColorValueInfo() {
     </>);
 }
 
+// export function MonoSwitch({ className }: HTMLAttributes<HTMLDivElement>) {
+//     const [mono, setMono] = useAtom(viewHueAtoms.monoAtom);
+//     return (
+//         <div className="mb-2 self-end flex items-center space-x-2">
+//             <div className="">Monochrome</div>
+//             <UISwitch value={!mono} onChange={(v) => setMono(!v)} />
+//             <div className="">Color</div>
+//         </div>
+//     );
+// }
+
 export function MonoSwitch({ className }: HTMLAttributes<HTMLDivElement>) {
     const [mono, setMono] = useAtom(viewHueAtoms.monoAtom);
     return (
-        <div className="mb-2 self-end flex items-center space-x-2">
-            <div className="">Monochrome</div>
+        <div className="mb-2 pt-2 self-end flex flex-col items-center space-x-2 border border-red-500 rounded">
             <UISwitch value={!mono} onChange={(v) => setMono(!v)} />
-            <div className="">Color</div>
+            <div className="flex">
+                <div className="" title="Monochrome">Mono</div>
+                <div className="border-l border-red-400">Color</div>
+            </div>
         </div>
     );
 }
