@@ -1,15 +1,24 @@
 const plugin = require('tailwindcss/plugin');
 
-function buildColorsToBridge(allColors, prefix, groupName, groupNameOut) {
-    const colorGroup = allColors[groupName];
+/**
+ * 
+ * @param {Record<string, string>[]} allColors 
+ * @param {GroupOptions} o 
+ * @returns {Record<string, string>}
+ */
+function buildColorsToBridge(allColors, o) {
+    const colorGroup = allColors[o.groupName];
 
     const bridge = Object.fromEntries(
-        Object.keys(colorGroup).map((colorKey) => [`${prefix}${groupNameOut || groupName}-${colorKey}`, colorGroup[colorKey],])
+        Object.keys(colorGroup).map((colorKey) => [`${o.prefix}${o.groupNameOut || o.groupName}-${colorKey}`, colorGroup[colorKey],])
     );
 
     return bridge;
 }
 
+/**
+ * @type {GroupOptions}
+ */
 const defOptions = {
     prefix: '--tm-',
     groupName: 'primary',
@@ -17,13 +26,14 @@ const defOptions = {
 };
 
 module.exports = plugin.withOptions(function (options) {
-    console.log('options', options);
+    console.log('options new', options);
 
     return function ({ theme, addBase }) {
         const allColors = theme('colors');
-        const prefix = '--tm-';
+
         const o = { ...defOptions, ...options };
-        const bridge = buildColorsToBridge(allColors, o.prefix, o.groupName, o.groupNameOut);
+        const bridge = buildColorsToBridge(allColors, o);
+
         addBase({
             ':root': {
                 ...bridge
@@ -31,3 +41,10 @@ module.exports = plugin.withOptions(function (options) {
         });
     };
 });
+
+/**
+ * @typedef GroupOptions
+ * @property {string} prefix // output color name prefix
+ * @property {string} groupName
+ * @property {string} groupNameOut
+ */

@@ -34,6 +34,7 @@ module.exports = {
     },
     plugins: [
         ...dataState.plugins,
+
         // function ({ theme, addBase }) {
         //     const bridge = buildColorsToBridge(theme('colors'), 'primary', 'primary');
         //     addBase({
