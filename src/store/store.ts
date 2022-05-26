@@ -25,7 +25,7 @@ namespace Storage {
         },
         viewHueOptions: {
             color: null,
-            hue: 0,
+            hue: 298,
             mono: false,
         },
         viewListOptions: {

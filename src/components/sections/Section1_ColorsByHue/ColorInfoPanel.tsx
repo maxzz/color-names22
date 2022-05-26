@@ -110,7 +110,7 @@ export function HueToleranceInfo({ className }: HTMLAttributes<HTMLDivElement>) 
 export function ColorInfoPanel() {
     const mono = useAtomValue(viewHueAtoms.monoAtom);
     return (
-        <div className="bg-slate-50">
+        <div className="bg-slate-200">
             <div className="px-4 mx-auto max-w-[42rem] flex items-center justify-between">
                 <div className="py-1 flex items-center space-x-4 text-sm">
                     <ColorPreview />
@@ -138,3 +138,7 @@ export function ColorInfoPanel() {
 }
 
 //TODO: add tailwind palettes
+//TODO: add input element for exact hue value
+//TODO: add control to enlarge/shrink hue slider
+//TODO: add control to dim on/off hue slider
+//TODO: add dark/light mode

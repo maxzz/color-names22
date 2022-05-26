@@ -8,7 +8,7 @@ import { dataLoadAtom } from './store/store';
 function App() {
     useAtomValue(dataLoadAtom);
     return (
-        <div className="h-screen flex flex-col bg-orange-100">
+        <div className="h-screen flex flex-col bg-slate-50">
             <App1_Header />
             <App2_Main className="flex-1" />
             <App3_Footer />
