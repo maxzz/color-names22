@@ -1,14 +1,23 @@
-const colors = require('tailwindcss/colors');
+const twColors = require('tailwindcss/colors');
 const dataState = require('./tailwind-plugin-data-state');
+
+function buildColorsToBridge(allColors, groupName, groupNameOut) {
+    const colorGroup = allColors[groupName];
+    const bridge = Object.fromEntries(
+        Object.keys(colorGroup).map((colorKey) => [ `--tm-${groupNameOut || groupName}-${colorKey}`, colorGroup[colorKey], ])
+    );
+    return bridge;
+}
 
 module.exports = {
     content: ['./index.html', './src/**/*.{tsx,ts,js,jsx}'],
     theme: {
         extend: {
             colors: {
-                primary: {
-                    100: colors.blue['500'],
-                }
+                // primary: {
+                //     100: twColors.blue['500'],
+                // },
+                primary: twColors.slate,
             },
             fontFamily: {
                 header: ['Merriweather', 'sans-serif']
@@ -24,6 +33,14 @@ module.exports = {
     },
     plugins: [
         ...dataState.plugins,
+        function ({ theme, addBase }) {
+            const bridge = buildColorsToBridge(theme('colors'), 'primary', 'primary');
+            addBase({
+                ':root': {
+                    ...bridge
+                },
+            });
+        },
         require('@tailwindcss/forms')({ strategy: 'class' })
     ],
 };
