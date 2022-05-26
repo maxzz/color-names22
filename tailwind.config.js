@@ -42,7 +42,11 @@ module.exports = {
         //         },
         //     });
         // },
-        ...colorsBridge.plugins,
+        
+        //...colorsBridge.plugins,
+        
+        colorsBridge,
+
         require('@tailwindcss/forms')({ strategy: 'class' })
     ],
 };

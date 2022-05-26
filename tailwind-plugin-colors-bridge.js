@@ -17,10 +17,11 @@ function colorsBridge({ theme, addBase }) {
     });
 }
 
-module.exports = {
-    plugins: [
-        plugin(function(helpers) {
-            colorsBridge(helpers);
-        })
-    ]
-};
+// module.exports = {
+//     plugins: [
+//         plugin(function(helpers) {
+//             colorsBridge(helpers);
+//         })
+//     ]
+// };
+module.exports = plugin(colorsBridge);
