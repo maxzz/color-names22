@@ -8,7 +8,7 @@ import { Experiments } from './UI/experiments/Experiments';
 export function App2_Main({ className }: React.HTMLAttributes<HTMLDivElement>) {
     const currentSection = useAtomValue(AppAtoms.currentSectionAtom);
     return (
-        <div className={classNames("min-h-0", className)}>
+        <div className={classNames("min-h-0 bg-gradient-radial-to-tl from-slate-200 to-slate-50", className)}>
             {/* <Experiments /> */}
 
             {currentSection === SectionName.hue &&
