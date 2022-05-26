@@ -1,10 +1,11 @@
 const twColors = require('tailwindcss/colors');
 const dataState = require('./tailwind-plugin-data-state');
+const colorsBridge = require('./tailwind-plugin-colors-bridge');
 
 function buildColorsToBridge(allColors, groupName, groupNameOut) {
     const colorGroup = allColors[groupName];
     const bridge = Object.fromEntries(
-        Object.keys(colorGroup).map((colorKey) => [ `--tm-${groupNameOut || groupName}-${colorKey}`, colorGroup[colorKey], ])
+        Object.keys(colorGroup).map((colorKey) => [`--tm-${groupNameOut || groupName}-${colorKey}`, colorGroup[colorKey],])
     );
     return bridge;
 }
@@ -27,20 +28,21 @@ module.exports = {
                 'gradient-radial-to-tr': 'radial-gradient(115% 90% at 0% 100%, var(--tw-gradient-stops))',
                 'gradient-radial-to-tl': 'radial-gradient(115% 90% at 100% 100%, var(--tw-gradient-stops))',
                 'gradient-radial-to-br': 'radial-gradient(90% 115% at 0% 0%, var(--tw-gradient-stops))',
-                'gradient-radial-to-bl': 'radial-gradient(90% 115% at 100% 0%, var(--tw-gradient-stops))',                
+                'gradient-radial-to-bl': 'radial-gradient(90% 115% at 100% 0%, var(--tw-gradient-stops))',
             }),
         },
     },
     plugins: [
         ...dataState.plugins,
-        function ({ theme, addBase }) {
-            const bridge = buildColorsToBridge(theme('colors'), 'primary', 'primary');
-            addBase({
-                ':root': {
-                    ...bridge
-                },
-            });
-        },
+        // function ({ theme, addBase }) {
+        //     const bridge = buildColorsToBridge(theme('colors'), 'primary', 'primary');
+        //     addBase({
+        //         ':root': {
+        //             ...bridge
+        //         },
+        //     });
+        // },
+        ...colorsBridge.plugins,
         require('@tailwindcss/forms')({ strategy: 'class' })
     ],
 };
