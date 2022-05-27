@@ -228,18 +228,18 @@ export function MonoSwitch({ className }: HTMLAttributes<HTMLDivElement>) {
         },
     });
     return (
-        <div className="mb-2 self-end relative border border-primary-500 rounded text-xs select-none cursor-pointer overflow-hidden">
+        <div className="mb-2 self-end relative bg-primary-300 border-primary-500 border rounded text-xs shadow select-none cursor-pointer overflow-hidden">
             <div className="flex">
                 <div
                     className={classNames(
-                        "px-2 py-2 flex items-end z-10",
-                        mono ? "bg-primary-100 font-bold" : "bg-primary-300",
+                        "px-2 py-2 flex-0 flex items-end z-10",
+                        mono ? "bg-primary-100 font-bold" : "shadow-[inset_1px_1px_3px_0px_#0004] opacity-50",
                     )}
                     onClick={() => setMono(true)} title="Monochrome">Mono</div>
                 <div
                     className={classNames(
-                        "px-2 py-2 flex items-end z-10 text-center border-l border-primary-400",
-                        !mono ? "bg-primary-100 font-bold" : "bg-primary-300",
+                        "px-2 py-2 flex-0 flex items-end z-10 text-center border-l border-primary-400",
+                        !mono ? "bg-primary-100 font-bold" : "shadow-[inset_1px_1px_3px_0px_#0004] opacity-50",
                     )}
                     onClick={() => setMono(false)}>Color</div>
             </div>
@@ -253,7 +253,9 @@ export function MonoSwitch({ className }: HTMLAttributes<HTMLDivElement>) {
                 // className={classNames("absolute bottom-0 w-1/2 h-full bg-primary-400", mono ? "rounded-l-sm" : "rounded-r-sm")}>
                 // className={classNames("absolute top-1 bottom-1 w-1/2 bg-primary-400", mono ? "rounded-l-sm" : "rounded-r-sm")}>
                 // className={classNames("absolute bottom-0 w-1/2 h-1 bg-primary-400 z-20", mono ? "" : "")}>
-                className={classNames("absolute bottom-0 w-1/2 h-full bg-primary-400", mono ? "rounded-full" : "rounded-full")}>
+                className={classNames("absolute bottom-0 w-1/2 h-full bg-primary-400/40")}
+                //, mono ? "rounded-full" : "rounded-full"
+                >
             </a.div>
         </div>
     );
