@@ -3,14 +3,22 @@ import React from 'react';
 import { AppAtoms, SectionName } from '../store/store';
 import { classNames } from '../utils/classnames';
 
+const btnStyle = {
+    "hi": {
+        backgroundColor: "#11225d",
+        boxShadow: "0px 0px 3px 3px #2c4083"
+    }
+};
+
 function LinkButton({ label, sectionName }: { label: string, sectionName: SectionName; }) {
     const [currentSection, setCurrentSection] = useAtom(AppAtoms.currentSectionAtom);
     return (
         <li
             className={classNames(
-                " text-right select-none cursor-pointer",
-                currentSection === sectionName ? "font-bold underline text-primary-100" : "text-primary-500",
+                "px-2 py-1 text-center border-primary-500 border rounded select-none cursor-pointer active:scale-[.97]",
+                currentSection === sectionName ? "bg-title text-[#347d84]" : "text-primary-500",
             )}
+            style={currentSection === sectionName ? btnStyle.hi : {}}
             onClick={() => setCurrentSection(sectionName)}
         >
             {label}
@@ -21,7 +29,7 @@ function LinkButton({ label, sectionName }: { label: string, sectionName: Sectio
 function Links({ className }: React.HTMLAttributes<HTMLDivElement>) {
     return (
         <div className={classNames("flex items-center", className)}>
-            <ul>
+            <ul className="space-y-1">
                 <LinkButton label="Hue groups" sectionName={SectionName.hue} />
                 <LinkButton label="Named colors" sectionName={SectionName.list} />
             </ul>
