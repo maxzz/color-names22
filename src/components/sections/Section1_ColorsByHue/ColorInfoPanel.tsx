@@ -143,15 +143,36 @@ export function MonoSwitch({ className }: HTMLAttributes<HTMLDivElement>) {
     const [mono, setMono] = useAtom(viewHueAtoms.monoAtom);
     const styles = useSpring({
         from: { x: '0%', backgroundColor: 'red', },
-        to: { x: mono ? '0%' : '100%', backgroundColor: mono ? 'blue': 'red', },
+        to: { x: mono ? '0%' : '100%', backgroundColor: mono ? 'blue' : 'red', },
     });
     return (
         <div className="mb-2 self-end relative border border-primary-500 rounded text-xs select-none cursor-pointer">
-            <a.div style={styles} className="absolute bottom-0 w-1/2 h-1 bg-primary-500"></a.div>
+            {/* <a.div style={styles} className="absolute bottom-0 w-1/2 h-1 bg-primary-500"></a.div> */}
             <div className="flex">
-                <div className="px-2 py-2 flex items-end" title="Monochrome" onClick={()=>setMono(true)}>Mono</div>
-                <div className="px-2 py-2 flex items-end text-center border-l border-primary-400" onClick={()=>setMono(false)}>Color</div>
+                <div
+                    className={classNames(
+                        "px-2 py-2 flex items-end z-10",
+                        //mono ? "bg-red-500" : "",
+                        mono ? "text-primary-100" : "",
+                    )}
+                    onClick={() => setMono(true)} title="Monochrome">Mono</div>
+                <div
+                    className={classNames(
+                        "px-2 py-2 flex items-end z-10 text-center border-l border-primary-400",
+                        //!mono ? "bg-red-500" : "",
+                        !mono ? "text-primary-100" : "",
+                    )}
+                    onClick={() => setMono(false)}>Color</div>
             </div>
+            {/* <a.div style={styles} className="absolute bottom-0 w-1/2 h-full bg-primary-500"></a.div> */}
+            <a.div
+                style={(() => {
+                    const { backgroundColor, ...rest } = styles;
+                    return rest;
+                }
+                )()}
+                className={classNames("absolute bottom-0 w-1/2 h-full bg-primary-400", mono ? "rounded-l-sm" : "rounded-r-sm")}>
+            </a.div>
         </div>
     );
 }
@@ -179,10 +200,10 @@ export function ColorInfoPanel() {
 
                 <div className="">
                     <div className="flex flex-col">
-                        <MonoSwitch0 />
+                        {/* <MonoSwitch0 />
                         <MonoSwitch1 />
                         <MonoSwitch2 />
-                        <MonoSwitch3 />
+                        <MonoSwitch3 /> */}
                         <MonoSwitch />
 
                         <div className="h-14">
