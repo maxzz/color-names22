@@ -13,14 +13,14 @@ function ColorPreview() {
     const borderColor = () => color ? color.dark ? 'white' : 'black' : 'transparent';
     return (
         <div
-            className="w-24 h-24 border flex items-center justify-center"
+            className="p-1 w-24 h-24 border-primary-400 border flex items-center justify-center"
             style={{
                 backgroundColor: `${color ? color.hex : 'transparent'}`,
                 color: borderColor(),
-                borderColor: borderColor()
+                //borderColor: borderColor()
             }}
         >
-            Test
+            Lorem ipsum dolor sit amet consectetur adipisicing.
         </div>
     );
 }
@@ -100,24 +100,22 @@ export function ColorInfoPanel() {
     const mono = useAtomValue(viewHueAtoms.monoAtom);
     return (
         <div className="bg-slate-200">
-            <div className="px-4 mx-auto max-w-[42rem] flex items-center justify-between">
+            <div className="mx-auto max-w-[42rem] flex items-center justify-between">
                 <div className="py-1 flex items-center space-x-4 text-sm">
                     <ColorPreview />
                     <ColorValueInfo />
                 </div>
 
-                <div className="">
-                    <div className="flex flex-col">
-                        <MonoSwitch />
+                <div className="flex-1 flex flex-col">
+                    <MonoSwitch />
 
-                        <div className="h-14">
-                            {!mono &&
-                                <div className="flex flex-col">
-                                    <HueSlider />
-                                    <HueToleranceInfo className="self-end" />
-                                </div>
-                            }
-                        </div>
+                    <div className="h-14">
+                        {!mono &&
+                            <div className="flex flex-col">
+                                <HueSlider />
+                                <HueToleranceInfo className="self-end" />
+                            </div>
+                        }
                     </div>
                 </div>
 

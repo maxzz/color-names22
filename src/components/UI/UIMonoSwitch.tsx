@@ -1,7 +1,7 @@
-import { a, useSpring } from "@react-spring/web";
-import { useAtom } from "jotai";
 import React, { HTMLAttributes, useState } from "react";
+import { useAtom } from "jotai";
 import { viewHueAtoms } from "../../store/store";
+import { a, useSpring } from "@react-spring/web";
 import { classNames } from "../../utils/classnames";
 import { UISwitch } from "./UiSwitch";
 
@@ -170,14 +170,13 @@ export function MonoSwitch13({ className }: HTMLAttributes<HTMLDivElement>) {
     <MonoSwitch11 />
     <MonoSwitch12 />
     <MonoSwitch13 />
-
 */
 
 export function MonoSwitch({ className }: HTMLAttributes<HTMLDivElement>) {
     const [mono, setMono] = useAtom(viewHueAtoms.monoAtom);
     const styles = useSpring({ from: { x: '0%', }, to: { x: mono ? '0%' : '100%', }, config: { duration: 150 } });
     return (
-        <div className="mb-2 self-end relative bg-primary-300 ring-1 ring-primary-500 rounded text-xs shadow select-none cursor-pointer overflow-hidden">
+        <div className="mb-2 self-end relative bg-primary-300 ring-1 ring-primary-400 rounded text-xs shadow select-none cursor-pointer overflow-hidden">
             <div className="flex">
                 <div
                     className={classNames(
