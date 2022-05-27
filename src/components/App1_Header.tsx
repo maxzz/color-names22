@@ -8,17 +8,18 @@ const btnStyle = {
         backgroundColor: "#11225d",
         boxShadow: "0px 0px 3px 3px #2c4083"
     }
-};
+};//text-[#347d84]
 
 function LinkButton({ label, sectionName }: { label: string, sectionName: SectionName; }) {
     const [currentSection, setCurrentSection] = useAtom(AppAtoms.currentSectionAtom);
+    const isActive = currentSection === sectionName;
     return (
         <li
             className={classNames(
-                "px-2 py-1 text-center border-primary-500 border rounded select-none cursor-pointer active:scale-[.97]",
-                currentSection === sectionName ? "bg-title text-[#347d84]" : "text-primary-500",
+                "px-2 py-1 text-sm text-center border-primary-500 border rounded select-none cursor-pointer active:scale-[.98]",
+                isActive ? "border-primary-300 bg-title text-primary-300" : "text-primary-500",
             )}
-            style={currentSection === sectionName ? btnStyle.hi : {}}
+            style={isActive ? btnStyle.hi : {}}
             onClick={() => setCurrentSection(sectionName)}
         >
             {label}
@@ -29,7 +30,7 @@ function LinkButton({ label, sectionName }: { label: string, sectionName: Sectio
 function Links({ className }: React.HTMLAttributes<HTMLDivElement>) {
     return (
         <div className={classNames("flex items-center", className)}>
-            <ul className="space-y-1">
+            <ul className="space-y-2">
                 <LinkButton label="Hue groups" sectionName={SectionName.hue} />
                 <LinkButton label="Named colors" sectionName={SectionName.list} />
             </ul>
@@ -48,7 +49,7 @@ const textShadow = {
 export function App1_Header() {
     return (
         <div className="relative py-8 bg-title border-primary-400 border-b shadow-[0px_1px_2px_1px_#ffc16d69]">
-            <div className="text-base flex items-center uppercase" style={textShadow}>
+            <div className="text-base flex items-center uppercase font-orgiginal" style={textShadow}>
                 <div className="mx-auto scale-y-[1.5]">CSS Color Names</div>
             </div>
 

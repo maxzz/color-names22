@@ -1,4 +1,5 @@
 const twColors = require('tailwindcss/colors');
+const twTheme = require('tailwindcss/defaultTheme');
 const dataState = require('./tailwind-plugin-data-state');
 const colorsBridge = require('./tailwind-plugin-colors-bridge');
 
@@ -22,7 +23,8 @@ module.exports = {
                 title: '#06133e',
             },
             fontFamily: {
-                header: ['Merriweather', 'sans-serif']
+                header: ['Merriweather', 'sans-serif'],
+                orgiginal: [...twTheme.fontFamily.sans],
             },
             backgroundImage: () => ({
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
