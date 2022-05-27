@@ -4,7 +4,7 @@ import { viewHueAtoms } from '../../../store/store';
 import { formatHSL, formatRGB } from '../../../utils/colors';
 import { classNames } from '../../../utils/classnames';
 import { IconClipboard } from '../../UI/UIIcons';
-import { a, easings, useTransition } from '@react-spring/web';
+import { a, easings, useSpring, useTransition } from '@react-spring/web';
 import { UISwitch } from '../../UI/UiSwitch';
 import { HueSlider } from './HueSlider/HueSlider';
 
@@ -124,7 +124,7 @@ export function MonoSwitch2({ className }: HTMLAttributes<HTMLDivElement>) {
     );
 }
 
-export function MonoSwitch({ className }: HTMLAttributes<HTMLDivElement>) {
+export function MonoSwitch3({ className }: HTMLAttributes<HTMLDivElement>) {
     const [mono, setMono] = useAtom(viewHueAtoms.monoAtom);
     return (
         <div className="mb-2 self-end relative border border-red-500 rounded text-xs">
@@ -134,6 +134,23 @@ export function MonoSwitch({ className }: HTMLAttributes<HTMLDivElement>) {
             <div className="px-2 h-14 flex">
                 <div className="px-2 flex items-end" title="Monochrome">Mono</div>
                 <div className="px-2 flex items-end text-center border-l border-red-400">Color</div>
+            </div>
+        </div>
+    );
+}
+
+export function MonoSwitch({ className }: HTMLAttributes<HTMLDivElement>) {
+    const [mono, setMono] = useAtom(viewHueAtoms.monoAtom);
+    const styles = useSpring({
+        from: { x: '0%', backgroundColor: 'red', },
+        to: { x: mono ? '0%' : '100%', backgroundColor: mono ? 'blue': 'red', },
+    });
+    return (
+        <div className="mb-2 self-end relative border border-primary-500 rounded text-xs select-none cursor-pointer">
+            <a.div style={styles} className="absolute bottom-0 w-1/2 h-1 bg-primary-500"></a.div>
+            <div className="flex">
+                <div className="px-2 py-2 flex items-end" title="Monochrome" onClick={()=>setMono(true)}>Mono</div>
+                <div className="px-2 py-2 flex items-end text-center border-l border-primary-400" onClick={()=>setMono(false)}>Color</div>
             </div>
         </div>
     );
@@ -165,6 +182,7 @@ export function ColorInfoPanel() {
                         <MonoSwitch0 />
                         <MonoSwitch1 />
                         <MonoSwitch2 />
+                        <MonoSwitch3 />
                         <MonoSwitch />
 
                         <div className="h-14">
@@ -183,7 +201,7 @@ export function ColorInfoPanel() {
     );
 }
 
-//TODO: add tailwind palettes
+//TODO: add tailwind palettes - done
 //TODO: add input element for exact hue value
 //TODO: add control to enlarge/shrink hue slider
 //TODO: add control to dim on/off hue slider
