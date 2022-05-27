@@ -86,9 +86,9 @@ function ColorValueInfo() {
 }
 
 export function MonoSwitch0({ className }: HTMLAttributes<HTMLDivElement>) {
-    const [mono, setMono] = useAtom(viewHueAtoms.monoAtom);
+    const [mono, setMono] = useState(false);
     return (
-        <div className="mb-2 self-end flex items-center space-x-2 text-xs">
+        <div className="m-2 self-end flex items-center space-x-2 text-xs">
             <div className="">Monochrome</div>
             <UISwitch value={!mono} onChange={(v) => setMono(!v)} />
             <div className="">Color</div>
@@ -105,6 +105,21 @@ export function MonoSwitch1({ className }: HTMLAttributes<HTMLDivElement>) {
                 <div className="border-l border-red-400">Color</div>
             </div>
             <UISwitch value={!mono} onChange={(v) => setMono(!v)} />
+        </div>
+    );
+}
+
+export function MonoSwitch2({ className }: HTMLAttributes<HTMLDivElement>) {
+    const [mono, setMono] = useAtom(viewHueAtoms.monoAtom);
+    return (
+        <div className="mb-2 self-end relative border border-red-500 rounded text-xs">
+            <div className="absolute pt-2 inset-0 flex items-start justify-center">
+                <UISwitch value={!mono} onChange={(v) => setMono(!v)} />
+            </div>
+            <div className="px-2 h-14 flex">
+                <div className="px-2 flex items-end" title="Monochrome">Mono</div>
+                <div className="px-2 flex items-end text-center border-l border-red-400">Color</div>
+            </div>
         </div>
     );
 }
@@ -149,6 +164,7 @@ export function ColorInfoPanel() {
                     <div className="flex flex-col">
                         <MonoSwitch0 />
                         <MonoSwitch1 />
+                        <MonoSwitch2 />
                         <MonoSwitch />
 
                         <div className="h-14">

@@ -69,7 +69,7 @@ type SetValueProps = {
 export function UISwitch({ value, onChange }: { value: boolean; onChange: (checked: boolean) => void; }) {
     return (
         <Switch
-            className="relative ml-2 w-[46px] h-[28px] flex items-center data-state-checked:bg-orange-300 bg-orange-200/50 ring-orange-400/30 focus:ring-offset-orange-50 focus:ring-orange-300 ring-1 focus:ring-2 focus:ring-offset-2 outline-none rounded-full shadow"
+            className="relative ml-2 w-[46px] h-[28px] flex items-center data-state-checked:bg-primary-300 bg-primary-200/50 ring-primary-400/30 focus:ring-offset-primary-50 focus:ring-primary-300 ring-1 focus:ring-2 focus:ring-offset-2 outline-none rounded-full shadow"
             checked={value}
             onCheckedChange={onChange}
         >

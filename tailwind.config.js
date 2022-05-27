@@ -19,6 +19,7 @@ module.exports = {
                 //     100: twColors.blue['500'],
                 // },
                 primary: twColors.slate,
+                title: '#06133e',
             },
             fontFamily: {
                 header: ['Merriweather', 'sans-serif']
