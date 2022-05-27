@@ -4,7 +4,7 @@ import { viewHueAtoms } from '../../../store/store';
 import { formatHSL, formatRGB } from '../../../utils/colors';
 import { classNames } from '../../../utils/classnames';
 import { IconClipboard } from '../../UI/UIIcons';
-import { a, easings, useSpring, useTransition } from '@react-spring/web';
+import { a, config, easings, useSpring, useTransition } from '@react-spring/web';
 import { UISwitch } from '../../UI/UiSwitch';
 import { HueSlider } from './HueSlider/HueSlider';
 
@@ -144,23 +144,29 @@ export function MonoSwitch({ className }: HTMLAttributes<HTMLDivElement>) {
     const styles = useSpring({
         from: { x: '0%', backgroundColor: 'red', },
         to: { x: mono ? '0%' : '100%', backgroundColor: mono ? 'blue' : 'red', },
+        config: {
+            duration: 150
+          }
+        ,
     });
     return (
-        <div className="mb-2 self-end relative border border-primary-500 rounded text-xs select-none cursor-pointer">
+        <div className="mb-2 self-end relative border border-primary-500 rounded text-xs select-none cursor-pointer overflow-hidden">
             {/* <a.div style={styles} className="absolute bottom-0 w-1/2 h-1 bg-primary-500"></a.div> */}
             <div className="flex">
                 <div
                     className={classNames(
                         "px-2 py-2 flex items-end z-10",
                         //mono ? "bg-red-500" : "",
-                        mono ? "text-primary-100" : "",
+                        //mono ? "text-primary-100" : "",
+                        mono ? "bg-primary-100 font-bold" : "bg-primary-300",
                     )}
                     onClick={() => setMono(true)} title="Monochrome">Mono</div>
                 <div
                     className={classNames(
                         "px-2 py-2 flex items-end z-10 text-center border-l border-primary-400",
                         //!mono ? "bg-red-500" : "",
-                        !mono ? "text-primary-100" : "",
+                        //!mono ? "text-primary-100" : "",
+                        !mono ? "bg-primary-100 font-bold" : "bg-primary-300",
                     )}
                     onClick={() => setMono(false)}>Color</div>
             </div>
@@ -171,7 +177,10 @@ export function MonoSwitch({ className }: HTMLAttributes<HTMLDivElement>) {
                     return rest;
                 }
                 )()}
-                className={classNames("absolute bottom-0 w-1/2 h-full bg-primary-400", mono ? "rounded-l-sm" : "rounded-r-sm")}>
+                // className={classNames("absolute bottom-0 w-1/2 h-full bg-primary-400", mono ? "rounded-l-sm" : "rounded-r-sm")}>
+                // className={classNames("absolute top-1 bottom-1 w-1/2 bg-primary-400", mono ? "rounded-l-sm" : "rounded-r-sm")}>
+                className={classNames("absolute bottom-0 w-1/2 h-1 bg-primary-400 z-20", mono ? "" : "")}>
+                {/* className={classNames("absolute bottom-0 w-1/2 h-full bg-primary-400", mono ? "rounded-full" : "rounded-full")}> */}
             </a.div>
         </div>
     );
