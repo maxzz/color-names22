@@ -9,7 +9,7 @@ function Cell({ label, active, setValue, className, ...rest }: { label: string; 
         <div
             className={classNames(
                 "px-2 py-2 flex-0 flex items-end z-10",
-                active ? "bg-primary-100 font-bold cursor-default" : "shadow-[inset_1px_2px_5px_0px_#0004,inset_-0px_-2px_2px_0px_#fffa] opacity-50 cursor-pointer",
+                active ? "bg-primary-100 font-bold" : "shadow-[inset_1px_2px_5px_0px_#0004,inset_-0px_-2px_2px_0px_#fffa] opacity-50",
                 className,
             )}
             onClick={setValue}
@@ -31,8 +31,8 @@ export function MonoSwitch({ className }: HTMLAttributes<HTMLDivElement>) {
             )}
         >
             <div className="flex">
-                <Cell label="Mono" title="Monochrome" active={mono} setValue={() => setMono(true)} />
-                <Cell label="Color" title="Hue" className="border-l border-primary-400" active={!mono} setValue={() => setMono(false)} />
+                <Cell label="Mono" title="Monochrome" active={mono} setValue={() => setMono((v) => !v)} />
+                <Cell label="Color" title="Hue" className="border-l border-primary-400" active={!mono} setValue={() => setMono((v) => !v)} />
             </div>
 
             <a.div style={styles} className={classNames("absolute bottom-0 w-1/2 h-full bg-primary-400/40")}></a.div>
