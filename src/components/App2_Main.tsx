@@ -13,11 +13,11 @@ export function App2_Main({ className }: React.HTMLAttributes<HTMLDivElement>) {
 
             {currentSection === SectionName.hue &&
                 <div className="h-full flex flex-col">
-                    <div className="mt-8 px-4 text-xl font-header border-slate-700 border-b">
+                    {/* <div className="mt-8 px-4 text-xl font-header border-slate-700 border-b">
                         Section two: sorted groups
-                    </div>
+                    </div> */}
 
-                    <Section1_ColorsByHue className="flex-1 overflow-auto" />
+                    <Section1_ColorsByHue className="flex-1 overflow-y-auto" style={{ overflow: 'overlay' }} />
                 </div>
             }
 

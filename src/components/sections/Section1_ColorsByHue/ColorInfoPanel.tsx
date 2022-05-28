@@ -100,7 +100,7 @@ export function ColorInfoPanel() {
     const mono = useAtomValue(viewHueAtoms.monoAtom);
     return (
         <div className="">
-            <div className="mx-auto p-4 max-w-[42rem] bg-slate-200 rounded grid grid-cols-[minmax(0,1fr),auto]">
+            <div className="mx-auto p-4 pt-1 max-w-[42rem] bg-slate-200 rounded grid grid-cols-[minmax(0,1fr),auto]">
 
                 <div className={`col-span-2 h-16 flex flex-col justify-center`}>
                     {!mono &&
