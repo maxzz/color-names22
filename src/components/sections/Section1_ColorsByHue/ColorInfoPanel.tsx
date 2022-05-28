@@ -25,7 +25,7 @@ function ColorPreview() {
     );
 }
 
-function Mount({ show, setShow, children }: { show: boolean; setShow?: (v: boolean) => void; } & React.HTMLAttributes<HTMLDivElement>) {
+function MountCopyNotice({ show, setShow, children }: { show: boolean; setShow?: (v: boolean) => void; } & React.HTMLAttributes<HTMLDivElement>) {
     const transitions = useTransition(Number(show), {
         from: { x: 0, opacity: 0, },
         enter: { x: 0, opacity: 1, },
@@ -66,7 +66,7 @@ function ValueWithCopy({ name, label }: { name: string; label: string; }) {
                 </div>
             </div>
 
-            <Mount show={showNotice} setShow={setShowNotice} ><CopyNotice /></Mount>
+            <MountCopyNotice show={showNotice} setShow={setShowNotice} ><CopyNotice /></MountCopyNotice>
         </div>
     </>);
 }
@@ -96,6 +96,15 @@ export function HueToleranceInfo({ className }: HTMLAttributes<HTMLDivElement>) 
     );
 }
 
+function MountHue({ show, setShow, children }: { show: boolean; setShow?: (v: boolean) => void; } & React.HTMLAttributes<HTMLDivElement>) {
+    const transitions = useTransition(Number(show), {
+        from: { y: -20, opacity: 0, },
+        enter: { y: 0, opacity: 1, },
+        leave: { y: -20, opacity: 0, config: { duration: 200, easing: easings.easeOutQuad }, onRest: ({ finished }) => show && finished && setShow && setShow(false) },
+    });
+    return transitions((styles, item) => item ? <a.div style={styles}> {children} </a.div> : null);
+}
+
 export function ColorInfoPanel() {
     const mono = useAtomValue(viewHueAtoms.monoAtom);
     return (
@@ -103,22 +112,12 @@ export function ColorInfoPanel() {
             <div className="mx-auto p-4 pt-1 max-w-[42rem] bg-slate-200 rounded grid grid-cols-[minmax(0,1fr),auto]">
 
                 <div className={`col-span-2 h-16 flex flex-col justify-center`}>
-                    {/* {!mono &&
-                        <div className="">
-                            <div className="flex justify-end">
-                                <HueToleranceInfo />
-                            </div>
-                            <HueSlider />
+                    <MountHue show={mono}>
+                        <div className="flex justify-end">
+                            <HueToleranceInfo />
                         </div>
-                    } */}
-                    <Mount show={mono}>
-                        <div className="">
-                            <div className="flex justify-end">
-                                <HueToleranceInfo />
-                            </div>
-                            <HueSlider />
-                        </div>
-                    </Mount>
+                        <HueSlider />
+                    </MountHue>
                 </div>
 
                 <div className="flex items-center space-x-4 text-sm">
