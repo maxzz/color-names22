@@ -41,9 +41,10 @@ function Row({ group }: { group: NamedGroup; }) {
     return (<>
         {values.map(([key, color], idx) => (
             <Fragment key={`${name}.${idx}`}>
-                <button className="w-4 h-4 rounded" style={{ backgroundColor: color }} title={`${name}: ${key}`} />
+                <button className="my-px w-7 h-5 rounded" style={{ backgroundColor: color }} title={`${name}: ${key}`} />
             </Fragment>
         ))}
+        <div className="px-2 text-xs flex items-center bg-[#878787]">{name}</div>
     </>);
 }
 
@@ -59,7 +60,7 @@ function List2() {
     }
 
     return (
-        <div ref={getColors} className="max-w-min grid grid-cols-[repeat(10,auto)] gap-[0.125rem] all-tw-colors">
+        <div ref={getColors} className="max-w-min grid grid-cols-[repeat(11,auto)] gap-0.5 all-tw-colors">
             {colors.map((group, idxRow) => (
                 <Row group={group} key={idxRow} />
             ))}
