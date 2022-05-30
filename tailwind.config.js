@@ -1,7 +1,8 @@
 const twColors = require('tailwindcss/colors');
 const twTheme = require('tailwindcss/defaultTheme');
-const dataState = require('./tailwind-plugin-data-state');
-const colorsBridge = require('./tailwind-plugin-colors-bridge');
+const dataState = require('./tailwind/tailwind-plugin-data-state');
+const colorsBridge = require('./tailwind/tailwind-plugin-colors-bridge');
+const debugStyles = require('./tailwind/tailwnd-plugin-debug-styles');
 
 function buildColorsToBridge(allColors, groupName, groupNameOut) {
     const colorGroup = allColors[groupName];
@@ -21,6 +22,7 @@ module.exports = {
                 // },
                 primary: twColors.slate,
                 title: '#06133e',
+                url: twColors.blue['500'],
             },
             fontFamily: {
                 header: ['Merriweather', ...twTheme.fontFamily.sans],
@@ -38,6 +40,7 @@ module.exports = {
     plugins: [
         dataState,
         colorsBridge({ prefix: '--tm-', groupName: 'primary' },),
+        debugStyles,
         require('@tailwindcss/forms')({ strategy: 'class' })
     ],
 };
