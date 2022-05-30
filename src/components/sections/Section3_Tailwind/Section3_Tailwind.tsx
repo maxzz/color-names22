@@ -1,7 +1,5 @@
 import React, { ChangeEvent, Fragment } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
-import { viewListAtoms } from '../../../store/store';
-import { formatHSL, SortBy } from '../../../utils/colors';
 import { classNames } from '../../../utils/classnames';
 
 let values = [
@@ -35,8 +33,13 @@ function List() {
 
 export function Section3_Tailwind({className}: React.HTMLAttributes<HTMLUListElement>) {
     return (
-        <div className={classNames("bg-primary-200 grid place-content-center", className)}>
-            <div className="p-1 bg-primary-100 border-primary-300 border rounded shadow-md"><List /></div>
+        <div className="h-full flex flex-col">
+            <div className={classNames("flex-[4_4] bg-primary-200 grid place-content-center", className)}>
+                <div className="p-1 bg-primary-100 border-primary-300 border rounded shadow-md"><List /></div>
+            </div>
+            <div className="flex-1">
+                <a className="text-url underline" href="https://tailwindcss.com/docs/customizing-colors" target="_blank">Colors on Tailwind CSS website</a>
+            </div>
         </div>
     );
 }

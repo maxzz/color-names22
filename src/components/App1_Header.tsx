@@ -16,8 +16,8 @@ function LinkButton({ label, sectionName }: { label: string, sectionName: Sectio
     return (
         <li
             className={classNames(
-                "px-2 py-1 text-sm text-center border-primary-500 border rounded select-none cursor-pointer active:scale-[.98]",
-                isActive ? "border-primary-300 bg-title text-primary-300" : "text-primary-500",
+                "px-2 py-1 text-sm text-center border-primary-500 border rounded select-none cursor-pointer active:scale-[.98] transition-colors",
+                isActive ? "text-primary-300 bg-title border-primary-300" : "text-primary-500 hover:text-primary-300 hover:border-primary-300",
             )}
             style={isActive ? btnStyle.hi : {}}
             onClick={() => setCurrentSection(sectionName)}
