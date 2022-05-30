@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Fragment, useRef } from 'react';
+import React, { ChangeEvent, Fragment, useEffect, useRef, useState } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { classNames } from '../../../utils/classnames';
 
@@ -38,13 +38,13 @@ function Row({ group }: { group: NamedGroup; }) {
     const arr = Object.entries(group)[0];
     const name = arr[0];
     const values = Object.entries(arr[1]);
-    console.log('values', values);
+    //console.log(name, values);
 
     return (
         <>
-            {values.map(([key, c], idx) => (
+            {values.map(([key, color], idx) => (
                 <Fragment key={`${name}.${idx}`}>
-                    <button className="w-4 h-4 rounded" style={{ backgroundColor: c }} />
+                    <button className="w-4 h-4 rounded" style={{ backgroundColor: color }} title={`${name}: ${key}`} />
                 </Fragment>
             ))}
         </>
@@ -53,17 +53,22 @@ function Row({ group }: { group: NamedGroup; }) {
 
 function List2() {
     const colorsRef = useRef<NamedGroup[]>([]);
-    
+    const [colors, setColors] = useState<NamedGroup[]>([]);
+
+    useEffect(() => setColors(colorsRef.current), [colorsRef]);
+
     function getColors(el: HTMLDivElement) {
         const colors = JSON.parse(el && getComputedStyle(el).getPropertyValue('--tm-tw-colors') || '[]');
         colorsRef.current = colors || [];
-        //console.log('colorsRef.current', colorsRef.current);
+        //colorsRef.current = [colors[0]] || [];
+        //console.log('colors', colors);
     }
+
     return (
-        <div ref={getColors} className="max-w-min grid grid-cols-[repeat(9,auto)] gap-[0.125rem] all-tw-colors">
+        <div ref={getColors} className="max-w-min grid grid-cols-[repeat(10,auto)] gap-[0.125rem] all-tw-colors">
             <>
-                {colorsRef.current.map((group, idxRow) => (
-                    <Row group={group} />
+                {colors.map((group, idxRow) => (
+                    <Row group={group} key={idxRow} />
                 ))}
 
                 {/* {colorsRef.current.map((group, idxRow) => {
@@ -85,10 +90,9 @@ export function Section3_Tailwind({ className }: React.HTMLAttributes<HTMLUListE
 
             <div className={classNames("flex-[4_4] bg-primary-200 grid place-content-center", className)}>
                 <div className="p-1 bg-primary-100 border-primary-300 border rounded shadow-md"><List /></div>
-            </div>
-
-            <div className={classNames("flex-[4_4] bg-primary-200 grid place-content-center", className)}>
-                <div className="p-1 bg-primary-100 border-primary-300 border rounded shadow-md"><List2 /></div>
+                <div className="">
+                    <div className="p-1 bg-primary-100 border-primary-300 border rounded shadow-md"><List2 /></div>
+                </div>
             </div>
 
             <div className="flex-1">
