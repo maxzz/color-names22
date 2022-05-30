@@ -31,19 +31,21 @@ function List() {
     );
 }
 
+type ColorGroup = Record<string, string>;
+
 function List2() {
-    const colorsRef = useRef('');
+    const colorsRef = useRef<ColorGroup[]>([]);
     function getColors(el: HTMLDivElement) {
-        colorsRef.current = el?.style.getPropertyValue('--tm-tw-colors') || '11';
-        console.log('colorsRef.current', colorsRef.current, el);
+        const colors = JSON.parse(el && getComputedStyle(el).getPropertyValue('--tm-tw-colors') || '[]');
+        colorsRef.current = colors || [];
     }
     return (
         <div ref={getColors} className="max-w-min grid grid-cols-[repeat(19,auto)] gap-[0.125rem] all-tw-colors">
-            {values.map((colors, idxRow) => (
+            {colorsRef.current.map((group, idxRow) => (
                 <Fragment key={idxRow}>
-                    {colors.map((color, idxCol) => (
+                    {Object.entries(group).map(([key, c], idxCol) => (
                         <Fragment key={`${idxRow}.${idxCol}`}>
-                            <button className="w-4 h-4 rounded" style={{ backgroundColor: color }} />
+                            <button className="w-4 h-4 rounded" style={{ backgroundColor: c }} />
                         </Fragment>
                     ))}
                 </Fragment>
