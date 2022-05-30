@@ -23,7 +23,7 @@ module.exports = {
                 title: '#06133e',
             },
             fontFamily: {
-                header: ['Merriweather', 'sans-serif'],
+                header: ['Merriweather', ...twTheme.fontFamily.sans],
                 orgiginal: [...twTheme.fontFamily.sans],
             },
             backgroundImage: () => ({
