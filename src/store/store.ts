@@ -6,6 +6,7 @@ import { allColorsWoAlternatives, ColorItem, groupColors, SortBy, sortColorItems
 export enum SectionName {
     hue,
     list,
+    tailwind,
 }
 
 //#region LocalStorage

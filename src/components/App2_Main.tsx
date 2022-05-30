@@ -3,6 +3,7 @@ import { AppAtoms, SectionName } from '../store/store';
 import { classNames } from '../utils/classnames';
 import { Section1_ColorsByHue } from './sections/Section1_ColorsByHue/Section1_ColorsByHue';
 import { Section2_ColorsList, SortOrderSwitch } from './sections/Section2_ColorsList/Section2_ColorsList';
+import { Section3_Tailwind } from './sections/Section3_Tailwind/Section3_Tailwind';
 import { Experiments } from './UI/experiments/Experiments';
 
 export function App2_Main({ className }: React.HTMLAttributes<HTMLDivElement>) {
@@ -32,6 +33,12 @@ export function App2_Main({ className }: React.HTMLAttributes<HTMLDivElement>) {
                     </div>
 
                     <Section2_ColorsList className="flex-1 overflow-auto" />
+                </div>
+            }
+
+            {currentSection === SectionName.tailwind &&
+                <div className="h-full flex flex-col">
+                    <Section3_Tailwind className="flex-1 overflow-auto" />
                 </div>
             }
 

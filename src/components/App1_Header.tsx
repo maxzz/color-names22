@@ -33,6 +33,7 @@ function Links({ className }: React.HTMLAttributes<HTMLDivElement>) {
             <ul className="space-y-2">
                 <LinkButton label="Hue groups" sectionName={SectionName.hue} />
                 <LinkButton label="Named colors" sectionName={SectionName.list} />
+                <LinkButton label="Tailwind" sectionName={SectionName.tailwind} />
             </ul>
         </div>
     );
@@ -48,7 +49,7 @@ const textShadow = {
 
 export function App1_Header() {
     return (
-        <div className="relative py-8 bg-title border-primary-400 border-b shadow-[0px_1px_2px_1px_#ffc16d69]">
+        <div className="relative py-12 bg-title border-primary-400 border-b shadow-[0px_1px_2px_1px_#ffc16d69]">
             <div className="text-base flex items-center uppercase font-orgiginal" style={textShadow}>
                 <div className="mx-auto scale-y-[1.5]">CSS Color Names</div>
             </div>
