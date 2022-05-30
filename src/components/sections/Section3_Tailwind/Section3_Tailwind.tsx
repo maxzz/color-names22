@@ -38,17 +38,13 @@ function Row({ group }: { group: NamedGroup; }) {
     const arr = Object.entries(group)[0];
     const name = arr[0];
     const values = Object.entries(arr[1]);
-    //console.log(name, values);
-
-    return (
-        <>
-            {values.map(([key, color], idx) => (
-                <Fragment key={`${name}.${idx}`}>
-                    <button className="w-4 h-4 rounded" style={{ backgroundColor: color }} title={`${name}: ${key}`} />
-                </Fragment>
-            ))}
-        </>
-    );
+    return (<>
+        {values.map(([key, color], idx) => (
+            <Fragment key={`${name}.${idx}`}>
+                <button className="w-4 h-4 rounded" style={{ backgroundColor: color }} title={`${name}: ${key}`} />
+            </Fragment>
+        ))}
+    </>);
 }
 
 function List2() {
@@ -60,25 +56,13 @@ function List2() {
     function getColors(el: HTMLDivElement) {
         const colors = JSON.parse(el && getComputedStyle(el).getPropertyValue('--tm-tw-colors') || '[]');
         colorsRef.current = colors || [];
-        //colorsRef.current = [colors[0]] || [];
-        //console.log('colors', colors);
     }
 
     return (
         <div ref={getColors} className="max-w-min grid grid-cols-[repeat(10,auto)] gap-[0.125rem] all-tw-colors">
-            <>
-                {colors.map((group, idxRow) => (
-                    <Row group={group} key={idxRow} />
-                ))}
-
-                {/* {colorsRef.current.map((group, idxRow) => {
-                    return Object.entries(group).map(([key, c], idxCol) => (
-                        <Fragment key={`${idxRow}.${idxCol}`}>
-                            <button className="w-4 h-4 rounded" style={{ backgroundColor: JSON.stringify(c) }} />
-                        </Fragment>
-                    ));
-                })} */}
-            </>
+            {colors.map((group, idxRow) => (
+                <Row group={group} key={idxRow} />
+            ))}
         </div>
 
     );
@@ -88,10 +72,13 @@ export function Section3_Tailwind({ className }: React.HTMLAttributes<HTMLUListE
     return (
         <div className="h-full flex flex-col">
 
-            <div className={classNames("flex-[4_4] bg-primary-200 grid place-content-center", className)}>
-                <div className="p-1 bg-primary-100 border-primary-300 border rounded shadow-md"><List /></div>
-                <div className="">
-                    <div className="p-1 bg-primary-100 border-primary-300 border rounded shadow-md"><List2 /></div>
+            <div className={classNames("flex-[4_4] bg-primary-400 grid grid-cols-[auto,auto] gap-x-4 content-evenly justify-center", className)}>
+                <div className="grid place-content-center">
+                    <div className="p-1 bg-primary-100 border-primary-300 border rounded shadow-md"><List /></div>
+                </div>
+
+                <div className="w-min grid place-content-center">
+                    <div className="p-1 bg-[#878787] border-primary-300 border rounded shadow-md"><List2 /></div>
                 </div>
             </div>
 
