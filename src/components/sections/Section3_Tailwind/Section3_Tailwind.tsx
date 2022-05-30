@@ -32,33 +32,57 @@ function List() {
 }
 
 type ColorGroup = Record<string, string>;
+type NamedGroup = Record<string, ColorGroup>;
+
+function Row({ group }: { group: NamedGroup; }) {
+    const arr = Object.entries(group)[0];
+    const name = arr[0];
+    const values = Object.entries(arr[1]);
+    console.log('values', values);
+
+    return (
+        <>
+            {values.map(([key, c], idx) => (
+                <Fragment key={`${name}.${idx}`}>
+                    <button className="w-4 h-4 rounded" style={{ backgroundColor: c }} />
+                </Fragment>
+            ))}
+        </>
+    );
+}
 
 function List2() {
-    const colorsRef = useRef<ColorGroup[]>([]);
+    const colorsRef = useRef<NamedGroup[]>([]);
+    
     function getColors(el: HTMLDivElement) {
         const colors = JSON.parse(el && getComputedStyle(el).getPropertyValue('--tm-tw-colors') || '[]');
         colorsRef.current = colors || [];
+        //console.log('colorsRef.current', colorsRef.current);
     }
     return (
-        <div ref={getColors} className="max-w-min grid grid-cols-[repeat(19,auto)] gap-[0.125rem] all-tw-colors">
-            {colorsRef.current.map((group, idxRow) => (
-                <Fragment key={idxRow}>
-                    {Object.entries(group).map(([key, c], idxCol) => (
+        <div ref={getColors} className="max-w-min grid grid-cols-[repeat(9,auto)] gap-[0.125rem] all-tw-colors">
+            <>
+                {colorsRef.current.map((group, idxRow) => (
+                    <Row group={group} />
+                ))}
+
+                {/* {colorsRef.current.map((group, idxRow) => {
+                    return Object.entries(group).map(([key, c], idxCol) => (
                         <Fragment key={`${idxRow}.${idxCol}`}>
-                            <button className="w-4 h-4 rounded" style={{ backgroundColor: c }} />
+                            <button className="w-4 h-4 rounded" style={{ backgroundColor: JSON.stringify(c) }} />
                         </Fragment>
-                    ))}
-                </Fragment>
-            ))}
+                    ));
+                })} */}
+            </>
         </div>
 
     );
 }
 
-export function Section3_Tailwind({className}: React.HTMLAttributes<HTMLUListElement>) {
+export function Section3_Tailwind({ className }: React.HTMLAttributes<HTMLUListElement>) {
     return (
         <div className="h-full flex flex-col">
-            
+
             <div className={classNames("flex-[4_4] bg-primary-200 grid place-content-center", className)}>
                 <div className="p-1 bg-primary-100 border-primary-300 border rounded shadow-md"><List /></div>
             </div>
