@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Fragment } from 'react';
+import React, { ChangeEvent, Fragment, useRef } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { classNames } from '../../../utils/classnames';
 
@@ -31,12 +31,38 @@ function List() {
     );
 }
 
+function List2() {
+    const colorsRef = useRef('');
+    function getColors(el: HTMLDivElement) {
+        colorsRef.current = el?.style.getPropertyValue('--tm-tw-colors') || '11';
+        console.log('colorsRef.current', colorsRef.current, el);
+    }
+    return (
+        <div ref={getColors} className="max-w-min grid grid-cols-[repeat(19,auto)] gap-[0.125rem] all-tw-colors">
+            {values.map((colors, idxRow) => (
+                <Fragment key={idxRow}>
+                    {colors.map((color, idxCol) => (
+                        <Fragment key={`${idxRow}.${idxCol}`}>
+                            <button className="w-4 h-4 rounded" style={{ backgroundColor: color }} />
+                        </Fragment>
+                    ))}
+                </Fragment>
+            ))}
+        </div>
+
+    );
+}
+
 export function Section3_Tailwind({className}: React.HTMLAttributes<HTMLUListElement>) {
     return (
-        <div className="h-full flex flex-col all-tw-colors">
+        <div className="h-full flex flex-col">
             
             <div className={classNames("flex-[4_4] bg-primary-200 grid place-content-center", className)}>
                 <div className="p-1 bg-primary-100 border-primary-300 border rounded shadow-md"><List /></div>
+            </div>
+
+            <div className={classNames("flex-[4_4] bg-primary-200 grid place-content-center", className)}>
+                <div className="p-1 bg-primary-100 border-primary-300 border rounded shadow-md"><List2 /></div>
             </div>
 
             <div className="flex-1">
