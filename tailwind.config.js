@@ -3,14 +3,7 @@ const twTheme = require('tailwindcss/defaultTheme');
 const dataState = require('./tailwind/tailwind-plugin-data-state');
 const colorsBridge = require('./tailwind/tailwind-plugin-colors-bridge');
 const debugStyles = require('./tailwind/tailwnd-plugin-debug-styles');
-
-function buildColorsToBridge(allColors, groupName, groupNameOut) {
-    const colorGroup = allColors[groupName];
-    const bridge = Object.fromEntries(
-        Object.keys(colorGroup).map((colorKey) => [`--tm-${groupNameOut || groupName}-${colorKey}`, colorGroup[colorKey],])
-    );
-    return bridge;
-}
+const allColors = require('./tailwind/tailwind-plugin-all-colors');
 
 module.exports = {
     content: ['./index.html', './src/**/*.{tsx,ts,js,jsx}'],
@@ -40,6 +33,7 @@ module.exports = {
     plugins: [
         dataState,
         colorsBridge({ prefix: '--tm-', groupName: 'primary' },),
+        allColors,
         debugStyles,
         require('@tailwindcss/forms')({ strategy: 'class' })
     ],

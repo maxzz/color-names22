@@ -33,13 +33,16 @@ function List() {
 
 export function Section3_Tailwind({className}: React.HTMLAttributes<HTMLUListElement>) {
     return (
-        <div className="h-full flex flex-col">
+        <div className="h-full flex flex-col all-tw-colors">
+            
             <div className={classNames("flex-[4_4] bg-primary-200 grid place-content-center", className)}>
                 <div className="p-1 bg-primary-100 border-primary-300 border rounded shadow-md"><List /></div>
             </div>
+
             <div className="flex-1">
                 <a className="text-url underline" href="https://tailwindcss.com/docs/customizing-colors" target="_blank">Colors on Tailwind CSS website</a>
             </div>
+
         </div>
     );
 }
