@@ -143,6 +143,14 @@ export const viewListAtoms: Atomize<ViewListOptions & {
 
 //#region Tailwind
 
+export type CurrentTwColor = {
+    group: string;  // group: stale, ..
+    key: string;    // 50, 100, ..
+    value: string;  // hex color value
+}
+
+export const currentTwColorAtom = atom<CurrentTwColor | null>(null);
+
 export const allColorsAtom = atom<NamedGroup[]>([]);
 
 //#endregion Tailwind

@@ -15,6 +15,6 @@ export function TailwindAllColorsBridge() {
     }
 
     return (
-        <div ref={getColors} className="all-tw-colors" />
+        <div ref={getColors} className="absolute hidden all-tw-colors" />
     );
 }
