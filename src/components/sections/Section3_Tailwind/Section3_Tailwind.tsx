@@ -1,6 +1,7 @@
 import React, { ChangeEvent, Fragment, useEffect, useRef, useState } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { classNames } from '../../../utils/classnames';
+import { NamedGroup } from './TailwindAllColors/TailwindAllColors';
 
 let values = [
     ["#ffe4e6", "#fce7f3", "#fae8ff", "#f3e8ff", "#ede9fe", "#e0e7ff", "#dbeafe", "#e0f2fe", "#cffafe", "#ccfbf1", "#d1fae5", "#dcfce7", "#ecfccb", "#fef9c3", "#fef3c7", "#ffedd5", "#fee2e2", "#f5f5f4", "#f3f4f6"],
@@ -30,9 +31,6 @@ function List() {
 
     );
 }
-
-type ColorGroup = Record<string, string>;
-type NamedGroup = Record<string, ColorGroup>;
 
 function Row({ group }: { group: NamedGroup; }) {
     const arr = Object.entries(group)[0];

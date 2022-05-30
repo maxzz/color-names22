@@ -2,6 +2,7 @@ import { atom, Getter, SetStateAction, Setter } from 'jotai';
 import { Atomize, atomLoader, atomWithCallback } from '../hooks/atomsX';
 import { debounce } from '../utils/debounce';
 import { allColorsWoAlternatives, ColorItem, groupColors, SortBy, sortColorItemsFn } from '../utils/colors';
+import { NamedGroup } from '../components/sections/Section3_Tailwind/TailwindAllColors/TailwindAllColors';
 
 export enum SectionName {
     hue,
@@ -140,6 +141,13 @@ export const viewListAtoms: Atomize<ViewListOptions & {
 
 //#endregion Sorted colors list
 
+
+//#region Tailwind
+
+export const allColorsAtom = atom<NamedGroup[]>([]);
+
+//#endregion Tailwind
+
 //#region App options
 
 type AppOptions = {
@@ -150,9 +158,9 @@ export const AppAtoms: Atomize<AppOptions> = {
     currentSectionAtom: atomWithCallback(Storage.initialData.appOptions.currentSection, Storage.save),
 };
 
-//#endregion App options
-
 export const dataLoadAtom = atomLoader((get: Getter, set: Setter) => {
     setColorList(get(_hueAtom), get(_monoAtom), set);
     set(viewListAtoms.sortByAtom, get(_colorListSortByAtom));
 });
+
+//#endregion App options
