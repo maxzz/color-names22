@@ -4,7 +4,7 @@ import './App.scss';
 import { App3_Footer } from './components/App3_Footer';
 import { useAtomValue } from 'jotai';
 import { dataLoadAtom } from './store/store';
-import { TailwindAllColorsBridge } from './components/sections/Section3_Tailwind/TailwindAllColors/TailwindAllColorsBridge';
+import { TailwindAllColorsBridge } from './components/sections/Section3_Tailwind/TailwindAllColors/TwAllColorsBridge';
 
 function App() {
     useAtomValue(dataLoadAtom);
