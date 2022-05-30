@@ -1,8 +1,8 @@
 import { atom, Getter, SetStateAction, Setter } from 'jotai';
-import { Atomize, atomLoader, atomWithCallback } from '../hooks/atomsX';
-import { debounce } from '../utils/debounce';
-import { allColorsWoAlternatives, ColorItem, groupColors, SortBy, sortColorItemsFn } from '../utils/colors';
-import { NamedGroup } from '../components/sections/Section3_Tailwind/TailwindAllColors/TailwindAllColors';
+import { Atomize, atomLoader, atomWithCallback } from '@/hooks/atomsX';
+import { debounce } from '@/utils/debounce';
+import { allColorsWoAlternatives, ColorItem, groupColors, SortBy, sortColorItemsFn } from '@/utils/colors';
+import { NamedGroup } from '@/components/sections/Section3_Tailwind/TailwindAllColors/tw-all-colors';
 
 export enum SectionName {
     hue,
@@ -140,7 +140,6 @@ export const viewListAtoms: Atomize<ViewListOptions & {
 };
 
 //#endregion Sorted colors list
-
 
 //#region Tailwind
 

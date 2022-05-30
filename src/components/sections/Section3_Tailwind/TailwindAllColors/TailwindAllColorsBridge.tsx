@@ -1,11 +1,9 @@
 import { useUpdateAtom } from "jotai/utils";
 import { useEffect, useRef, useState } from "react";
 import { allColorsAtom } from "@/store/store";
+import { NamedGroup } from "./tw-all-colors";
 
-export type ColorGroup = Record<string, string>;
-export type NamedGroup = Record<string, ColorGroup>;
-
-export function TailwindAllColors() {
+export function TailwindAllColorsBridge() {
     const colorsRef = useRef<NamedGroup[]>([]);
     const setColors = useUpdateAtom(allColorsAtom);
 
@@ -17,6 +15,6 @@ export function TailwindAllColors() {
     }
 
     return (
-        <div ref={getColors} className="max-w-min grid grid-cols-[repeat(11,auto)] gap-0.5 all-tw-colors" />
+        <div ref={getColors} className="all-tw-colors" />
     );
 }
