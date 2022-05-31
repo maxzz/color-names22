@@ -2,7 +2,7 @@ import { atom, Getter, SetStateAction, Setter } from 'jotai';
 import { Atomize, atomLoader, atomWithCallback } from '@/hooks/atomsX';
 import { debounce } from '@/utils/debounce';
 import { allColorsWoAlternatives, ColorItem, groupColors, SortBy, sortColorItemsFn } from '@/utils/colors';
-import { ColorGroups } from '@/components/UI/TailwindColorsBridge/tw-all-colors';
+import { ColorGroups } from '@/components/UI/TailwindColorsBridge';
 
 export enum SectionName {
     hue,
@@ -143,6 +143,7 @@ export const viewListAtoms: Atomize<ViewListOptions & {
 
 //#region Tailwind
 
+/*1*/
 export type CurrentTwColor = {
     group: string;  // group: stale, ..
     key: string;    // 50, 100, ..
@@ -150,6 +151,65 @@ export type CurrentTwColor = {
 }
 
 export const currentTwColorAtom = atom<CurrentTwColor | null>(null);
+/**/
+
+/*3* /
+export type CurrentTwGrIdx = {
+    key: string;    // 50, 100, ..
+    value: string;  // hex color value
+};
+
+export type CurrentTwColor =
+    & {
+        group: string;  // group: stale, ..
+    }
+    & CurrentTwGrIdx;
+
+export const currentTwColorAtom = atom<CurrentTwColor | null>(null);
+
+export const setTwGrIdxAtom = atom(
+    null,
+    (get, set, value: CurrentTwGrIdx) => {
+        const twColor = get(currentTwColorAtom);
+        if (twColor) {
+            set(currentTwColorAtom, { group: twColor.group, ...value });
+        }
+    }
+);
+
+/**/
+
+/*2* /
+export type CurrentTwGrIdx = {
+    key: string;    // 50, 100, ..
+    value: string;  // hex color value
+};
+
+export type CurrentTwColor = {
+    group: string;  // group: stale, ..
+} & CurrentTwGrIdx;
+
+export const currentTwGroupAtom = atom<string | null>(null);
+export const currentTwGrIdxAtom = atom<CurrentTwGrIdx | null>(null);
+
+export const currentTwColorAtom = atom(
+    (get) => {
+        const group = get(currentTwGroupAtom);
+        const grIdx = get(currentTwGrIdxAtom);
+        return group && grIdx ? { group, ...grIdx } : null;
+    },
+    (get, set, value: SetStateAction<CurrentTwColor | null>) => {
+        const v = typeof value === 'function'? value(get(currentTwColorAtom)) : value;
+        if (!v) {
+            set(currentTwGroupAtom, null);
+            set(currentTwGrIdxAtom, null);
+        } else {
+            set(currentTwGroupAtom, v.group);
+            set(currentTwGrIdxAtom, { key: v.key, value: v.value });
+        }
+    }
+);
+/**/
 
 export const allColorsAtom = atom<ColorGroups>({});
 
