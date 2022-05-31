@@ -2,7 +2,7 @@ import { atom, Getter, SetStateAction, Setter } from 'jotai';
 import { Atomize, atomLoader, atomWithCallback } from '@/hooks/atomsX';
 import { debounce } from '@/utils/debounce';
 import { allColorsWoAlternatives, ColorItem, groupColors, SortBy, sortColorItemsFn } from '@/utils/colors';
-import { NamedGroup } from '@/components/sections/Section3_Tailwind/TailwindAllColors/tw-all-colors';
+import { ColorGroups } from '@/components/sections/Section3_Tailwind/TailwindAllColors/tw-all-colors';
 
 export enum SectionName {
     hue,
@@ -151,7 +151,7 @@ export type CurrentTwColor = {
 
 export const currentTwColorAtom = atom<CurrentTwColor | null>(null);
 
-export const allColorsAtom = atom<NamedGroup[]>([]);
+export const allColorsAtom = atom<ColorGroups>({});
 
 //#endregion Tailwind
 

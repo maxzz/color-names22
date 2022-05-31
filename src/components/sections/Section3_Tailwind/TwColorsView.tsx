@@ -1,14 +1,11 @@
 import { Fragment } from "react";
 import { useAtomValue } from "jotai";
 import { allColorsAtom, currentTwColorAtom } from "@/store/store";
-import { NamedGroup } from "./TailwindAllColors/tw-all-colors";
+import { ColorGroups, GroupValues } from "./TailwindAllColors/tw-all-colors";
 import { useUpdateAtom } from "jotai/utils";
 
-function Row({ group }: { group: NamedGroup; }) {
-    const arr = Object.entries(group)[0];
-    const name = arr[0];
-    const values = Object.entries(arr[1]);
-
+function Row({ groupName, groupValues }: { groupName: string; groupValues: GroupValues; }) {
+    const values = Object.entries(groupValues);
     const setCurrentTwColor = useUpdateAtom(currentTwColorAtom);
     return (<>
         {values.map(([key, color], idx) => (
@@ -16,22 +13,23 @@ function Row({ group }: { group: NamedGroup; }) {
                 <button
                     className="p-1 w-7 h-5 border-slate-600 border rounded hover:scale-125 active:scale-x-[.8] transition-transform"
                     style={{ backgroundColor: color }}
-                    onClick={() => setCurrentTwColor({ group: name, key, value: color, })}
-                    title={`${name}: ${key}`}
+                    onClick={() => setCurrentTwColor({ group: groupName, key, value: color, })}
+                    title={`${groupName}: ${key}`}
                 />
             </Fragment>
         ))}
 
-        <div className="px-2 text-xs flex items-center font-bold text-primary-900">{name}</div>
+        <div className="px-2 text-xs flex items-center font-bold text-primary-900">{groupName}</div>
     </>);
 }
 
 export function TwColorsView() {
     const colors = useAtomValue(allColorsAtom);
+    const groups = Object.entries(colors);
     return (
         <div className="max-w-min grid grid-cols-[repeat(11,auto)] gap-0.5">
-            {colors.map((group, idxRow) => (
-                <Row group={group} key={idxRow} />
+            {groups.map(([groupName, groupValues], idxRow) => (
+                <Row groupName={groupName} groupValues={groupValues} key={idxRow} />
             ))}
         </div>
 
