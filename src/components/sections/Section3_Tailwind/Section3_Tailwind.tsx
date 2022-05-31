@@ -7,8 +7,9 @@ import { TwColorInfo } from './TwColorInfo';
 export function Section3_Tailwind({ className }: React.HTMLAttributes<HTMLUListElement>) {
     return (
         <div className="h-full flex flex-col bg-primary-200">
-
-            <TwColorInfo />
+            <div className="bg-primary-300">
+                <TwColorInfo className="max-w-3xl mx-auto" />
+            </div>
 
             <div className={classNames("flex-1 grid grid-cols-[auto,auto] gap-x-4 content-evenly justify-center", className)}>
                 {/* <div className="grid place-content-center">

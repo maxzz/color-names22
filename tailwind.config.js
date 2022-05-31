@@ -9,6 +9,9 @@ module.exports = {
     content: ['./index.html', './src/**/*.{tsx,ts,js,jsx}'],
     theme: {
         extend: {
+            screens: {
+                smallest: '501px',
+            },
             colors: {
                 // primary: {
                 //     100: twColors.blue['500'],
