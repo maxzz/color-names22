@@ -40,19 +40,15 @@ function CopyNotice() {
     );
 }
 
-function ValueWithCopy({ name, label }: { name: string; label: string; }) {
+export function ValueWithCopy({ colorValue: value }: { colorValue: string; }) {
     const [focus, setFocus] = useState(false);
     const [showNotice, setShowNotice] = useState(false);
-    return (<>
-        {/* Column name */}
-        <div className="py-0.5 select-none">{name}</div>
-
-        {/* Column value */}
+    return (
         <div
             className="flex items-center space-x-2 select-none"
             onPointerEnter={() => setFocus(true)}
             onPointerLeave={() => setFocus(false)}
-            onClick={async () => { await navigator.clipboard.writeText(label); setShowNotice(true); }}
+            onClick={async () => { await navigator.clipboard.writeText(value); setShowNotice(true); }}
         >
             <div
                 className={classNames(
@@ -60,7 +56,7 @@ function ValueWithCopy({ name, label }: { name: string; label: string; }) {
                     focus ? "px-1 py-0.5 bg-slate-100 outline-slate-500 outline-1 outline rounded shadow active:scale-[.97]" : "px-1 py-0.5"
                 )}
             >
-                <div className="">{label}</div>
+                <div className="">{value}</div>
                 <div className={classNames("ml-1", focus ? "visible" : "invisible")}>
                     <IconClipboard className="w-4 h-4 text-slate-500" />
                 </div>
@@ -68,6 +64,16 @@ function ValueWithCopy({ name, label }: { name: string; label: string; }) {
 
             <MountCopyNotice show={showNotice} setShow={setShowNotice} ><CopyNotice /></MountCopyNotice>
         </div>
+    );
+}
+
+function NameAndValue({ name, colorValue }: { name: string; colorValue: string; }) {
+    return (<>
+        {/* Column name */}
+        <div className="py-0.5 select-none">{name}</div>
+
+        {/* Column value */}
+        <ValueWithCopy colorValue={colorValue} />
     </>);
 }
 
@@ -76,10 +82,10 @@ function ColorValueInfo() {
     return (<>
         {color &&
             <div className="grid grid-cols-[auto,1fr] gap-x-2 gap-y-0.5">
-                <ValueWithCopy name={"Name"} label={color.name} />
-                <ValueWithCopy name={"Hex"} label={color.hex} />
-                <ValueWithCopy name={"RGB"} label={formatRGB(color.rgb)} />
-                <ValueWithCopy name={"HSL"} label={formatHSL(color.hsl)} />
+                <NameAndValue name={"Name"} colorValue={color.name} />
+                <NameAndValue name={"Hex"} colorValue={color.hex} />
+                <NameAndValue name={"RGB"} colorValue={formatRGB(color.rgb)} />
+                <NameAndValue name={"HSL"} colorValue={formatHSL(color.hsl)} />
             </div>
         }
     </>);
