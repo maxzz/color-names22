@@ -11,7 +11,7 @@ function Row({ groupName, groupValues }: { groupName: string; groupValues: Group
         {values.map(([key, color], idx) => (
             <Fragment key={`${groupName}.${idx}`}>
                 <button
-                    className="p-1 w-7 h-5 border-slate-600 border rounded hover:scale-125 active:scale-x-[.8] transition-transform"
+                    className="p-1 w-7 h-5 border-slate-600 border rounded hover:scale-125 active:scale-[.97] transition-transform"
                     style={{ backgroundColor: color }}
                     onClick={() => setCurrentTwColor({ group: groupName, key, value: color, })}
                     title={`${groupName}: ${key}`}

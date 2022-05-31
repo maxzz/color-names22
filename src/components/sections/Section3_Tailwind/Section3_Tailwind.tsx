@@ -6,17 +6,17 @@ import { TwColorInfo } from './TwColorInfo';
 
 export function Section3_Tailwind({ className }: React.HTMLAttributes<HTMLUListElement>) {
     return (
-        <div className="h-full flex flex-col bg-primary-400">
+        <div className="h-full flex flex-col bg-primary-200">
 
             <TwColorInfo />
 
             <div className={classNames("flex-1 grid grid-cols-[auto,auto] gap-x-4 content-evenly justify-center", className)}>
-                <div className="grid place-content-center">
+                {/* <div className="grid place-content-center">
                     <div className="p-1 bg-primary-100 border-primary-300 border rounded shadow-md"><TwColorsPicker /></div>
-                </div>
+                </div> */}
 
                 <div className="w-min grid place-content-center">
-                    <div className="p-1 border-primary-300 border rounded shadow-md"><TwColorsView /></div>
+                    <div className="p-1 bg-primary-400 border-primary-300 border rounded shadow-md"><TwColorsView /></div>
                 </div>
             </div>
 

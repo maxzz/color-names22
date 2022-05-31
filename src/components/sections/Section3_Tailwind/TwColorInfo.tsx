@@ -14,7 +14,7 @@ function Row({ groupName, className }: { groupName: string; } & HTMLAttributes<H
         <div className={classNames("grid grid-cols-10 text-xs", className)}>
             {values.map(([key, color], idx) => (
                 <div
-                    className="pr-1 w-10 h-16 flex items-end justify-end"
+                    className="pr-1 w-10 h-16 cursor-pointer active:scale-y-[.97] flex items-end justify-end"
                     style={{ backgroundColor: color }}
                     onClick={() => setTwColor((v) => v && { group: v.group, key, value: color })}
                     key={idx}
@@ -29,7 +29,12 @@ function Row({ groupName, className }: { groupName: string; } & HTMLAttributes<H
 export function TwColorInfo() {
     const [currentTwColor] = useAtom(currentTwColorAtom);
     return (
-        <div className="p-4 bg-primary-300">
+        <div className="px-4 pb-4 bg-primary-300">
+
+            <div className="my-4 text-center">
+                {currentTwColor ? `Palette: ${currentTwColor.group}` : "Pick a color from the grid"}
+            </div>
+
             <div className="flex items-center space-x-4 text-sm">
                 <div
                     className="w-24 h-16 border-primary-400 border rounded"
@@ -37,16 +42,16 @@ export function TwColorInfo() {
                 />
 
                 {currentTwColor
-                    ?
+                    &&
                     <div className="flex-1 grid grid-cols-[auto,auto,1fr] items-center">
                         <div className="">{currentTwColor.group}.{currentTwColor.key}:</div>
                         <ValueWithCopy colorValue={currentTwColor.value.toUpperCase()} />
                         <Row className="justify-self-end" groupName={currentTwColor.group} />
                     </div>
-                    :
-                    <div className="">Pick a color from the grid</div>
                 }
             </div>
+
+
         </div>
     );
 }
