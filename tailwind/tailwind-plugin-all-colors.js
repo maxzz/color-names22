@@ -50,3 +50,15 @@ module.exports = plugin(function ({ addComponents, theme }) {
         },
     });
 });
+
+/*
+var a = {a:1}
+a['c'] = 2
+a['b'] = 3
+a                   -> {a: 1, c: 2, b: 3}
+JSON.stringify(a)   -> '{"a":1,"c":2,"b":3}'
+var b = JSON.stringify(a)
+b                   -> '{"a":1,"c":2,"b":3}'
+var c = JSON.parse(b)
+c                   -> {a: 1, c: 2, b: 3}
+*/
