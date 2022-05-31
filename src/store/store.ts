@@ -2,7 +2,7 @@ import { atom, Getter, SetStateAction, Setter } from 'jotai';
 import { Atomize, atomLoader, atomWithCallback } from '@/hooks/atomsX';
 import { debounce } from '@/utils/debounce';
 import { allColorsWoAlternatives, ColorItem, groupColors, SortBy, sortColorItemsFn } from '@/utils/colors';
-import { ColorGroups } from '@/components/sections/Section3_Tailwind/TailwindAllColors/tw-all-colors';
+import { ColorGroups } from '@/components/UI/TailwindColorsBridge/tw-all-colors';
 
 export enum SectionName {
     hue,

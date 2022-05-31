@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { useAtomValue } from "jotai";
 import { allColorsAtom, currentTwColorAtom } from "@/store/store";
-import { GroupValues } from "./TailwindAllColors/tw-all-colors";
+import { GroupValues } from "../../UI/TailwindColorsBridge/tw-all-colors";
 import { useUpdateAtom } from "jotai/utils";
 
 function Row({ groupName, groupValues }: { groupName: string; groupValues: GroupValues; }) {
