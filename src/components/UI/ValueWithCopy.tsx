@@ -12,9 +12,13 @@ function MountCopyNotice({ show, setShow, children }: { show: boolean; setShow?:
     return transitions((styles, item) => item ? <a.div style={styles}> {children} </a.div> : null);
 }
 
+const textShadow = {
+    textShadow: '#98989887 1px 1px, #4141412e -1px -1px 0px'
+};
+
 function CopyNotice() {
     return (
-        <div className="px-2 py-px bg-green-500 text-green-50 rounded font-bold">Copied</div>
+        <div className="px-2 py-px text-sm bg-green-500 text-green-900 border-green-700 border rounded" style={textShadow}>Copied</div>
     );
 }
 
@@ -28,6 +32,7 @@ export function ValueWithCopy({ colorValue: value }: { colorValue: string; }) {
             onPointerLeave={() => setFocus(false)}
             onClick={async () => { await navigator.clipboard.writeText(value); setShowNotice(true); }}
         >
+            {/* <CopyNotice /> */}
             <div
                 className={classNames(
                     "inline-flex items-center cursor-pointer",
