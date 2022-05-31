@@ -1,7 +1,7 @@
+import React from 'react';
 import { currentTwColorAtom } from '@/store/store';
 import { useAtom } from 'jotai';
-import React from 'react';
-import { ValueWithCopy } from '../Section1_ColorsByHue/ColorInfoPanel';
+import { ValueWithCopy } from '@/components/UI/ValueWithCopy';
 
 export function TwColorInfo() {
     const [currentTwColor] = useAtom(currentTwColorAtom);
