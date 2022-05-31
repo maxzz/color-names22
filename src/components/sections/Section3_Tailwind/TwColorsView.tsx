@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { useAtomValue } from "jotai";
 import { allColorsAtom, currentTwColorAtom } from "@/store/store";
-import { ColorGroups, GroupValues } from "./TailwindAllColors/tw-all-colors";
+import { GroupValues } from "./TailwindAllColors/tw-all-colors";
 import { useUpdateAtom } from "jotai/utils";
 
 function Row({ groupName, groupValues }: { groupName: string; groupValues: GroupValues; }) {
@@ -9,7 +9,7 @@ function Row({ groupName, groupValues }: { groupName: string; groupValues: Group
     const setCurrentTwColor = useUpdateAtom(currentTwColorAtom);
     return (<>
         {values.map(([key, color], idx) => (
-            <Fragment key={`${name}.${idx}`}>
+            <Fragment key={`${groupName}.${idx}`}>
                 <button
                     className="p-1 w-7 h-5 border-slate-600 border rounded hover:scale-125 active:scale-x-[.8] transition-transform"
                     style={{ backgroundColor: color }}
