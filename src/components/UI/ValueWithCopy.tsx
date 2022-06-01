@@ -1,6 +1,6 @@
 import { classNames } from "@/utils/classnames";
 import { a, easings, useTransition } from "@react-spring/web";
-import { useState } from "react";
+import { cloneElement, HTMLAttributes, useState } from "react";
 import { IconClipboard } from "./UIIcons";
 
 function MountCopyNotice({ show, setShow, children }: { show: boolean; setShow?: (v: boolean) => void; } & React.HTMLAttributes<HTMLDivElement>) {
@@ -22,7 +22,26 @@ function CopyNotice() {
     );
 }
 
-export function ValueWithCopy({ copyValue }: { copyValue: string; }) {
+export function ValueView({ copyValue, focus }: { copyValue?: string; focus?: boolean; }) {
+    return (
+        <div
+            className={classNames(
+                "inline-flex items-center cursor-pointer",
+                focus ? "px-1 py-0.5 bg-slate-100 outline-slate-500 outline-1 outline rounded shadow active:scale-[.97]" : "px-1 py-0.5"
+            )}
+        >
+            <div>
+                {copyValue}
+            </div>
+
+            <div className={classNames("ml-1", focus ? "visible" : "invisible")}>
+                <IconClipboard className="w-4 h-4 text-slate-500" />
+            </div>
+        </div>
+    );
+}
+
+export function ValueWithCopy({ copyValue, children }: { copyValue: string; children?: JSX.Element } & HTMLAttributes<HTMLDivElement>) {
     const [focus, setFocus] = useState(false);
     const [showNotice, setShowNotice] = useState(false);
     return (
@@ -32,20 +51,7 @@ export function ValueWithCopy({ copyValue }: { copyValue: string; }) {
             onPointerLeave={() => setFocus(false)}
             onClick={async () => { await navigator.clipboard.writeText(copyValue); setShowNotice(true); }}
         >
-            <div
-                className={classNames(
-                    "inline-flex items-center cursor-pointer",
-                    focus ? "px-1 py-0.5 bg-slate-100 outline-slate-500 outline-1 outline rounded shadow active:scale-[.97]" : "px-1 py-0.5"
-                )}
-            >
-                <div>
-                    {copyValue}
-                </div>
-
-                <div className={classNames("ml-1", focus ? "visible" : "invisible")}>
-                    <IconClipboard className="w-4 h-4 text-slate-500" />
-                </div>
-            </div>
+            {children ? cloneElement(children, {copyValue, focus}) : <ValueView copyValue={copyValue} focus={focus}/>}
 
             <MountCopyNotice show={showNotice} setShow={setShowNotice} >
                 <CopyNotice />

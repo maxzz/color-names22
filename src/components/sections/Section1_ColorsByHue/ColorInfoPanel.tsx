@@ -5,7 +5,7 @@ import { a, easings, useTransition } from '@react-spring/web';
 import { classNames } from '@/utils/classnames';
 import { formatHSL, formatRGB } from '@/utils/colors';
 import { MonoSwitch } from '@/components/UI/UIMonoSwitch';
-import { ValueWithCopy } from '@/components/UI/ValueWithCopy';
+import { ValueView, ValueWithCopy } from '@/components/UI/ValueWithCopy';
 import { HueSlider } from './HueSlider/HueSlider';
 
 function ColorPreview() {
@@ -31,7 +31,10 @@ function NameAndValue({ name, colorValue }: { name: string; colorValue: string; 
         <div className="py-0.5 select-none">{name}</div>
 
         {/* Column value */}
-        <ValueWithCopy copyValue={colorValue} />
+        {/* <ValueWithCopy copyValue={colorValue} /> */}
+        <ValueWithCopy copyValue={colorValue}>
+            <ValueView />
+        </ValueWithCopy>
     </>);
 }
 
