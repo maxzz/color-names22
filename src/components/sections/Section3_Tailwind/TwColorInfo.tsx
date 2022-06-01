@@ -38,33 +38,44 @@ export function TwColorInfo({ className, ...rest }: HTMLAttributes<HTMLDivElemen
     return (
         <div className={classNames("p-4", className)} {...rest}>
 
+            {/* Palette name */}
             <div className="mb-4 text-center">
                 {currentTwColor ? `Palette: ${currentTwColor.group}` : "Pick a color from the grid"}
             </div>
 
-            <div className="flex items-center space-x-4 text-sm">
-                <div
-                    className="flex-none w-24 h-16 border-primary-400 border rounded"
-                    style={{ backgroundColor: currentTwColor?.value || 'transparent' }}
-                />
+            {/* Low container */}
+            <div className="flex items-start justify-between space-x-4 text-sm">
 
-                {currentTwColor
-                    &&
-                    <div className="flex-1 flex items-center justify-between">
-                        
-                        <div className="">
-                            <div className="">
-                                {currentTwColor.group}.{currentTwColor.key}:
-                            </div>
-                            <ValueWithCopy colorValue={currentTwColor.value.toUpperCase()} />
-                        </div>
+                {/* Preview and color value */}
+                <div className="flex flex-col sm:flex-row space-x-0 sm:space-x-2">
 
-                        {/* <Row className="justify-self-end" groupName={currentTwColor.group} /> */}
-                        <Row className="flex-1" groupName={currentTwColor.group} />
+                    {/* Preview box */}
+                    <div
+                        className="flex-none w-24 h-16 border-primary-400 border rounded"
+                        style={{ backgroundColor: currentTwColor?.value || 'transparent' }}
+                    />
+
+                    {/* Color value */}
+                    <div className="flex items-center">
+                        {currentTwColor &&
+                            <>
+                                <div className="">
+                                    {currentTwColor.group}.{currentTwColor.key}:
+                                </div>
+                                <ValueWithCopy colorValue={currentTwColor.value.toUpperCase()} />
+                            </>
+                        }
                     </div>
-                }
-            </div>
+                </div>
 
+                {/* Row */}
+                {/* <Row className="justify-self-end" groupName={currentTwColor.group} /> */}
+                <div className="flex-1 max-w-[400px]">
+                    {currentTwColor &&
+                        <Row className="" groupName={currentTwColor.group} />
+                    }
+                </div>
+            </div>
 
         </div>
     );
