@@ -10,10 +10,12 @@ function App() {
     useAtomValue(dataLoadAtom);
     return (<>
         <TailwindColorsBridge />
-        <div className="h-screen flex flex-col bg-slate-50">
+        <div className="h-screen flex flex-col md:flex-row bg-slate-50">
             <App1_Header />
-            <App2_Main className="flex-1" />
-            <App3_Footer />
+            <div className="flex-1 flex flex-col">
+                <App2_Main className="flex-1" />
+                <App3_Footer />
+            </div>
         </div>
     </>);
 }
