@@ -11,10 +11,17 @@ function Row({ groupName, className }: { groupName: string; } & HTMLAttributes<H
     const values = Object.entries(allColors[groupName]);
     const setTwColor = useUpdateAtom(currentTwColorAtom);
     return (
-        <div className={classNames("grid grid-cols-10 text-xs", className)}>
+        <div className={classNames("grid grid-cols-10 justify-end text-xs", className)}>
             {values.map(([key, color], idx) => (
                 <div
-                    className="pr-1 w-8 sm:w-10 h-16 cursor-pointer active:scale-y-[.97] flex items-end justify-end"
+                    // className="pr-1 w-8 sm:w-10 h-16 cursor-pointer active:scale-y-[.97] flex items-end justify-end"
+                    // className="pr-1 min-w-[2.5rem] h-16 cursor-pointer active:scale-y-[.97] flex items-end justify-end"
+                    // className="pr-1 w-10 h-16 cursor-pointer active:scale-y-[.97] flex items-end justify-end"
+                    // className="pr-1 w-[minmax(2.5rem,auto)] h-16 cursor-pointer active:scale-y-[.97] flex items-end justify-end"
+                    // className="pr-1 w-[clamp(2.5rem,auto,5rem)] h-16 cursor-pointer active:scale-y-[.97] flex items-end justify-end"
+                    // className="pr-1 min-w-[2rem] max-w-[2.5rem] h-16 cursor-pointer active:scale-y-[.97] flex items-end justify-end"
+                    // className="pr-1 min-w-[2rem] w-10 h-16 cursor-pointer active:scale-y-[.97] flex items-end justify-end"
+                    className="pr-1 min-w-[2rem] h-16 cursor-pointer active:scale-y-[.97] flex items-end justify-end"
                     style={{ backgroundColor: color }}
                     onClick={() => setTwColor((v) => v && { group: v.group, key, value: color })}
                     key={idx}
@@ -43,13 +50,17 @@ export function TwColorInfo({ className, ...rest }: HTMLAttributes<HTMLDivElemen
 
                 {currentTwColor
                     &&
-                    <div className="flex-1 grid grid-cols-[auto,auto,minmax(400px,1fr)] items-center">
-                        <div className="">
-                            {currentTwColor.group}.{currentTwColor.key}:
-                        </div>
-                        <ValueWithCopy colorValue={currentTwColor.value.toUpperCase()} />
+                    <div className="flex-1 flex items-center justify-between">
                         
-                        <Row className="justify-self-end" groupName={currentTwColor.group} />
+                        <div className="">
+                            <div className="">
+                                {currentTwColor.group}.{currentTwColor.key}:
+                            </div>
+                            <ValueWithCopy colorValue={currentTwColor.value.toUpperCase()} />
+                        </div>
+
+                        {/* <Row className="justify-self-end" groupName={currentTwColor.group} /> */}
+                        <Row className="flex-1" groupName={currentTwColor.group} />
                     </div>
                 }
             </div>
