@@ -5,6 +5,7 @@ import { ValueWithCopy } from '@/components/UI/ValueWithCopy';
 import { classNames } from '@/utils/classnames';
 import { isLightColor } from '@/utils/colors';
 import { useUpdateAtom } from 'jotai/utils';
+import useMeasure from 'react-use-measure';
 
 function PreviewBox() {
     const currentTwColor = useAtomValue(currentTwColorAtom);
@@ -22,7 +23,7 @@ function PreviewBox() {
     );
 }
 
-function SelectedColorValue({currentTwColor}: {currentTwColor: CurrentTwColor | null}) {
+function SelectedColorValue({ currentTwColor }: { currentTwColor: CurrentTwColor | null; }) {
     return (
         <div className="flex items-center">
             {currentTwColor && <>
@@ -57,8 +58,11 @@ function RowPalette({ groupName, className }: { groupName: string; } & HTMLAttri
 
 export function TwColorInfo({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const currentTwColor = useAtomValue(currentTwColorAtom);
+    const [ref, { width: containerWidth }] = useMeasure();
+
+    console.log('bounds', { parentWidth: containerWidth });
     return (
-        <div className={classNames("p-4", className)} {...rest}>
+        <div ref={ref} className={classNames("qq p-4", className)} {...rest}>
 
             {/* Palette name */}
             <div className="mb-4 text-center">
@@ -69,7 +73,9 @@ export function TwColorInfo({ className, ...rest }: HTMLAttributes<HTMLDivElemen
             <div className="flex items-start justify-between space-x-4 text-sm">
 
                 {/* Preview and color value */}
-                <div className="flex flex-col sm:flex-row space-x-0 sm:space-x-2">
+                {/* <div className="flex flex-col sm:flex-row space-x-0 sm:space-x-2"> */}
+                <div className={classNames("flex", containerWidth < 700 ? 'flex-col space-x-0' : 'flex-row space-x-2', )}
+                >
                     <PreviewBox />
                     <SelectedColorValue currentTwColor={currentTwColor} />
                 </div>

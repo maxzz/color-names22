@@ -13,7 +13,9 @@ export function Section3_Tailwind({ className }: React.HTMLAttributes<HTMLUListE
 
             <div className={classNames("flex-1 grid grid-cols-[auto,auto] gap-x-4 content-evenly justify-center")}>
                 {/* <div className="grid place-content-center">
-                    <div className="p-1 bg-primary-100 border-primary-300 border rounded shadow-md"><TwColorsPicker /></div>
+                    <div className="p-1 bg-primary-100 border-primary-300 border rounded shadow-md">
+                        <TwColorsPicker />
+                    </div>
                 </div> */}
 
                 <div className="p-4 w-min grid place-content-center">
