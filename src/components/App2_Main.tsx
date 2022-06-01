@@ -39,7 +39,7 @@ export function App2_Main({ className }: React.HTMLAttributes<HTMLDivElement>) {
 
             {currentSection === SectionName.tailwind &&
                 <div className="h-full flex flex-col">
-                    <Section3_Tailwind className="flex-1 overflow-auto" />
+                    <Section3_Tailwind className="flex-1" />
                 </div>
             }
 
