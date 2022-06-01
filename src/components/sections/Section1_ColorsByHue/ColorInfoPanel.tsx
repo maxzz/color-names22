@@ -13,7 +13,7 @@ function ColorPreview() {
     const borderColor = () => color ? color.dark ? 'white' : 'black' : 'transparent';
     return (
         <div
-            className="p-1 w-24 h-24 border-primary-400 border flex items-center justify-center"
+            className="flex-1 p-1 w-24 h-24 border-primary-400 border flex items-center justify-center"
             style={{
                 backgroundColor: `${color ? color.hex : 'transparent'}`,
                 color: borderColor(),
@@ -31,7 +31,7 @@ function NameAndValue({ name, colorValue }: { name: string; colorValue: string; 
         <div className="py-0.5 select-none">{name}</div>
 
         {/* Column value */}
-        <ValueWithCopy colorValue={colorValue} />
+        <ValueWithCopy copyValue={colorValue} />
     </>);
 }
 
@@ -84,8 +84,8 @@ function MountHue({ show, setShow, children }: { show: boolean; setShow?: (v: bo
 export function ColorInfoPanel() {
     const mono = useAtomValue(viewHueAtoms.monoAtom);
     return (
-        <div className="">
-            <div className="mx-auto p-4 pt-1 max-w-[42rem] bg-slate-200 rounded grid grid-cols-[minmax(0,1fr),auto]">
+        <div className="bg-primary-200">
+            <div className="mx-auto p-4 pt-1 max-w-[42rem] grid grid-cols-[minmax(0,1fr),auto]">
 
                 <div className={`col-span-2 h-16 flex flex-col justify-center`}>
                     <MountHue show={!mono}>

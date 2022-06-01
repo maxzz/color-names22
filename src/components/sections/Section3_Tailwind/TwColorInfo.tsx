@@ -30,7 +30,7 @@ function SelectedColorValue({ currentTwColor }: { currentTwColor: CurrentTwColor
                 <div className="">
                     {currentTwColor.group}.{currentTwColor.key}:
                 </div>
-                <ValueWithCopy colorValue={currentTwColor.value.toUpperCase()} />
+                <ValueWithCopy copyValue={currentTwColor.value.toUpperCase()} />
             </>}
         </div>
     );
@@ -60,7 +60,7 @@ export function TwColorInfo({ className, ...rest }: HTMLAttributes<HTMLDivElemen
     const currentTwColor = useAtomValue(currentTwColorAtom);
     const [ref, { width: containerWidth }] = useMeasure();
     return (
-        <div ref={ref} className={classNames("qq p-4", className)} {...rest}>
+        <div ref={ref} className={classNames("p-4", className)} {...rest}>
 
             {/* Palette name */}
             <div className="mb-4 text-center">

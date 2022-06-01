@@ -22,7 +22,7 @@ function CopyNotice() {
     );
 }
 
-export function ValueWithCopy({ colorValue: value }: { colorValue: string; }) {
+export function ValueWithCopy({ copyValue }: { copyValue: string; }) {
     const [focus, setFocus] = useState(false);
     const [showNotice, setShowNotice] = useState(false);
     return (
@@ -30,22 +30,26 @@ export function ValueWithCopy({ colorValue: value }: { colorValue: string; }) {
             className="flex items-center space-x-2 select-none"
             onPointerEnter={() => setFocus(true)}
             onPointerLeave={() => setFocus(false)}
-            onClick={async () => { await navigator.clipboard.writeText(value); setShowNotice(true); }}
+            onClick={async () => { await navigator.clipboard.writeText(copyValue); setShowNotice(true); }}
         >
-            {/* <CopyNotice /> */}
             <div
                 className={classNames(
                     "inline-flex items-center cursor-pointer",
                     focus ? "px-1 py-0.5 bg-slate-100 outline-slate-500 outline-1 outline rounded shadow active:scale-[.97]" : "px-1 py-0.5"
                 )}
             >
-                <div className="">{value}</div>
+                <div>
+                    {copyValue}
+                </div>
+
                 <div className={classNames("ml-1", focus ? "visible" : "invisible")}>
                     <IconClipboard className="w-4 h-4 text-slate-500" />
                 </div>
             </div>
 
-            <MountCopyNotice show={showNotice} setShow={setShowNotice} ><CopyNotice /></MountCopyNotice>
+            <MountCopyNotice show={showNotice} setShow={setShowNotice} >
+                <CopyNotice />
+            </MountCopyNotice>
         </div>
     );
 }
