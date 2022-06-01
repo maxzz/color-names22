@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai';
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import { AppAtoms, SectionName } from '../store/store';
 import { classNames } from '../utils/classnames';
 
@@ -47,9 +47,9 @@ const textShadow = {
     color: "rgb(102 116 161)",
 };
 
-export function App1_Header() {
+export function App1_Header({className, ...rest}: HTMLAttributes<HTMLDivElement>) {
     return (
-        <div className="relative py-12 bg-title border-primary-400 border-b shadow-[0px_1px_2px_1px_#ffc16d69]">
+        <div className={classNames("relative py-12 bg-title border-primary-400 border-b shadow-[0px_1px_2px_1px_#ffc16d69]", className)} {...rest}>
             <div className="text-base flex items-center uppercase font-orgiginal" style={textShadow}>
                 <div className="mx-auto scale-y-[1.5]">CSS Color Names</div>
             </div>
