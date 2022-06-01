@@ -24,9 +24,6 @@ export function Section3_Tailwind({ className }: React.HTMLAttributes<HTMLUListE
             </div>
 
             <div className="">
-                <a className="text-url underline" href="https://tailwindcss.com/docs/customizing-colors" target="_blank">
-                    Colors on Tailwind CSS website
-                </a>
             </div>
         </div>
     );
