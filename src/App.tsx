@@ -11,7 +11,7 @@ function App() {
     return (<>
         <TailwindColorsBridge />
         <div className="h-screen flex flex-col md:flex-row bg-slate-50">
-            <App1_Header className="md:w-80" />
+            <App1_Header className="md:w-80 lg:w-[33rem] transition-all" />
             <div className="flex-1 flex flex-col">
                 <App2_Main className="flex-1" />
                 <App3_Footer />

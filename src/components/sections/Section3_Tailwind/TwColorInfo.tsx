@@ -59,8 +59,6 @@ function RowPalette({ groupName, className }: { groupName: string; } & HTMLAttri
 export function TwColorInfo({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const currentTwColor = useAtomValue(currentTwColorAtom);
     const [ref, { width: containerWidth }] = useMeasure();
-
-    console.log('bounds', { parentWidth: containerWidth });
     return (
         <div ref={ref} className={classNames("qq p-4", className)} {...rest}>
 
@@ -73,9 +71,7 @@ export function TwColorInfo({ className, ...rest }: HTMLAttributes<HTMLDivElemen
             <div className="flex items-start justify-between space-x-4 text-sm">
 
                 {/* Preview and color value */}
-                {/* <div className="flex flex-col sm:flex-row space-x-0 sm:space-x-2"> */}
-                <div className={classNames("flex", containerWidth < 700 ? 'flex-col space-x-0' : 'flex-row space-x-2', )}
-                >
+                <div className={classNames("flex", containerWidth < 700 ? 'flex-col space-x-0' : 'flex-row space-x-2', )}>
                     <PreviewBox />
                     <SelectedColorValue currentTwColor={currentTwColor} />
                 </div>
