@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import { useAtomValue } from 'jotai';
 import { AppAtoms, SectionName } from '@/store/store';
 import { IconGithubLogo } from './UI/UIIcons';
+import { classNames } from '@/utils/classnames';
 
 function Section1_HueLinks() {
     return (<>
@@ -42,10 +43,14 @@ function GitHubLink() {
     );
 }
 
-export function App3_Footer() {
+export function App3_Footer({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const currentSection = useAtomValue(AppAtoms.currentSectionAtom);
     return (
-        <div className="px-4 py-2 text-sm flex items-center justify-end space-x-4 bg-title border-primary-400 border-t shadow-[0px_-1px_2px_1px_#b69a7950] text-primary-400/75">
+        <div className={classNames(
+            "px-4 py-2 text-sm flex items-center justify-end space-x-4 bg-title text-primary-400/75",
+            //"border-primary-400 border-t shadow-[0px_-1px_2px_1px_#b69a7950]",
+            className,
+        )} {...rest}>
             {currentSection === SectionName.hue && <Section1_HueLinks />}
             {currentSection === SectionName.list && <Section2_ColorListLinks />}
             {currentSection === SectionName.tailwind && <Section3_TailwindLinks />}

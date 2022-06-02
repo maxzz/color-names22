@@ -23,7 +23,9 @@ function App() {
 
             <div className="flex-1 flex flex-col">
                 <App2_Main className="flex-1" />
-                <App3_Footer />
+                <div className="md:hidden">
+                    <App3_Footer />
+                </div>
             </div>
         </div>
     </>);

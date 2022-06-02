@@ -2,6 +2,7 @@ import { useAtom } from 'jotai';
 import React, { HTMLAttributes } from 'react';
 import { AppAtoms, SectionName } from '../store/store';
 import { classNames } from '../utils/classnames';
+import { App3_Footer } from './App3_Footer';
 
 const btnStyle = {
     "hi": {
@@ -47,17 +48,25 @@ const textShadow = {
 
 export function App1_Header({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     return (
-        <div className={classNames("relative py-12 bg-title border-primary-400 border-b", className)} {...rest}>
-            <div className="text-base flex items-center uppercase font-orgiginal" style={textShadow}>
-                <div className="mx-auto scale-y-[1.5]">CSS Color Names</div>
-            </div>
-
+        <div className="flex flex-col">
             <div className={classNames(
-                "absolute h-full top-0 right-2 flex items-center",
-                "md:relative md:h-auto md:top-auto md:right-auto md:block",
-                "md:py-8 md:mx-auto md:max-w-[50%]",
-            )}>
-                <Links className="" />
+                "flex-1 relative py-12 bg-title",
+                //"border-primary-400 border-b",
+                className,
+            )} {...rest}>
+                <div className="text-base flex items-center uppercase font-orgiginal" style={textShadow}>
+                    <div className="mx-auto scale-y-[1.5]">CSS Color Names</div>
+                </div>
+                <div className={classNames(
+                    "absolute h-full top-0 right-2 flex items-center",
+                    "md:relative md:h-auto md:top-auto md:right-auto md:block",
+                    "md:py-8 md:mx-auto md:max-w-[50%]",
+                )}>
+                    <Links className="" />
+                </div>
+            </div>
+            <div className="hidden md:block"> {/* TODO: We can simplify it, by always having footer and change width from full width to width of sidebar */}
+                <App3_Footer />
             </div>
         </div>
     );
