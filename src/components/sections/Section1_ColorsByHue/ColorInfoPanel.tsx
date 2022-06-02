@@ -33,7 +33,7 @@ function ColorPreview() {
     const borderColor = () => color ? color.dark ? 'white' : 'black' : 'transparent';
     return (
         <div
-            className="relative flex-1 p-1 w-24 h-24 border-primary-400 border rounded flex items-end"
+            className="relative flex-1 p-1 w-24 h-24 border-primary-400 border rounded flex items-center"
             style={{
                 backgroundColor: `${color ? color.hex : 'transparent'}`,
                 color: borderColor(),
