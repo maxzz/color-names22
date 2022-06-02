@@ -1,6 +1,6 @@
 import { classNames } from "@/utils/classnames";
 import { a, easings, useTransition } from "@react-spring/web";
-import { cloneElement, HTMLAttributes, useState } from "react";
+import { cloneElement, HTMLAttributes, ReactNode, useState } from "react";
 import { IconClipboard } from "./UIIcons";
 
 function MountCopyNotice({ show, setShow, children }: { show: boolean; setShow?: (v: boolean) => void; } & React.HTMLAttributes<HTMLDivElement>) {
@@ -16,7 +16,7 @@ const textShadow = {
     textShadow: '#98989887 1px 1px, #4141412e -1px -1px 0px'
 };
 
-function CopyNotice() {
+export function CopyNotice() {
     return (
         <div className="px-2 py-px text-sm bg-green-500 text-green-900 border-green-700 border rounded" style={textShadow}>Copied</div>
     );
@@ -41,7 +41,7 @@ export function ValueView({ copyValue, focus }: { copyValue?: string; focus?: bo
     );
 }
 
-export function ValueWithCopy({ copyValue, children }: { copyValue: string; children?: JSX.Element } & HTMLAttributes<HTMLDivElement>) {
+export function ValueWithCopy({ copyValue, children, copyNotice }: { copyValue: string; children?: JSX.Element; copyNotice?: ReactNode } & HTMLAttributes<HTMLDivElement>) {
     const [focus, setFocus] = useState(false);
     const [showNotice, setShowNotice] = useState(false);
     return (
@@ -51,10 +51,10 @@ export function ValueWithCopy({ copyValue, children }: { copyValue: string; chil
             onPointerLeave={() => setFocus(false)}
             onClick={async () => { await navigator.clipboard.writeText(copyValue); setShowNotice(true); }}
         >
-            {children ? cloneElement(children, {copyValue, focus}) : <ValueView copyValue={copyValue} focus={focus}/>}
+            {children ? cloneElement(children, { copyValue, focus }) : <ValueView copyValue={copyValue} focus={focus} />}
 
             <MountCopyNotice show={showNotice} setShow={setShowNotice} >
-                <CopyNotice />
+                {copyNotice ? copyNotice : <CopyNotice /> }
             </MountCopyNotice>
         </div>
     );

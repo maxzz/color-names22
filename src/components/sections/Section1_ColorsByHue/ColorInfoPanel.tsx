@@ -5,20 +5,14 @@ import { a, easings, useTransition } from '@react-spring/web';
 import { classNames } from '@/utils/classnames';
 import { formatHSL, formatRGB } from '@/utils/colors';
 import { MonoSwitch } from '@/components/UI/UIMonoSwitch';
-import { ValueView, ValueWithCopy } from '@/components/UI/ValueWithCopy';
+import { CopyNotice, ValueView, ValueWithCopy } from '@/components/UI/ValueWithCopy';
 import { HueSlider } from './HueSlider/HueSlider';
 
-function ColorValueInfo() {
-    const color = useAtomValue(viewHueAtoms.colorAtom);
+function SingleValue({ copyValue }: { copyValue: string; }) {
     return (<>
-        {color &&
-            <div className="flex flex-col text-xs">
-                <ValueWithCopy copyValue={color.name} />
-                <ValueWithCopy copyValue={color.hex} />
-                <ValueWithCopy copyValue={formatRGB(color.rgb)} />
-                <ValueWithCopy copyValue={formatHSL(color.hsl)} />
-            </div>
-        }
+        <ValueWithCopy copyValue={copyValue} copyNotice={<CopyNotice />}>
+            <ValueView />
+        </ValueWithCopy>
     </>);
 }
 
@@ -34,7 +28,14 @@ function ColorPreview() {
                 borderColor: borderColor()
             }}
         >
-            <ColorValueInfo />
+            {color &&
+                <div className="flex flex-col text-xs">
+                    <SingleValue copyValue={color.name} />
+                    <SingleValue copyValue={color.hex} />
+                    <SingleValue copyValue={formatRGB(color.rgb)} />
+                    <SingleValue copyValue={formatHSL(color.hsl)} />
+                </div>
+            }
         </div>
     );
 }
