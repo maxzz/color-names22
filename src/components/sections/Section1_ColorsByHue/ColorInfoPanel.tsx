@@ -20,7 +20,8 @@ function ColorPreview() {
                 //borderColor: borderColor()
             }}
         >
-            Lorem ipsum dolor sit amet consectetur adipisicing.
+            {/* Lorem ipsum dolor sit amet consectetur adipisicing. */}
+            <ColorValueInfo />
         </div>
     );
 }
@@ -88,7 +89,7 @@ export function ColorInfoPanel() {
     const mono = useAtomValue(viewHueAtoms.monoAtom);
     return (
         <div className="bg-primary-200">
-            <div className="mx-auto p-4 pt-1 max-w-[42rem] grid grid-cols-[minmax(0,1fr),auto]">
+            <div className="mx-auto p-4 pt-1 max-w-[42rem] grid grid-cols-[minmax(0,1fr),auto] gap-x-4">
 
                 <div className={`col-span-2 h-16 flex flex-col justify-center`}>
                     <MountHue show={!mono}>
@@ -101,7 +102,7 @@ export function ColorInfoPanel() {
 
                 <div className="flex items-center space-x-4 text-sm">
                     <ColorPreview />
-                    <ColorValueInfo />
+                    {/* <ColorValueInfo /> */}
                 </div>
 
                 <MonoSwitch className="place-self-start" />

@@ -65,9 +65,12 @@ export function App1_Header({ className, ...rest }: HTMLAttributes<HTMLDivElemen
                     <Links className="" />
                 </div>
             </div>
-            <div className="hidden md:block"> {/* TODO: We can simplify it, by always having footer and change width from full width to width of sidebar */}
+            <div className="hidden md:block">
                 <App3_Footer />
             </div>
         </div>
     );
 }
+
+//TODO: We can simplify it, by always having footer and change width from full width to width of sidebar
+//      or can have a global state with parent layot width
