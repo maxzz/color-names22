@@ -11,7 +11,7 @@ function Row({ groupName, groupValues }: { groupName: string; groupValues: Group
         {values.map(([key, color], idx) => (
             <Fragment key={`${groupName}.${idx}`}>
                 <button
-                    className="p-1 w-7 h-5 border-slate-600 border rounded hover:scale-125 active:scale-[.97] transition-transform"
+                    className="p-1 h-6 border-slate-600 border rounded hover:scale-125 active:scale-[.97] transition-transform"
                     style={{ backgroundColor: color }}
                     onClick={() => setCurrentTwColor({ group: groupName, key, value: color, })}
                     title={`${groupName}: ${key}`}
@@ -19,7 +19,7 @@ function Row({ groupName, groupValues }: { groupName: string; groupValues: Group
             </Fragment>
         ))}
 
-        <div className="px-2 text-xs flex items-center font-bold text-primary-900">{groupName}</div>
+        <div className="px-2 flex items-center text-primary-900">{groupName}</div>
     </>);
 }
 
@@ -27,7 +27,7 @@ export function TwColorsView() {
     const colors = useAtomValue(allColorsAtom);
     const groups = Object.entries(colors);
     return (
-        <div className="max-w-min grid grid-cols-[repeat(11,auto)] gap-0.5">
+        <div className="grid grid-cols-[repeat(10,minmax(16px,46px)),auto] gap-0.5">
             {groups.map(([groupName, groupValues], idxRow) => (
                 <Row groupName={groupName} groupValues={groupValues} key={idxRow} />
             ))}
