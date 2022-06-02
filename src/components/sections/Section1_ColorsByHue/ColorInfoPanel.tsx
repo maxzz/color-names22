@@ -13,7 +13,7 @@ function ColorPreview() {
     const borderColor = () => color ? color.dark ? 'white' : 'black' : 'transparent';
     return (
         <div
-            className="flex-1 p-1 w-24 h-24 border-primary-400 border flex items-center justify-center"
+            className="flex-1 p-1 w-24 h-24 border-primary-400 border flex items-end"
             style={{
                 backgroundColor: `${color ? color.hex : 'transparent'}`,
                 color: borderColor(),
@@ -43,15 +43,29 @@ function ColorValueInfo() {
     const color = useAtomValue(viewHueAtoms.colorAtom);
     return (<>
         {color &&
-            <div className="grid grid-cols-[auto,1fr] gap-x-2 gap-y-0.5">
-                <NameAndValue name={"Name"} colorValue={color.name} />
-                <NameAndValue name={"Hex"} colorValue={color.hex} />
-                <NameAndValue name={"RGB"} colorValue={formatRGB(color.rgb)} />
-                <NameAndValue name={"HSL"} colorValue={formatHSL(color.hsl)} />
+            <div className="flex flex-col text-xs">
+                <ValueWithCopy copyValue={color.name} />
+                <ValueWithCopy copyValue={color.hex} />
+                <ValueWithCopy copyValue={formatRGB(color.rgb)} />
+                <ValueWithCopy copyValue={formatHSL(color.hsl)} />
             </div>
         }
     </>);
 }
+
+// function ColorValueInfo() {
+//     const color = useAtomValue(viewHueAtoms.colorAtom);
+//     return (<>
+//         {color &&
+//             <div className="grid grid-cols-[auto,1fr] gap-x-2 gap-y-0.5">
+//                 <NameAndValue name={"Name"} colorValue={color.name} />
+//                 <NameAndValue name={"Hex"} colorValue={color.hex} />
+//                 <NameAndValue name={"RGB"} colorValue={formatRGB(color.rgb)} />
+//                 <NameAndValue name={"HSL"} colorValue={formatHSL(color.hsl)} />
+//             </div>
+//         }
+//     </>);
+// }
 
 export function HueToleranceInfo({ className }: HTMLAttributes<HTMLDivElement>) {
     const [hue, setHue] = useAtom(viewHueAtoms.hueAtom); //TODO: const [localHue, setLocalHue] = useState(0);
