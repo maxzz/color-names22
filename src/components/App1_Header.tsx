@@ -27,34 +27,38 @@ function LinkButton({ label, sectionName }: { label: string, sectionName: Sectio
     );
 }
 
-function Links({ className }: React.HTMLAttributes<HTMLDivElement>) {
+function Links({ className }: React.HTMLAttributes<HTMLUListElement>) {
     return (
-        <div className={classNames("flex items-center", className)}>
-            <ul className="space-y-2">
-                <LinkButton label="Hue groups" sectionName={SectionName.hue} />
-                <LinkButton label="Named colors" sectionName={SectionName.list} />
-                <LinkButton label="Tailwind" sectionName={SectionName.tailwind} />
-            </ul>
-        </div>
+        <ul className={classNames("space-y-2", className)} >
+            <LinkButton label="Hue groups" sectionName={SectionName.hue} />
+            <LinkButton label="Named colors" sectionName={SectionName.list} />
+            <LinkButton label="Tailwind" sectionName={SectionName.tailwind} />
+        </ul>
     );
 }
 
 //const textShadow = { textShadow: '1px 1px red, -1px -1px white', 'WebkitTextStroke': '0.5px #f3e8ff', };
-// const textShadow = { textShadow: 'red 1px 1px, #5f81f473 -1px -1px', 'WebkitTextStroke': '0.5px #232c49', };
+//const textShadow = { textShadow: 'red 1px 1px, #5f81f473 -1px -1px', 'WebkitTextStroke': '0.5px #232c49', };
 const textShadow = {
     textShadow: "#347d84 1px 1px, #8c9cd475 -3px 0px 5px",
     WebkitTextStroke: "0.5px #000000",
     color: "rgb(102 116 161)",
 };
 
-export function App1_Header({className, ...rest}: HTMLAttributes<HTMLDivElement>) {
+export function App1_Header({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     return (
-        <div className={classNames("relative py-12 bg-title border-primary-400 border-b shadow-[0px_1px_2px_1px_#ffc16d69]", className)} {...rest}>
+        <div className={classNames("relative py-12 bg-title border-primary-400 border-b", className)} {...rest}>
             <div className="text-base flex items-center uppercase font-orgiginal" style={textShadow}>
                 <div className="mx-auto scale-y-[1.5]">CSS Color Names</div>
             </div>
 
-            <Links className="absolute top-0 right-2 h-full" />
+            <div className={classNames(
+                "absolute h-full top-0 right-2 flex items-center",
+                "md:relative md:h-auto md:top-auto md:right-auto md:block",
+                "md:py-8 md:mx-auto md:max-w-[50%]",
+            )}>
+                <Links className="" />
+            </div>
         </div>
     );
 }
