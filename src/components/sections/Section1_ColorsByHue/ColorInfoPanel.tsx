@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useState } from 'react';
+import React, { HTMLAttributes } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { viewHueAtoms } from '@/store/store';
 import { a, easings, useTransition } from '@react-spring/web';
@@ -7,37 +7,6 @@ import { formatHSL, formatRGB } from '@/utils/colors';
 import { MonoSwitch } from '@/components/UI/UIMonoSwitch';
 import { ValueView, ValueWithCopy } from '@/components/UI/ValueWithCopy';
 import { HueSlider } from './HueSlider/HueSlider';
-
-function ColorPreview() {
-    const color = useAtomValue(viewHueAtoms.colorAtom);
-    const borderColor = () => color ? color.dark ? 'white' : 'black' : 'transparent';
-    return (
-        <div
-            className="flex-1 p-1 w-24 h-24 border-primary-400 border flex items-end"
-            style={{
-                backgroundColor: `${color ? color.hex : 'transparent'}`,
-                color: borderColor(),
-                //borderColor: borderColor()
-            }}
-        >
-            {/* Lorem ipsum dolor sit amet consectetur adipisicing. */}
-            <ColorValueInfo />
-        </div>
-    );
-}
-
-function NameAndValue({ name, colorValue }: { name: string; colorValue: string; }) {
-    return (<>
-        {/* Column name */}
-        <div className="py-0.5 select-none">{name}</div>
-
-        {/* Column value */}
-        {/* <ValueWithCopy copyValue={colorValue} /> */}
-        <ValueWithCopy copyValue={colorValue}>
-            <ValueView />
-        </ValueWithCopy>
-    </>);
-}
 
 function ColorValueInfo() {
     const color = useAtomValue(viewHueAtoms.colorAtom);
@@ -53,19 +22,22 @@ function ColorValueInfo() {
     </>);
 }
 
-// function ColorValueInfo() {
-//     const color = useAtomValue(viewHueAtoms.colorAtom);
-//     return (<>
-//         {color &&
-//             <div className="grid grid-cols-[auto,1fr] gap-x-2 gap-y-0.5">
-//                 <NameAndValue name={"Name"} colorValue={color.name} />
-//                 <NameAndValue name={"Hex"} colorValue={color.hex} />
-//                 <NameAndValue name={"RGB"} colorValue={formatRGB(color.rgb)} />
-//                 <NameAndValue name={"HSL"} colorValue={formatHSL(color.hsl)} />
-//             </div>
-//         }
-//     </>);
-// }
+function ColorPreview() {
+    const color = useAtomValue(viewHueAtoms.colorAtom);
+    const borderColor = () => color ? color.dark ? 'white' : 'black' : 'transparent';
+    return (
+        <div
+            className="flex-1 p-1 w-24 h-24 border-primary-400 border rounded flex items-end"
+            style={{
+                backgroundColor: `${color ? color.hex : 'transparent'}`,
+                color: borderColor(),
+                borderColor: borderColor()
+            }}
+        >
+            <ColorValueInfo />
+        </div>
+    );
+}
 
 export function HueToleranceInfo({ className }: HTMLAttributes<HTMLDivElement>) {
     const [hue, setHue] = useAtom(viewHueAtoms.hueAtom); //TODO: const [localHue, setLocalHue] = useState(0);
@@ -85,7 +57,6 @@ export function HueToleranceInfo({ className }: HTMLAttributes<HTMLDivElement>) 
                     !isNaN(v) && setHue(v % 360);
                 }}
             />
-
         </div>
     );
 }
@@ -126,7 +97,7 @@ export function ColorInfoPanel() {
 }
 
 //TODO: add tailwind palettes - done
-//TODO: add input element for exact hue value
-//TODO: add control to enlarge/shrink hue slider
+//TODO: add input element for exact hue value - done
+//TODO: add control to enlarge/shrink hue slider - no need
 //TODO: add control to dim on/off hue slider
 //TODO: add dark/light mode
