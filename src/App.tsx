@@ -21,7 +21,7 @@ function App() {
             {/* <App1_Header className={classNames("md:w-80 lg:w-[33rem] transition-all", headerShadow1)} /> */}
             {/* <App1_Header className={classNames("md:w-80 lg:w-[33rem] transition-all")} style={headerShadowStyle} /> */}
 
-            <div className="flex-1 flex flex-col">
+            <div className="flex-1 flex flex-col overflow-hidden">
                 <App2_Main className="flex-1" />
                 <div className="md:hidden">
                     <App3_Footer />

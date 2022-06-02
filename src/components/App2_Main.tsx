@@ -33,7 +33,7 @@ export function App2_Main({ className }: React.HTMLAttributes<HTMLDivElement>) {
                         <SortOrderSwitch className="px-4" />
                     </div>
 
-                    <Section2_ColorsList className="p-4 flex-1 overflow-auto" />
+                    <Section2_ColorsList className="p-4 flex-1 overflow-auto" style={{overflow: 'overlay'}} />
                 </div>
             }
 

@@ -27,9 +27,6 @@ function SelectedColorValue({ currentTwColor }: { currentTwColor: CurrentTwColor
     return (
         <div className="flex items-center">
             {currentTwColor && <>
-                <div className="">
-                    {currentTwColor.group}.{currentTwColor.key}:
-                </div>
                 <ValueWithCopy copyValue={currentTwColor.value.toUpperCase()} />
             </>}
         </div>
