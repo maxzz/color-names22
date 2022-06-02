@@ -8,7 +8,7 @@ import { ColorNeighbors } from './ColorNeighbors/ColorNeighbors';
 export function Section1_ColorsByHue({ className, ...rest }: React.HTMLAttributes<HTMLDivElement>) {
     useAtomValue(viewListAtoms.sortByAtom);
     return (
-        <div className={classNames("flex flex-col", className)} {...rest}>
+        <div className={classNames("flex flex-col pattern", className)} {...rest}>
             <ColorInfoPanel />
             <div className="flex-1 p-4 grid place-items-center">
                 <ColorNeighbors />
