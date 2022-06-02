@@ -2,8 +2,7 @@
 
 CSS color names selector.
 
-![](./src/assets/previews/2022-05-23_19-50-37.png)
-![](./src/assets/previews/2022-05-23_19-51-19.png)
+![](./src/assets/previews/2022-06-02_3-49-34.png)
 
 ### Demo 👀
 * Check out [the demo page](https://maxzz.github.io/color-names22)

@@ -11,12 +11,12 @@
     font-weight: 400;
     src: local("Source Sans Pro"), local("SourceSansPro-Regular"), url(@/assets/fonts/source_sans.woff2) format("woff2");
 }
-// @font-face {
-//     font-family: "Source Sans Pro";
-//     font-style: normal;
-//     font-weight: 600;
-//     src: local("Source Sans Pro Semibold"), local("SourceSansPro-Semibold"), url(@/assets/fonts/source_sans_semibold.woff2) format("woff2");
-// }
+@font-face {
+    font-family: "Source Sans Pro";
+    font-style: normal;
+    font-weight: 600;
+    src: local("Source Sans Pro Semibold"), local("SourceSansPro-Semibold"), url(@/assets/fonts/source_sans_semibold.woff2) format("woff2");
+}
 // @font-face {
 //     font-family: "Source Sans Pro";
 //     font-style: italic;
