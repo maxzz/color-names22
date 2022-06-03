@@ -1,9 +1,5 @@
 const twColors = require('tailwindcss/colors');
 const twTheme = require('tailwindcss/defaultTheme');
-const dataState = require('./tailwind/tailwind-plugin-data-state');
-const colorsBridge = require('./tailwind/tailwind-plugin-colors-bridge');
-const debugStyles = require('./tailwind/tailwnd-plugin-debug-styles');
-const allColors = require('./tailwind/tailwind-plugin-all-colors');
 
 module.exports = {
     content: ['./index.html', './src/**/*.{tsx,ts,js,jsx}'],
@@ -34,10 +30,10 @@ module.exports = {
         },
     },
     plugins: [
-        dataState,
-        colorsBridge({ prefix: '--tm-', groupName: 'primary' },),
-        allColors,
-        debugStyles,
-        require('@tailwindcss/forms')({ strategy: 'class' })
+        require('./tailwind/tailwind-plugin-data-state'),
+        require('./tailwind/tailwind-plugin-colors-bridge')({ prefix: '--tm-', groupName: 'primary' },),
+        require('./tailwind/tailwind-plugin-all-colors'),
+        require('./tailwind/tailwnd-plugin-debug-styles'),
+        require('@tailwindcss/forms')({ strategy: 'class' }),
     ],
 };
