@@ -8,7 +8,7 @@ import { ColorListInfoPanel } from './ColorListInfoPanel';
 function List() {
     const colorList = useAtomValue(viewListAtoms.colorListAtom);
     return (
-        <div className="grid grid-cols-[auto,8rem,auto,minmax(160px,1fr)] gap-x-2">
+        <div className="grid grid-cols-[auto,8rem,auto,minmax(20px,1fr)] gap-x-2">
             {colorList.map((color) => (
                 <Fragment key={color.name}>
                     <div className="text-xs leading-5 front-mono">{color.hex}</div>
@@ -26,10 +26,7 @@ export function Section2_ColorsList({ className }: React.HTMLAttributes<HTMLULis
         <div className={classNames("flex flex-col bg-primary-100 overflow-hidden", className)}>
             <ColorListInfoPanel />
             <div className="h-full overflow-overlay">
-                {/* flex justify-center */}
-                <div className="px-8 py-4 lg:px-24 xl:px-48">
-                {/* <div className="px-8 py-4 lg:px-24 xl:px-48"> */}
-                    {/* max-w-[460px] */}
+                <div className="pl-4 pr-8 py-4 lg:pl-12 lg:pr-16 xl:pl-16 xl:pr-20 2xl:pl-[9rem] 2xl:pr-[12rem]">
                     <List />
                 </div>
             </div>
