@@ -11,11 +11,11 @@ function List() {
         <div className="grid grid-cols-[auto,auto,8rem,auto,minmax(20px,1fr)] gap-x-2">
             {colorList.map((color, idx) => (
                 <Fragment key={color.name}>
-                    <div className="text-xs leading-5 front-mono">{idx}</div>
+                    <div className="text-xs leading-5 front-mono text-right">{idx}</div>
                     <div className="text-xs leading-5 front-mono">{color.hex}</div>
                     <div className="text-xs leading-5 front-mono">{formatHSL(color.hsl)}</div>
                     <div className="text-sm">{color.name}</div>
-                    <div className="" style={{ backgroundColor: color.name }} />
+                    <div style={{ backgroundColor: color.name }} />
                 </Fragment>
             ))}
         </div>
@@ -35,4 +35,8 @@ export function Section2_ColorsList({ className }: React.HTMLAttributes<HTMLULis
     );
 }
 
+//TODO: color index and sorted map indices are now different but should be preserved or removed at all.
+
 //scrollbar-gutter: stable both-edges
+//font-size: calc(16px + (32 - 16) * (100vw - 320px) / (1280 - 320)); //https://codepen.io/jkantner/pen/eYygqJm
+//dark/light https://codepen.io/jkantner/pen/eYygqJm

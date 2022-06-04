@@ -29,35 +29,32 @@ import { RadioGroupItemProps, RadioGroupProps } from '@radix-ui/react-radio-grou
 //     );
 // }
 
-const Root = RadioGroupPrimitive.Root as React.ForwardRefExoticComponent<Omit<RadioGroupPrimitive.RadioGroupProps, 'value'> & { value: string | number | undefined; } & React.RefAttributes<HTMLDivElement>>;
-const Item = RadioGroupPrimitive.Item as React.ForwardRefExoticComponent<Omit<RadioGroupItemProps, 'value'> & { value: string | number | undefined; } & React.RefAttributes<HTMLButtonElement>>;
+type StringNumberValue = { value: string | number | undefined; };
+type FixValue<T> = Omit<T, 'value'> & StringNumberValue;
+
+const Root = RadioGroupPrimitive.Root as React.ForwardRefExoticComponent<FixValue<RadioGroupPrimitive.RadioGroupProps> & React.RefAttributes<HTMLDivElement>>;
+const Item = RadioGroupPrimitive.Item as React.ForwardRefExoticComponent<FixValue<RadioGroupItemProps> & React.RefAttributes<HTMLButtonElement>>;
 const Indicator = RadioGroupPrimitive.Indicator;
+
+function ItemCell({ label, value }: { label: string; } & StringNumberValue) {
+    return (
+        <label className="flex items-center">
+            <Item className="w-4 h-4" value={value}>
+                <Indicator className="inline-block bg-red-500 w-4 h-4" />
+            </Item>
+            {label}
+        </label>
+    );
+}
 
 function SortOrderSwitch({ className }: React.HTMLAttributes<HTMLDivElement>) {
     const [sortBy, setSortBy] = useAtom(viewListAtoms.sortByAtom);
     const onChange = (v: string) => setSortBy(+v);
     return (
         <Root className={classNames("flex items-center space-x-2", className)} aria-label="Sort order" value={sortBy} onValueChange={onChange}>
-            <label className="flex items-center">
-                <Item className="w-4 h-4" value={SortBy.name}>
-                    <Indicator className="inline-block bg-red-500 w-4 h-4" />
-                </Item>
-                Name
-            </label>
-
-            <label className="flex items-center">
-                <Item className="w-4 h-4" value={SortBy.rgb}>
-                    <Indicator className="inline-block bg-red-500 w-4 h-4" />
-                </Item>
-                RBG
-            </label>
-
-            <label className="flex items-center">
-                <Item className="w-4 h-4" value={SortBy.hsl}>
-                    <Indicator className="inline-block bg-red-500 w-4 h-4" />
-                </Item>
-                HSL
-            </label>
+            <ItemCell label="Name" value={SortBy.name} />
+            <ItemCell label="RGB" value={SortBy.rgb} />
+            <ItemCell label="HSL" value={SortBy.hsl} />
         </Root>
     );
 }
