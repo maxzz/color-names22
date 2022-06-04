@@ -1,42 +1,40 @@
-import React, { ChangeEvent, Fragment } from 'react';
-import { useAtom, useAtomValue } from 'jotai';
+import React, { Fragment } from 'react';
+import { useAtomValue } from 'jotai';
 import { viewListAtoms } from '../../../store/store';
-import { formatHSL, SortBy } from '../../../utils/colors';
+import { formatHSL, } from '../../../utils/colors';
 import { classNames } from '../../../utils/classnames';
-
-export function SortOrderSwitch({className}: React.HTMLAttributes<HTMLUListElement>) {
-    const [sortBy, setSortBy] = useAtom(viewListAtoms.sortByAtom);
-    const onChange = (event: ChangeEvent<HTMLInputElement>) => setSortBy(+event.target.value);
-    return (
-        <ul className={classNames("flex items-center space-x-2", className)}>
-            <label className="flex items-center"><input className="form-radio mr-1" type="radio" onChange={onChange} checked={sortBy === SortBy.none} value={SortBy.none} name="sortby" />none</label>
-            <label className="flex items-center"><input className="form-radio mr-1" type="radio" onChange={onChange} checked={sortBy === SortBy.name} value={SortBy.name} name="sortby" />name</label>
-            <label className="flex items-center"><input className="form-radio mr-1" type="radio" onChange={onChange} checked={sortBy === SortBy.rgb} value={SortBy.rgb} name="sortby" />rgb</label>
-            <label className="flex items-center"><input className="form-radio mr-1" type="radio" onChange={onChange} checked={sortBy === SortBy.hsl} value={SortBy.hsl} name="sortby" />hsl</label>
-        </ul>
-    );
-}
+import { ColorListInfoPanel } from './ColorListInfoPanel';
 
 function List() {
     const colorList = useAtomValue(viewListAtoms.colorListAtom);
     return (
-        <div className="px-4 grid grid-cols-[8rem,auto,1fr] gap-x-2">
+        <div className="grid grid-cols-[auto,8rem,auto,minmax(160px,1fr)] gap-x-2">
             {colorList.map((color) => (
                 <Fragment key={color.name}>
+                    <div className="text-xs leading-5 front-mono">{color.hex}</div>
                     <div className="text-xs leading-5 front-mono">{formatHSL(color.hsl)}</div>
                     <div className="text-sm">{color.name}</div>
                     <div className="" style={{ backgroundColor: color.name }} />
                 </Fragment>
             ))}
         </div>
-
     );
 }
 
-export function Section2_ColorsList({className}: React.HTMLAttributes<HTMLUListElement>) {
+export function Section2_ColorsList({ className }: React.HTMLAttributes<HTMLUListElement>) {
     return (
-        <div className={classNames("space-y-4", className)}>
-            <List />
+        <div className={classNames("flex flex-col bg-primary-100 overflow-hidden", className)}>
+            <ColorListInfoPanel />
+            <div className="h-full overflow-overlay">
+                {/* flex justify-center */}
+                <div className="px-8 py-4 lg:px-24 xl:px-48">
+                {/* <div className="px-8 py-4 lg:px-24 xl:px-48"> */}
+                    {/* max-w-[460px] */}
+                    <List />
+                </div>
+            </div>
         </div>
     );
 }
+
+//scrollbar-gutter: stable both-edges
