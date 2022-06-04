@@ -29,46 +29,44 @@ import { RadioGroupItemProps, RadioGroupProps } from '@radix-ui/react-radio-grou
 //     );
 // }
 
-const RadioGroup = RadioGroupPrimitive.Root as React.ForwardRefExoticComponent<Omit<RadioGroupPrimitive.RadioGroupProps, 'value'> & { value: string | number | undefined; } & React.RefAttributes<HTMLDivElement>>;
-const RadioGroupRadio = RadioGroupPrimitive.Item as React.ForwardRefExoticComponent<Omit<RadioGroupItemProps, 'value'> & { value: string | number | undefined; } & React.RefAttributes<HTMLButtonElement>>;
-const RadioGroupIndicator = RadioGroupPrimitive.Indicator;
+const Root = RadioGroupPrimitive.Root as React.ForwardRefExoticComponent<Omit<RadioGroupPrimitive.RadioGroupProps, 'value'> & { value: string | number | undefined; } & React.RefAttributes<HTMLDivElement>>;
+const Item = RadioGroupPrimitive.Item as React.ForwardRefExoticComponent<Omit<RadioGroupItemProps, 'value'> & { value: string | number | undefined; } & React.RefAttributes<HTMLButtonElement>>;
+const Indicator = RadioGroupPrimitive.Indicator;
 
-function SortOrderSwitch({ className }: React.HTMLAttributes<HTMLUListElement>) {
+function SortOrderSwitch({ className }: React.HTMLAttributes<HTMLDivElement>) {
     const [sortBy, setSortBy] = useAtom(viewListAtoms.sortByAtom);
     const onChange = (v: string) => setSortBy(+v);
     return (
-        <ul className={classNames("flex items-center space-x-2", className)}>
+        <Root className={classNames("flex items-center space-x-2", className)} aria-label="Sort order" value={sortBy} onValueChange={onChange}>
+            <label className="flex items-center">
+                <Item className="w-4 h-4" value={SortBy.name}>
+                    <Indicator className="inline-block bg-red-500 w-4 h-4" />
+                </Item>
+                Name
+            </label>
 
-            <RadioGroup className="flex space-x-4" aria-label="Sort order" value={sortBy} onValueChange={onChange}>
-                <label className="flex items-center">
-                    <RadioGroupRadio className="w-4 h-4" value={SortBy.name}>
-                        <RadioGroupIndicator className="inline-block bg-red-500 w-4 h-4" />
-                    </RadioGroupRadio>
-                    Name
-                </label>
+            <label className="flex items-center">
+                <Item className="w-4 h-4" value={SortBy.rgb}>
+                    <Indicator className="inline-block bg-red-500 w-4 h-4" />
+                </Item>
+                RBG
+            </label>
 
-                <label className="flex items-center">
-                    <RadioGroupRadio className="w-4 h-4" value={SortBy.rgb}>
-                        <RadioGroupIndicator className="inline-block bg-red-500 w-4 h-4" />
-                    </RadioGroupRadio>
-                    RBG
-                </label>
-
-                <label className="flex items-center">
-                    <RadioGroupRadio className="w-4 h-4" value={SortBy.hsl}>
-                        <RadioGroupIndicator className="inline-block bg-red-500 w-4 h-4" />
-                    </RadioGroupRadio>
-                    HSL
-                </label>
-            </RadioGroup>
-        </ul>
+            <label className="flex items-center">
+                <Item className="w-4 h-4" value={SortBy.hsl}>
+                    <Indicator className="inline-block bg-red-500 w-4 h-4" />
+                </Item>
+                HSL
+            </label>
+        </Root>
     );
 }
 
 export function ColorListInfoPanel() {
     return (
         <div className="bg-primary-200">
-            <div className="mt-8 px-4 border-slate-700 border-b flex items-center justify-center space-x-4">
+            <div className="mt-8 text-center">The 147 color keywords defined in SVG plus one more, as defined in the CSS Color Module Level 4</div>
+            <div className="px-4 border-slate-700 border-b flex items-center justify-center space-x-4">
                 <SortOrderSwitch className="p-4" />
             </div>
         </div>

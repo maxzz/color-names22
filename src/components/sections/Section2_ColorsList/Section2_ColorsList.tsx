@@ -8,9 +8,10 @@ import { ColorListInfoPanel } from './ColorListInfoPanel';
 function List() {
     const colorList = useAtomValue(viewListAtoms.colorListAtom);
     return (
-        <div className="grid grid-cols-[auto,8rem,auto,minmax(20px,1fr)] gap-x-2">
-            {colorList.map((color) => (
+        <div className="grid grid-cols-[auto,auto,8rem,auto,minmax(20px,1fr)] gap-x-2">
+            {colorList.map((color, idx) => (
                 <Fragment key={color.name}>
+                    <div className="text-xs leading-5 front-mono">{idx}</div>
                     <div className="text-xs leading-5 front-mono">{color.hex}</div>
                     <div className="text-xs leading-5 front-mono">{formatHSL(color.hsl)}</div>
                     <div className="text-sm">{color.name}</div>
