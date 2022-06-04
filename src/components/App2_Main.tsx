@@ -2,7 +2,7 @@ import { useAtomValue } from 'jotai';
 import { AppAtoms, SectionName } from '../store/store';
 import { classNames } from '../utils/classnames';
 import { Section1_ColorsByHue } from './sections/Section1_ColorsByHue/Section1_ColorsByHue';
-import { Section2_ColorsList, SortOrderSwitch } from './sections/Section2_ColorsList/Section2_ColorsList';
+import { Section2_ColorsList } from './sections/Section2_ColorsList/Section2_ColorsList';
 import { Section3_Tailwind } from './sections/Section3_Tailwind/Section3_Tailwind';
 import { Experiments } from './UI/experiments/Experiments';
 
@@ -14,26 +14,13 @@ export function App2_Main({ className }: React.HTMLAttributes<HTMLDivElement>) {
 
             {currentSection === SectionName.hue &&
                 <div className="h-full flex flex-col">
-                    {/* <div className="mt-8 px-4 text-xl font-header border-slate-700 border-b">
-                        Section one: sorted groups
-                    </div> */}
-
                     <Section1_ColorsByHue className="flex-1 overflow-y-auto" style={{ overflow: 'overlay' }} />
                 </div>
             }
 
             {currentSection === SectionName.list &&
                 <div className="h-full flex flex-col">
-                    <div className="mt-8 px-4 border-slate-700 border-b flex items-center justify-between space-x-4">
-                        <div className="text-xl font-header">
-                            {/* Section two: colors list */}    
-                        </div>
-                        
-
-                        <SortOrderSwitch className="px-4" />
-                    </div>
-
-                    <Section2_ColorsList className="p-4 flex-1 overflow-auto" style={{overflow: 'overlay'}} />
+                    <Section2_ColorsList className="flex-1" />
                 </div>
             }
 

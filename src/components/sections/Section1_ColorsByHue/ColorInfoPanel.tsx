@@ -14,7 +14,8 @@ const copyHueNoticeTextShadow = {
 
 function CopyHueNotice() {
     return (
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        // <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <div className="absolute">
             <div className="px-2 py-px text-sm bg-green-500 text-green-900 border-green-700 border rounded" style={copyHueNoticeTextShadow}>Copied</div>
         </div>
     );

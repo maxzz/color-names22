@@ -27,7 +27,7 @@ export function ValueView({ copyValue, focus }: { copyValue?: string; focus?: bo
         <div
             className={classNames(
                 "inline-flex items-center cursor-pointer",
-                focus ? "px-1 py-0.5 bg-slate-100 outline-slate-500 outline-1 outline rounded shadow active:scale-[.97]" : "px-1 py-0.5"
+                focus ? "px-1 py-0.5 bg-slate-100 text-primary-900 outline-slate-500 outline-1 outline rounded shadow active:scale-[.97]" : "px-1 py-0.5"
             )}
         >
             <div>
@@ -35,7 +35,7 @@ export function ValueView({ copyValue, focus }: { copyValue?: string; focus?: bo
             </div>
 
             <div className={classNames("ml-1", focus ? "visible" : "invisible")}>
-                <IconClipboard className="w-4 h-4 text-slate-500" />
+                <IconClipboard className="w-4 h-4 text-primary-500" />
             </div>
         </div>
     );
