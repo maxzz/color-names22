@@ -88,7 +88,7 @@ function MountHue({ show, setShow, children }: { show: boolean; setShow?: (v: bo
 export function ColorInfoPanel() {
     const mono = useAtomValue(viewHueAtoms.monoAtom);
     return (
-        <div className="bg-primary-200">
+        <div className="bg-primary-200 border-slate-400 border-b">
             <div className="mx-auto p-4 pt-1 max-w-[42rem] grid grid-cols-[minmax(0,1fr),auto] gap-x-4">
 
                 <div className={`col-span-2 h-16 flex flex-col justify-center`}>

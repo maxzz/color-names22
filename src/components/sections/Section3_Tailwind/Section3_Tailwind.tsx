@@ -20,7 +20,7 @@ function VerticalOverflowFix({ children }: { children: ReactNode; }) {
 export function Section3_Tailwind({ className }: React.HTMLAttributes<HTMLUListElement>) {
     return (
         <div className={classNames("h-full flex flex-col bg-primary-100 overflow-hidden", className)}>
-            <div className="bg-primary-200">
+            <div className="bg-primary-200 border-slate-400 border-b">
                 <TwColorInfo className="max-w-3xl mx-auto" />
             </div>
 
