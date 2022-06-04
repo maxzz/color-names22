@@ -4,7 +4,6 @@ import { viewListAtoms } from '@/store/store';
 import { SortBy } from '@/utils/colors';
 import { classNames } from '@/utils/classnames';
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
-import { RadioGroupItemProps, RadioGroupProps } from '@radix-ui/react-radio-group';
 
 // function SortOrderSwitch({className}: React.HTMLAttributes<HTMLUListElement>) {
 //     const [sortBy, setSortBy] = useAtom(viewListAtoms.sortByAtom);
@@ -33,16 +32,16 @@ type StringNumberValue = { value: string | number | undefined; };
 type FixValue<T> = Omit<T, 'value'> & StringNumberValue;
 
 const Root = RadioGroupPrimitive.Root as React.ForwardRefExoticComponent<FixValue<RadioGroupPrimitive.RadioGroupProps> & React.RefAttributes<HTMLDivElement>>;
-const Item = RadioGroupPrimitive.Item as React.ForwardRefExoticComponent<FixValue<RadioGroupItemProps> & React.RefAttributes<HTMLButtonElement>>;
+const Item = RadioGroupPrimitive.Item as React.ForwardRefExoticComponent<FixValue<RadioGroupPrimitive.RadioGroupItemProps> & React.RefAttributes<HTMLButtonElement>>;
 const Indicator = RadioGroupPrimitive.Indicator;
 
 function ItemCell({ label, value }: { label: string; } & StringNumberValue) {
     return (
-        <label className="flex items-center">
-            <Item className="w-4 h-4" value={value}>
-                <Indicator className="inline-block bg-red-500 w-4 h-4" />
+        <label className="flex items-center space-x-1">
+            <Item className="w-4 h-4 bg-primary-50 border-primary-400 border rounded-full flex items-center justify-center" value={value}>
+                <Indicator className="w-2 h-2 bg-primary-600 rounded-full inline-block" />
             </Item>
-            {label}
+            <div>{label}</div>
         </label>
     );
 }
@@ -51,10 +50,10 @@ function SortOrderSwitch({ className }: React.HTMLAttributes<HTMLDivElement>) {
     const [sortBy, setSortBy] = useAtom(viewListAtoms.sortByAtom);
     const onChange = (v: string) => setSortBy(+v);
     return (
-        <Root className={classNames("flex items-center space-x-2", className)} aria-label="Sort order" value={sortBy} onValueChange={onChange}>
-            <ItemCell label="Name" value={SortBy.name} />
+        <Root className={classNames("text-sm flex items-center space-x-3", className)} aria-label="Sort order" value={sortBy} onValueChange={onChange}>
             <ItemCell label="RGB" value={SortBy.rgb} />
             <ItemCell label="HSL" value={SortBy.hsl} />
+            <ItemCell label="Name" value={SortBy.name} />
         </Root>
     );
 }
@@ -62,9 +61,15 @@ function SortOrderSwitch({ className }: React.HTMLAttributes<HTMLDivElement>) {
 export function ColorListInfoPanel() {
     return (
         <div className="bg-primary-200">
-            <div className="mt-8 text-center">The 147 color keywords defined in SVG plus one more, as defined in the CSS Color Module Level 4</div>
-            <div className="px-4 border-slate-700 border-b flex items-center justify-center space-x-4">
-                <SortOrderSwitch className="p-4" />
+            {/* <div className="mt-8 text-center">The 147 color keywords defined in SVG plus one more, as defined in the CSS Color Module Level 4</div> */}
+            {/* <div className="mt-8 text-center">The color keywords defined in SVG plus one more as defined in the CSS level 4 color module</div> */}
+            <div className="mt-8 text-center">Color keywords defined in the <a className="text-primary-700 hover:border-blue-400/40 border-b" href="http://dev.w3.org/csswg/css-color" target="_blank">
+                CSS Color Module Level 4
+            </a>
+            </div>
+            <div className="px-4 border-slate-400 border-b flex items-center justify-center space-x-2">
+                <div className="text-sm">Sort by:</div>
+                <SortOrderSwitch className="py-4" />
             </div>
         </div>
     );
