@@ -31,9 +31,10 @@ module.exports = {
     },
     plugins: [
         require('./tailwind/tailwind-plugin-data-state'),
-        require('./tailwind/tailwind-plugin-colors-bridge')({ prefix: '--tm-', groupName: 'primary' },),
+        require('./tailwind/tailwind-plugin-colors-bridge')({ prefix: '--tm-', groupName: 'primary' }),
         require('./tailwind/tailwind-plugin-all-colors'),
         require('./tailwind/tailwnd-plugin-debug-styles'),
+        require('tailwindcss-debug-screens'),
         require('@tailwindcss/forms')({ strategy: 'class' }),
     ],
 };
