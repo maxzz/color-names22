@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import { styled } from '../../stitches.config';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
 import { classNames } from '../../utils/classnames';
@@ -64,14 +64,19 @@ const SwitchThumb = StyledThumb;
 type SetValueProps = {
     value: boolean;
     onChange: (checked: boolean) => void;
-} & React.HTMLAttributes<HTMLLabelElement>;
+};
 
-export function UISwitch({ value, onChange }: { value: boolean; onChange: (checked: boolean) => void; }) {
+export function UISwitch({ value, onChange, className, ...rest }: SetValueProps & Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'>) {
     return (
         <Switch
-            className="relative ml-2 w-[46px] h-[28px] flex items-center data-state-checked:bg-primary-300 bg-primary-200/50 ring-primary-400/30 focus:ring-offset-primary-50 focus:ring-primary-300 ring-1 focus:ring-2 focus:ring-offset-2 outline-none rounded-full shadow"
+            className={classNames(
+                "relative ml-2 w-[46px] h-[28px] flex items-center data-state-checked:bg-primary-300 bg-primary-200/50 ring-primary-400/30",
+                "focus:ring-offset-primary-50 focus:ring-primary-300 ring-1 focus:ring-2 focus:ring-offset-2 outline-none rounded-full shadow",
+                className
+            )}
             checked={value}
             onCheckedChange={onChange}
+            {...rest}
         >
             {/* <Switch className="ml-2 w-[42px] h-6 flex items-center bg-gray-700 rounded-full relative shadow ring-2 ring-gray-400 focus:ring-gray-900"> */}
             <SwitchThumb className="mb-px w-[22px] h-[22px]" />
