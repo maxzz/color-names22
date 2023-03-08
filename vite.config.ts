@@ -37,6 +37,9 @@ export default ({ command }) => {
                 '@': path.resolve(__dirname, './src'),
             },
         },
+        server: {
+            port: 3000,
+        }
         //assetsInclude: ['./src/**/*.woff2'],
     });
 };
