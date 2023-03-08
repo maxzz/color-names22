@@ -1,10 +1,9 @@
 import React, { HTMLAttributes } from 'react';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { allColorsAtom, CurrentTwColor, currentTwColorAtom } from '@/store/store';
 import { ValueWithCopy } from '@/components/UI/ValueWithCopy';
 import { classNames } from '@/utils/classnames';
 import { isLightColor } from '@/utils/colors';
-import { useUpdateAtom } from 'jotai/utils';
 import useMeasure from 'react-use-measure';
 
 function PreviewBox() {
@@ -36,7 +35,7 @@ function SelectedColorValue({ currentTwColor }: { currentTwColor: CurrentTwColor
 function RowPalette({ groupName, className }: { groupName: string; } & HTMLAttributes<HTMLDivElement>) {
     const allColors = useAtomValue(allColorsAtom);
     const values = Object.entries(allColors[groupName]);
-    const setTwColor = useUpdateAtom(currentTwColorAtom);
+    const setTwColor = useSetAtom(currentTwColorAtom);
     return (
         <div className={classNames("grid grid-cols-10 justify-end text-xs", className)}>
             {values.map(([key, color], idx) => (

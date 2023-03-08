@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react";
-import { useUpdateAtom } from "jotai/utils";
+import { useSetAtom } from "jotai";
 import { ColorGroups } from "./tw-all-colors";
 import { allColorsAtom } from "@/store/store";
 
 export function TailwindAllColorsBridge() {
     const colorsRef = useRef<ColorGroups>({});
-    const setColors = useUpdateAtom(allColorsAtom);
+    const setColors = useSetAtom(allColorsAtom);
 
     useEffect(() => setColors(colorsRef.current), [colorsRef]);
 

@@ -1,12 +1,11 @@
 import { Fragment } from "react";
-import { useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { allColorsAtom, currentTwColorAtom } from "@/store/store";
 import { GroupValues } from "@/components/UI/TailwindColorsBridge";
-import { useUpdateAtom } from "jotai/utils";
 
 function Row({ groupName, groupValues }: { groupName: string; groupValues: GroupValues; }) {
     const values = Object.entries(groupValues);
-    const setCurrentTwColor = useUpdateAtom(currentTwColorAtom);
+    const setCurrentTwColor = useSetAtom(currentTwColorAtom);
     return (<>
         {values.map(([key, color], idx) => (
             <Fragment key={`${groupName}.${idx}`}>
