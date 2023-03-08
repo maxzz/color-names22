@@ -1,9 +1,9 @@
 import { useAtomValue } from 'jotai';
 import { AppAtoms, SectionName } from '../store/store';
 import { classNames } from '../utils/classnames';
-import { Section1_ColorsByHue } from './sections/Section1_ColorsByHue/Section1_ColorsByHue';
-import { Section2_ColorsList } from './sections/Section2_ColorsList/Section2_ColorsList';
-import { Section3_Tailwind } from './sections/Section3_Tailwind/Section3_Tailwind';
+import { Section1_ColorsByHue } from './sections/Section1_ColorsByHue';
+import { Section2_ColorsList } from './sections/Section2_ColorsList';
+import { Section3_Tailwind } from './sections/Section3_Tailwind';
 import { Experiments } from './UI/experiments/Experiments';
 
 export function App2_Main({ className }: React.HTMLAttributes<HTMLDivElement>) {
