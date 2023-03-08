@@ -3,7 +3,7 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { allColorsAtom, CurrentTwColor, currentTwColorAtom } from '@/store/store';
 import { ValueWithCopy } from '@/components/UI/ValueWithCopy';
 import { classNames } from '@/utils/classnames';
-import { isLightColor } from '@/utils/colors';
+import { isLightColor } from '@/utils-color';
 import useMeasure from 'react-use-measure';
 
 function PreviewBox() {

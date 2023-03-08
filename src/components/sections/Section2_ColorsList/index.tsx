@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { useAtomValue } from 'jotai';
 import { viewListAtoms } from '../../../store/store';
-import { formatHSL, } from '../../../utils/colors';
+import { formatHSL, } from '../../../utils-color';
 import { classNames } from '../../../utils/classnames';
 import { ColorListInfoPanel } from './ColorListInfoPanel';
 

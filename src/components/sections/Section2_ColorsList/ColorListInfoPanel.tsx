@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import { useAtom } from 'jotai';
 import { viewListAtoms } from '@/store/store';
-import { SortBy } from '@/utils/colors';
+import { SortBy } from '@/utils-color';
 import { classNames } from '@/utils/classnames';
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 

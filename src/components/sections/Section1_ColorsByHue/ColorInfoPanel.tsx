@@ -3,7 +3,7 @@ import { useAtom, useAtomValue } from 'jotai';
 import { viewHueAtoms } from '@/store/store';
 import { a, easings, useTransition } from '@react-spring/web';
 import { classNames } from '@/utils/classnames';
-import { formatHSL, formatRGB } from '@/utils/colors';
+import { formatHSL, formatRGB } from '@/utils-color';
 import { MonoSwitch } from '@/components/UI/UIMonoSwitch';
 import { ValueView, ValueWithCopy } from '@/components/UI/ValueWithCopy';
 import { HueSlider } from './HueSlider/HueSlider';
