@@ -3,6 +3,8 @@ import { useSetAtom } from "jotai";
 import { ColorGroups } from "./tw-all-colors";
 import { allColorsAtom } from "@/store/store";
 
+// ./tailwind/tailwind-plugin-all-colors.js defines '.all-tw-colors' class with all colors and we put them into DOM.
+
 export function TailwindAllColorsBridge() {
     const colorsRef = useRef<ColorGroups>({});
     const setColors = useSetAtom(allColorsAtom);
