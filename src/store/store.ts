@@ -136,7 +136,6 @@ export const viewListAtoms: Atomize<ViewListOptions & {
         }
     ),
     colorListAtom: atom<ColorItem[]>([]),
-
 };
 
 //#endregion Sorted colors list
