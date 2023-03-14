@@ -10,12 +10,17 @@ function PreviewBox() {
     const currentTwColor = useAtomValue(currentTwColorAtom);
     return (
         <div
-            className="flex-none w-24 h-16 border-primary-400 border rounded flex items-end justify-end"
+            className="flex-none w-24 h-16 text-xs border-primary-400 border rounded flex transition-colors"
             style={{ backgroundColor: currentTwColor?.value || 'transparent' }}
         >
             {currentTwColor &&
-                <div className="pr-1" style={{ color: isLightColor(currentTwColor.value) ? 'black' : 'white' }}>
-                    {currentTwColor.key}
+                <div className="flex-1 px-1.5 py-0.5 flex items-end justify-between">
+                    <div className="transition-colors" style={{ color: isLightColor(currentTwColor.value) ? 'black' : 'white' }}>
+                        {currentTwColor.group}
+                    </div>
+                    <div className="transition-colors" style={{ color: isLightColor(currentTwColor.value) ? 'black' : 'white' }}>
+                        {currentTwColor.key}
+                    </div>
                 </div>
             }
         </div>
@@ -24,7 +29,7 @@ function PreviewBox() {
 
 function SelectedColorValue({ currentTwColor }: { currentTwColor: CurrentTwColor | null; }) {
     return (
-        <div className="flex items-center">
+        <div className="text-xs flex items-center">
             {currentTwColor && <>
                 <ValueWithCopy copyValue={currentTwColor.value.toUpperCase()} />
             </>}
@@ -67,7 +72,7 @@ export function TwColorInfoContainer({ className, ...rest }: HTMLAttributes<HTML
             <div className="flex items-start justify-between space-x-4 text-sm">
 
                 {/* Preview and color value */}
-                <div className={classNames("flex", containerWidth < 700 ? 'flex-col space-x-0' : 'flex-row space-x-2', )}>
+                <div className={classNames("flex", containerWidth < 700 ? 'flex-col space-x-0' : 'flex-row space-x-2',)}>
                     <PreviewBox />
                     <SelectedColorValue currentTwColor={currentTwColor} />
                 </div>
