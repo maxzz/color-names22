@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { classNames } from '../../../utils/classnames';
-import { TwColorsGrid } from './TwColorsView';
+import { TwColorsGrid } from './TwColorsGrid';
 import { TwColorInfoContainer } from './TwColorInfo';
 import useMeasure from 'react-use-measure';
 

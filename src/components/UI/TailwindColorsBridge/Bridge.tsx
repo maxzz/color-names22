@@ -31,3 +31,4 @@ export function TailwindAllColorsBridge() {
 }
 
 //TODO: save currentTwColorAtom value
+//TODO: save allColors to local store to avoid grid shift on reload/on sub-app tab buttons change
