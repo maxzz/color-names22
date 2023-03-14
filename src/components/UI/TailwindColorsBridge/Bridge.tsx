@@ -11,8 +11,9 @@ export function TailwindAllColorsBridge() {
 
     useEffect(() => setColors(colorsRef.current), [colorsRef]);
 
-    function getColors(el: HTMLDivElement) {
-        const colors = JSON.parse(el && getComputedStyle(el).getPropertyValue('--tm-tw-colors') || '[]');
+    function getColors(el: HTMLDivElement | null) {
+        const twAttr = el && getComputedStyle(el).getPropertyValue('--tm-tw-colors');
+        const colors = JSON.parse(twAttr || '[]');
         colorsRef.current = colors || {};
     }
 
