@@ -22,7 +22,7 @@ function Row({ groupName, groupValues }: { groupName: string; groupValues: Group
     </>);
 }
 
-export function TwColorsView() {
+export function TwColorsGrid() {
     const colors = useAtomValue(allColorsAtom);
     const groups = Object.entries(colors);
     return (

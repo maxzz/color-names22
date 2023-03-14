@@ -52,7 +52,7 @@ function RowPalette({ groupName, className }: { groupName: string; } & HTMLAttri
     );
 }
 
-export function TwColorInfo({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
+export function TwColorInfoContainer({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const currentTwColor = useAtomValue(currentTwColorAtom);
     const [ref, { width: containerWidth }] = useMeasure();
     return (

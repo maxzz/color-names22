@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { classNames } from '../../../utils/classnames';
-import { TwColorsView } from './TwColorsView';
-import { TwColorInfo } from './TwColorInfo';
+import { TwColorsGrid } from './TwColorsView';
+import { TwColorInfoContainer } from './TwColorInfo';
 import useMeasure from 'react-use-measure';
 
 function VerticalOverflowFix({ children }: { children: ReactNode; }) {
@@ -21,11 +21,11 @@ export function Section3_Tailwind({ className }: React.HTMLAttributes<HTMLUListE
     return (
         <div className={classNames("h-full flex flex-col bg-primary-100 overflow-hidden", className)}>
             <div className="bg-primary-200 border-slate-400 border-b">
-                <TwColorInfo className="max-w-3xl mx-auto" />
+                <TwColorInfoContainer className="max-w-3xl mx-auto" />
             </div>
 
             <VerticalOverflowFix>
-                <TwColorsView />
+                <TwColorsGrid />
             </VerticalOverflowFix>
         </div>
     );
