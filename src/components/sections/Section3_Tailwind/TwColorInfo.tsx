@@ -61,11 +61,17 @@ export function TwColorInfoContainer({ className, ...rest }: HTMLAttributes<HTML
     const currentTwColor = useAtomValue(currentTwColorAtom);
     const [ref, { width: containerWidth }] = useMeasure();
     return (
-        <div ref={ref} className={classNames("p-4", className)} {...rest}>
+        <div ref={ref} className={classNames("px-4 py-2", className)} {...rest}>
 
             {/* Palette name */}
-            <div className="mb-4 text-center">
-                {currentTwColor ? `Palette: ${currentTwColor.group}` : "Pick a color from the grid"}
+            <div className="flex items-center justify-end text-center">
+                {currentTwColor
+                    ?
+                    <div className="flex items-center text-sm tracking-tighter uppercase">
+                        {currentTwColor.group}
+                    </div>
+                    : "Pick a color from the grid"
+                }
             </div>
 
             {/* Low container */}
