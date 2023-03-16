@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from 'react';
 import { useAtomValue } from 'jotai';
-import { AppAtoms, SectionName } from '@/store/store';
+import { AppAtoms, SectionName } from '@/store';
 import { IconGithubLogo } from './UI/UIIcons';
 import { classNames } from '@/utils/classnames';
 

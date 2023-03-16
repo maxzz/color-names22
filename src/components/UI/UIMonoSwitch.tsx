@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, useState } from "react";
 import { useAtom } from "jotai";
-import { viewHueAtoms } from "../../store/store";
+import { viewHueAtoms } from "../../store";
 import { a, useSpring } from "@react-spring/web";
 import { classNames } from "../../utils/classnames";
 

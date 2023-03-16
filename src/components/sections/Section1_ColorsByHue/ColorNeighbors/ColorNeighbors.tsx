@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom, useSetAtom } from 'jotai';
-import { viewHueAtoms } from '../../../../store/store';
+import { viewHueAtoms } from '../../../../store';
 import './ColorNeighbors.scss';
 
 export function ColorNeighbors() {

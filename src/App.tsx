@@ -1,5 +1,5 @@
 import { useAtomValue } from 'jotai';
-import { dataLoadAtom } from './store/store';
+import { dataLoadAtom } from './store';
 import { TailwindColorsBridge } from './components/UI/TailwindColorsBridge';
 import { App1_Header } from './components/App1_Header';
 import { App2_Main } from './components/App2_Main';

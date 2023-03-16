@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtomValue } from 'jotai';
-import { viewListAtoms } from '../../../store/store';
+import { viewListAtoms } from '../../../store';
 import { classNames } from '../../../utils/classnames';
 import { ColorInfoPanel } from './ColorInfoPanel';
 import { ColorNeighbors } from './ColorNeighbors/ColorNeighbors';

@@ -1,5 +1,5 @@
 import { useAtomValue } from 'jotai';
-import { AppAtoms, SectionName } from '../store/store';
+import { AppAtoms, SectionName } from '../store';
 import { classNames } from '../utils/classnames';
 import { Section1_ColorsByHue } from './sections/Section1_ColorsByHue';
 import { Section2_ColorsList } from './sections/Section2_ColorsList';
