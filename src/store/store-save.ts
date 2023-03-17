@@ -20,7 +20,7 @@ const saveDebounced = debounce(function _save(get: Getter) {
             sortBy: get(viewListAtoms.sortByAtom),
         },
     };
-    console.log('save', newStore);
+    //console.log('save', newStore);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(newStore));
 }, 1000);
 
