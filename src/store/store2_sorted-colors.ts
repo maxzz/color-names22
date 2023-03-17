@@ -1,0 +1,28 @@
+//#region Sorted colors list
+
+import { Atomize, atomWithCallback } from "@/hooks/atomsX";
+import { allColorsWoAlternatives, ColorItem, SortBy, sortColorItemsFn } from "@/utils-color";
+import { atom, SetStateAction } from "jotai";
+import { initialData, ViewListOptions } from "./store-initial-data";
+import { AppStorage } from "./store-save";
+
+export const _colorListSortByAtom = atomWithCallback(initialData.viewListOptions.sortBy, AppStorage.save);
+
+export const viewListAtoms: Atomize<ViewListOptions & {
+    colorList: ColorItem[];
+}> = {
+    sortByAtom: atom(
+        (get) => get(_colorListSortByAtom),
+        (get, set, value: SetStateAction<SortBy>) => {
+            const v = typeof value === 'function' ? value(get(_colorListSortByAtom)) : value;
+            const fn = sortColorItemsFn(v);
+            const list = fn ? [...allColorsWoAlternatives].sort(fn) : allColorsWoAlternatives;
+            set(viewListAtoms.colorListAtom, list);
+            set(_colorListSortByAtom, v);
+        }
+    ),
+    colorListAtom: atom<ColorItem[]>([]),
+};
+
+//#endregion Sorted colors list
+
