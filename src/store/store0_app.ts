@@ -1,14 +1,14 @@
 import { Atomize, atomLoader, atomWithCallback } from "@/hooks/atomsX";
 import { Getter, Setter } from "jotai";
 import { AppOptions, initialData } from "./store-initial-data";
-import { AppStorage } from "./store-save";
+import { saveStore } from "./store-save";
 import { setColorList, _hueAtom, _monoAtom } from "./store1_hue";
 import { viewListAtoms, _colorListSortByAtom } from "./store2_sorted-colors";
 
 //#region App options
 
 export const AppAtoms: Atomize<AppOptions> = {
-    currentSectionAtom: atomWithCallback(initialData.appOptions.currentSection, AppStorage.save),
+    currentSectionAtom: atomWithCallback(initialData.appOptions.currentSection, saveStore),
 };
 
 export const dataLoadAtom = atomLoader((get: Getter, set: Setter) => {

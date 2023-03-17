@@ -6,28 +6,24 @@ import { AppAtoms } from "./store0_app";
 import { viewHueAtoms, _hueAtom, _monoAtom } from "./store1_hue";
 import { viewListAtoms } from "./store2_sorted-colors";
 
-export namespace AppStorage {
-
-    export const saveDebounced = debounce(function _save(get: Getter) {
-        let newStore: Store = {
-            appOptions: {
-                currentSection: get(AppAtoms.currentSectionAtom),
-            },
-            viewHueOptions: {
-                color: get(viewHueAtoms.colorAtom),
-                hue: get(_hueAtom),
-                mono: get(_monoAtom),
-            },
-            viewListOptions: {
-                sortBy: get(viewListAtoms.sortByAtom),
-            },
-        };
-        console.log('save', newStore);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(newStore));
-    }, 1000);
-
-} //namespace AppStorage
+const saveDebounced = debounce(function _save(get: Getter) {
+    let newStore: Store = {
+        appOptions: {
+            currentSection: get(AppAtoms.currentSectionAtom),
+        },
+        viewHueOptions: {
+            color: get(viewHueAtoms.colorAtom),
+            hue: get(_hueAtom),
+            mono: get(_monoAtom),
+        },
+        viewListOptions: {
+            sortBy: get(viewListAtoms.sortByAtom),
+        },
+    };
+    console.log('save', newStore);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(newStore));
+}, 1000);
 
 export function saveStore({ get }: { get: Getter; }) {
-    return AppStorage.saveDebounced(get);
+    return saveDebounced(get);
 }
