@@ -22,6 +22,7 @@ export namespace AppStorage {
                 sortBy: get(viewListAtoms.sortByAtom),
             },
         };
+        console.log('save', newStore);
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newStore));
     }, 1000);
 

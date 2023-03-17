@@ -40,6 +40,6 @@ export let initialData: Store = {
     },
 };
 
-export function setInitialData(initialData: Store) {
-    initialData = initialData;
+export function setInitialData(data: Store) {
+    initialData = data;
 }
