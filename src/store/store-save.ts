@@ -25,8 +25,8 @@ export namespace AppStorage {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newStore));
     }, 1000);
 
-    export function save({ get }: { get: Getter; }) {
-        return saveDebounced(get);
-    }
-
 } //namespace AppStorage
+
+export function saveStore({ get }: { get: Getter; }) {
+    return AppStorage.saveDebounced(get);
+}

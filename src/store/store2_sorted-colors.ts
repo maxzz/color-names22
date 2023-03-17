@@ -4,9 +4,9 @@ import { Atomize, atomWithCallback } from "@/hooks/atomsX";
 import { allColorsWoAlternatives, ColorItem, SortBy, sortColorItemsFn } from "@/utils-color";
 import { atom, SetStateAction } from "jotai";
 import { initialData, ViewListOptions } from "./store-initial-data";
-import { AppStorage } from "./store-save";
+import { saveStore } from "./store-save";
 
-export const _colorListSortByAtom = atomWithCallback(initialData.viewListOptions.sortBy, AppStorage.save);
+export const _colorListSortByAtom = atomWithCallback(initialData.viewListOptions.sortBy, saveStore);
 
 export const viewListAtoms: Atomize<ViewListOptions & {
     colorList: ColorItem[];

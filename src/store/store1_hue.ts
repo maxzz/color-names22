@@ -4,16 +4,16 @@ import { Atomize, atomWithCallback } from "@/hooks/atomsX";
 import { allColorsWoAlternatives, ColorItem, groupColors } from "@/utils-color";
 import { atom, SetStateAction, Setter } from "jotai";
 import { initialData, ViewHueOptions } from "./store-initial-data";
-import { AppStorage } from "./store-save";
+import { saveStore } from "./store-save";
 
-export const _hueAtom = atomWithCallback(initialData.viewHueOptions.hue, AppStorage.save);
-export const _monoAtom = atomWithCallback(initialData.viewHueOptions.mono, AppStorage.save);
+export const _hueAtom = atomWithCallback(initialData.viewHueOptions.hue, saveStore);
+export const _monoAtom = atomWithCallback(initialData.viewHueOptions.mono, saveStore);
 
 export const viewHueAtoms: Atomize<ViewHueOptions & {
     colorGroups: ColorItem[][];
     tolerance: number;
 }> = {
-    colorAtom: atomWithCallback(initialData.viewHueOptions.color, AppStorage.save),
+    colorAtom: atomWithCallback(initialData.viewHueOptions.color, saveStore),
     hueAtom: atom(
         (get) => get(_hueAtom),
         (get, set, hue: SetStateAction<number>) => {
