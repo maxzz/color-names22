@@ -1,5 +1,5 @@
 import React, { HTMLAttributes } from 'react';
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { allColorsAtom, CurrentTwColor, currentTwColorAtom } from '@/store';
 import { ValueWithCopy } from '@/components/UI/ValueWithCopy';
 import { classNames } from '@/utils/classnames';
@@ -40,14 +40,18 @@ function SelectedColorValue({ currentTwColor }: { currentTwColor: CurrentTwColor
 function RowPalette({ groupName, className }: { groupName: string; } & HTMLAttributes<HTMLDivElement>) {
     const allColors = useAtomValue(allColorsAtom);
     const values = Object.entries(allColors[groupName]);
-    const setTwColor = useSetAtom(currentTwColorAtom);
+    const [currentTwColor, setCurrentTwColor] = useAtom(currentTwColorAtom);
     return (
         <div className={classNames("grid grid-cols-10 justify-end text-xs", className)}>
             {values.map(([key, color], idx) => (
                 <div
-                    className="pr-1 min-w-[2rem] h-16 cursor-pointer active:scale-y-[.97] flex items-end justify-end"
+                    className={classNames(
+                        "relative pr-1 min-w-[2rem] h-16 cursor-pointer active:scale-y-[.97] flex items-end justify-end",
+                        currentTwColor?.value === color ? 'after:absolute after:left-0 after:bottom-0 after:w-full after:border ' : '',
+                        currentTwColor?.value === color && isLightColor(color) ? 'after:border-red-600' : 'after:border-red-100',
+                    )}
                     style={{ backgroundColor: color }}
-                    onClick={() => setTwColor((v) => v && { group: v.group, key, value: color })}
+                    onClick={() => setCurrentTwColor((v) => v && { group: v.group, key, value: color })}
                     key={idx}
                 >
                     <div style={{ color: isLightColor(color) ? 'black' : 'white' }}>{key}</div>
