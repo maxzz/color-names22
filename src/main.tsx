@@ -9,3 +9,6 @@ root.render(
         <App />
     </React.StrictMode>
 );
+
+//TODO: https://developer.chrome.com/blog/css-color-mix/ 'CSS color-mix()'
+//TODO: parse pasted gradients, patterns
