@@ -42,13 +42,12 @@ function RowPalette({ groupName, className }: { groupName: string; } & HTMLAttri
     const values = Object.entries(allColors[groupName]);
     const [currentTwColor, setCurrentTwColor] = useAtom(currentTwColorAtom);
     return (
-        <div className={classNames("grid grid-cols-10 justify-end text-xs", className)}>
+        <div className={classNames("grid grid-cols-10 justify-end text-xs select-none", className)}>
             {values.map(([key, color], idx) => (
                 <div
                     className={classNames(
                         "relative pr-1 min-w-[2rem] h-16 cursor-pointer active:scale-y-[.97] flex items-end justify-end",
-                        currentTwColor?.value === color ? 'after:absolute after:left-0 after:bottom-0 after:w-full after:border ' : '',
-                        currentTwColor?.value === color && isLightColor(color) ? 'after:border-red-600' : 'after:border-red-100',
+                        currentTwColor?.value === color && 'after:absolute after:left-0 after:-bottom-1.5 after:w-full after:h-1 after:bg-slate-400/40',
                     )}
                     style={{ backgroundColor: color }}
                     onClick={() => setCurrentTwColor((v) => v && { group: v.group, key, value: color })}
