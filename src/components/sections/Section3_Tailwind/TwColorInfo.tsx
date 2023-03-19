@@ -46,8 +46,9 @@ function RowPalette({ groupName, className }: { groupName: string; } & HTMLAttri
             {values.map(([key, color], idx) => (
                 <div
                     className={classNames(
-                        "relative pr-1 min-w-[2rem] h-16 cursor-pointer active:scale-y-[.97] flex items-end justify-end",
-                        currentTwColor?.value === color && 'after:absolute after:left-0 after:-bottom-1.5 after:w-full after:h-1 after:bg-slate-400/40',
+                        "relative pr-1 min-w-[2rem] h-16 cursor-pointer flex items-end justify-end",
+                        currentTwColor?.value === color &&
+                            'after:absolute after:left-0 after:-bottom-1.5 after:w-full after:h-1 after:bg-slate-400/40 after:border-slate-400 after:border-t',
                     )}
                     style={{ backgroundColor: color }}
                     onClick={() => setCurrentTwColor((v) => v && { group: v.group, key, value: color })}
