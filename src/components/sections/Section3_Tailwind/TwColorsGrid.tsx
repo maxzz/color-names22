@@ -26,7 +26,7 @@ export function TwColorsGrid() {
     const colors = useAtomValue(allColorsAtom);
     const groups = Object.entries(colors);
     return (
-        <div className="grid grid-cols-[repeat(10,minmax(16px,46px)),auto] gap-0.5">
+        <div className="grid grid-cols-[repeat(11,minmax(16px,46px)),auto] gap-0.5">
             {groups.map(([groupName, groupValues], idxRow) => (
                 <Row groupName={groupName} groupValues={groupValues} key={idxRow} />
             ))}

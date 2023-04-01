@@ -42,7 +42,7 @@ function RowPalette({ groupName, className }: { groupName: string; } & HTMLAttri
     const values = Object.entries(allColors[groupName]);
     const [currentTwColor, setCurrentTwColor] = useAtom(currentTwColorAtom);
     return (
-        <div className={classNames("grid grid-cols-10 justify-end text-xs select-none", className)}>
+        <div className={classNames("grid grid-cols-11 justify-end text-xs select-none", className)}>
             {values.map(([key, color], idx) => (
                 <div
                     className={classNames(
