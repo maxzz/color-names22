@@ -25,11 +25,18 @@ function Row({ groupName, groupValues }: { groupName: string; groupValues: Group
 export function TwColorsGrid() {
     const colors = useAtomValue(allColorsAtom);
     const groups = Object.entries(colors);
+    console.log('groups',groups);
+    console.log('colors',colors);
+    
+    const cnt = Object.keys(groups[0]?.[1] || {}).length;
     return (
-        <div className="grid grid-cols-[repeat(11,minmax(16px,46px)),auto] gap-0.5">
+        // <div className="grid grid-cols-[repeat(11,minmax(16px,46px)),auto] gap-0.5">
+        <div className={`grid gap-0.5`} style={{gridTemplateColumns: `repeat(${cnt}, minmax(16px,46px)) auto`}}>
             {groups.map(([groupName, groupValues], idxRow) => (
                 <Row groupName={groupName} groupValues={groupValues} key={idxRow} />
             ))}
         </div>
     );
 }
+
+//TODO: WIP. ---------- TwColorsGrid. N of colors changed 10 -> 11

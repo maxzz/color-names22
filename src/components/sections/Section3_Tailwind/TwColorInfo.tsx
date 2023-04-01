@@ -40,6 +40,7 @@ function SelectedColorValue({ currentTwColor }: { currentTwColor: CurrentTwColor
 function RowPalette({ groupName, className }: { groupName: string; } & HTMLAttributes<HTMLDivElement>) {
     const allColors = useAtomValue(allColorsAtom);
     const values = Object.entries(allColors[groupName]);
+    
     const [currentTwColor, setCurrentTwColor] = useAtom(currentTwColorAtom);
     return (
         <div className={classNames("grid grid-cols-11 justify-end text-xs select-none", className)}>
