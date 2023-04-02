@@ -73,5 +73,13 @@ export const currentTwColorAtom = atom(
 
 export const allColorsAtom = atom<ColorGroups>({});
 
+export const colorNameCntAtom = atom( // number of colors in group [50, 100, ..., 950]
+    (get) => {
+        const colors = get(allColorsAtom);
+        const [_, groupValues] = Object.entries(colors)[0] || [];
+        return Object.keys(groupValues || {}).length;
+    }
+);
+
 //#endregion Tailwind
 

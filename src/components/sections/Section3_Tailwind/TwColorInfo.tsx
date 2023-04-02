@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { allColorsAtom, CurrentTwColor, currentTwColorAtom } from '@/store';
+import { allColorsAtom, colorNameCntAtom, CurrentTwColor, currentTwColorAtom } from '@/store';
 import { ValueWithCopy } from '@/components/UI/ValueWithCopy';
 import { classNames } from '@/utils/classnames';
 import { isLightColor } from '@/utils-color';
@@ -15,10 +15,10 @@ function PreviewBox() {
         >
             {currentTwColor &&
                 <div className="flex-1 px-1.5 py-0.5 flex items-end justify-between">
-                    <div className="transition-colors" style={{ color: isLightColor(currentTwColor.value) ? 'black' : 'white' }}>
+                    <div className="transition-colors" style={{ color: isLightColor(currentTwColor.value) ? "black" : "white" }}>
                         {currentTwColor.group}
                     </div>
-                    <div className="transition-colors" style={{ color: isLightColor(currentTwColor.value) ? 'black' : 'white' }}>
+                    <div className="transition-colors" style={{ color: isLightColor(currentTwColor.value) ? "black" : "white" }}>
                         {currentTwColor.key}
                     </div>
                 </div>
@@ -38,24 +38,24 @@ function SelectedColorValue({ currentTwColor }: { currentTwColor: CurrentTwColor
 }
 
 function RowPalette({ groupName, className }: { groupName: string; } & HTMLAttributes<HTMLDivElement>) {
+    const groupCnt = useAtomValue(colorNameCntAtom);
     const allColors = useAtomValue(allColorsAtom);
     const values = Object.entries(allColors[groupName]);
-    
     const [currentTwColor, setCurrentTwColor] = useAtom(currentTwColorAtom);
     return (
-        <div className={classNames("grid grid-cols-11 justify-end text-xs select-none", className)}>
+        <div className={classNames("grid justify-end text-xs select-none", className)} style={{gridTemplateColumns: `repeat(${groupCnt}, minmax(0,1fr))`}}>
             {values.map(([key, color], idx) => (
                 <div
                     className={classNames(
                         "relative pr-1 min-w-[2rem] h-16 cursor-pointer flex items-end justify-end",
                         currentTwColor?.value === color &&
-                            'after:absolute after:left-0 after:-bottom-1.5 after:w-full after:h-1 after:bg-slate-400/40 after:border-slate-400 after:border-t',
+                            "after:absolute after:left-0 after:-bottom-1.5 after:w-full after:h-1 after:bg-slate-400/40 after:border-slate-400 after:border-t",
                     )}
                     style={{ backgroundColor: color }}
                     onClick={() => setCurrentTwColor((v) => v && { group: v.group, key, value: color })}
                     key={idx}
                 >
-                    <div style={{ color: isLightColor(color) ? 'black' : 'white' }}>{key}</div>
+                    <div style={{ color: isLightColor(color) ? "black" : "white" }}>{key}</div>
                 </div>
             ))}
         </div>
@@ -83,7 +83,7 @@ export function TwColorInfoContainer({ className, ...rest }: HTMLAttributes<HTML
             <div className="flex items-start justify-between space-x-4 text-sm">
 
                 {/* Preview and color value */}
-                <div className={classNames("flex", containerWidth < 700 ? 'flex-col space-x-0' : 'flex-row space-x-2',)}>
+                <div className={classNames("flex", containerWidth < 700 ? "flex-col space-x-0" : "flex-row space-x-2")}>
                     <PreviewBox />
                     <SelectedColorValue currentTwColor={currentTwColor} />
                 </div>
