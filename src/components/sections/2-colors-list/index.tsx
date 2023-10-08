@@ -1,26 +1,7 @@
-import { Fragment, HTMLAttributes } from 'react';
-import { useAtomValue } from 'jotai';
-import { viewListAtoms } from '@/store';
-import { ColorListInfoPanel } from './ColorListInfoPanel';
-import { formatHSL, } from '@/utils-color';
+import { HTMLAttributes } from 'react';
+import { ColorListInfoPanel } from './1-top-panel';
+import { ColorNamesList } from './2-color-names-list';
 import { classNames } from '@/utils';
-
-function List() {
-    const colorList = useAtomValue(viewListAtoms.colorListAtom);
-    return (
-        <div className="grid grid-cols-[auto,auto,8rem,auto,minmax(20px,1fr)] gap-x-2">
-            {colorList.map((color, idx) => (
-                <Fragment key={color.name}>
-                    <div className="text-xs leading-5 front-mono text-right">{idx}</div>
-                    <div className="text-xs leading-5 front-mono">{color.hex}</div>
-                    <div className="text-xs leading-5 front-mono">{formatHSL(color.hsl)}</div>
-                    <div className="text-sm">{color.name}</div>
-                    <div style={{ backgroundColor: color.name }} />
-                </Fragment>
-            ))}
-        </div>
-    );
-}
 
 export function Section2_ColorsList({ className }: HTMLAttributes<HTMLUListElement>) {
     return (
@@ -28,7 +9,7 @@ export function Section2_ColorsList({ className }: HTMLAttributes<HTMLUListEleme
             <ColorListInfoPanel />
             <div className="h-full overflow-overlay">
                 <div className="pl-4 pr-8 py-4 lg:pl-12 lg:pr-16 xl:pl-16 xl:pr-20 2xl:pl-[9rem] 2xl:pr-[12rem]">
-                    <List />
+                    <ColorNamesList />
                 </div>
             </div>
         </div>
