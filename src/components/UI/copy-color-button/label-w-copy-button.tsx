@@ -1,5 +1,5 @@
 import { classNames } from "@/utils/classnames";
-import { IconClipboard } from "../icons/normal";
+import { IconClipboard } from "@/components/ui/icons/normal";
 
 export function ValueViewIcon({ valueToCopy, isHovered }: { valueToCopy?: string; isHovered?: boolean; }) {
     return (

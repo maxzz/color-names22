@@ -1,7 +1,7 @@
+import { HTMLAttributes } from 'react';
 import { useAtom } from 'jotai';
-import React, { HTMLAttributes } from 'react';
-import { AppAtoms, SectionName } from '../../store';
-import { classNames } from '../../utils/classnames';
+import { AppAtoms, SectionName } from '@/store';
+import { classNames } from '@/utils/classnames';
 import { App3_Footer } from './3-footer';
 
 const btnStyle = {
@@ -28,7 +28,7 @@ function LinkButton({ label, sectionName }: { label: string, sectionName: Sectio
     );
 }
 
-function Links({ className }: React.HTMLAttributes<HTMLUListElement>) {
+function Links({ className }: HTMLAttributes<HTMLUListElement>) {
     return (
         <ul className={classNames("space-y-2", className)} >
             <LinkButton label="Hue groups" sectionName={SectionName.hue} />

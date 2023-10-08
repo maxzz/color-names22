@@ -1,8 +1,8 @@
-import React, { ReactNode } from 'react';
-import { classNames } from '../../../utils/classnames';
+import { HTMLAttributes, ReactNode } from 'react';
+import useMeasure from 'react-use-measure';
 import { TwColorsGrid } from './colors-grid';
 import { TwColorInfoContainer } from './color-row';
-import useMeasure from 'react-use-measure';
+import { classNames } from '@/utils/classnames';
 
 function VerticalOverflowFix({ children }: { children: ReactNode; }) {
     const [refParent, parent] = useMeasure();
@@ -17,7 +17,7 @@ function VerticalOverflowFix({ children }: { children: ReactNode; }) {
     );
 }
 
-export function Section3_Tailwind({ className }: React.HTMLAttributes<HTMLUListElement>) {
+export function Section3_Tailwind({ className }: HTMLAttributes<HTMLUListElement>) {
     return (
         <div className={classNames("h-full flex flex-col bg-primary-100 overflow-hidden", className)}>
             <div className="bg-primary-200 border-slate-400 border-b">

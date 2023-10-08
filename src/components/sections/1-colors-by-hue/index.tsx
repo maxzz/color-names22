@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtomValue } from 'jotai';
-import { viewListAtoms } from '../../../store';
-import { classNames } from '../../../utils/classnames';
+import { viewListAtoms } from '@/store';
+import { classNames } from '@/utils/classnames';
 import { SelectedColorInfoPanel } from './1-selected-color';
 import { ColorNeighborsGrid } from './2-color-neighbors-grid';
 

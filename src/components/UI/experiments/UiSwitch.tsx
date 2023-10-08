@@ -1,14 +1,14 @@
 import React, { HTMLAttributes } from 'react';
-import { styled } from '../../../stitches.config';
-import * as SwitchPrimitive from '@radix-ui/react-switch';
-import { classNames } from '../../../utils/classnames';
+import * as Prim from '@radix-ui/react-switch';
+import { styled } from '@/stitches.config';
+import { classNames } from '@/utils/classnames';
 
 const blackA = {
     blackA7: '#00000080',
     blackA9: 'red',
 };
 
-const StyledSwitch = styled(SwitchPrimitive.Root, {
+const StyledSwitch = styled(Prim.Root, {
     //all: 'unset',
     // width: 42,
     // height: 25,
@@ -22,7 +22,7 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
     //'&[data-state="checked"]': { backgroundColor: 'rgb(156, 163, 175)' }, //bg-gray-400
 });
 
-const StyledThumb = styled(SwitchPrimitive.Thumb, {
+const StyledThumb = styled(Prim.Thumb, {
     display: 'block',
     // width: 21,
     // height: 21,
