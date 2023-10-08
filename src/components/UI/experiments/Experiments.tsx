@@ -1,5 +1,5 @@
 import { UISwitch } from './swtches/UISwitch';
-import { UISwitch as UIRadixSwitch } from '../UiSwitch';
+import { UISwitch as UIRadixSwitch } from './UiSwitch';
 import { UISwitchCheck } from './swtches/UISwitchCheck';
 import { UISwitchRadio } from './swtches/UISwitchRadio';
 

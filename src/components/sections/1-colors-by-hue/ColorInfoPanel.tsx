@@ -1,11 +1,11 @@
 import React, { HTMLAttributes } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
-import { viewHueAtoms } from '@/store';
 import { a, easings, useTransition } from '@react-spring/web';
+import { viewHueAtoms } from '@/store';
 import { classNames } from '@/utils/classnames';
 import { formatHSL, formatRGB } from '@/utils-color';
-import { MonoSwitch } from '@/components/ui/UIMonoSwitch';
-import { ValueView, ValueWithCopy } from '@/components/ui/ValueWithCopy';
+import { MonoSwitch } from './mono-color-switch';
+import { ValueViewIcon, ValueWithCopy } from '@/components/ui/ValueWithCopy';
 import { HueSlider } from './HueSlider/HueSlider';
 
 const copyHueNoticeTextShadow = {
@@ -15,21 +15,23 @@ const copyHueNoticeTextShadow = {
 function CopyHueNotice() {
     return (
         // <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        <div className="absolute">
-            <div className="px-2 py-px text-sm bg-green-500 text-green-900 border-green-700 border rounded" style={copyHueNoticeTextShadow}>Copied</div>
+        <div className="relative">
+            <div className="px-2 py-px text-sm bg-green-500 text-green-900 border-green-700 border rounded" style={copyHueNoticeTextShadow}>
+                Copied
+            </div>
         </div>
     );
 }
 
-function SingleValue({ copyValue }: { copyValue: string; }) {
-    return (<>
-        <ValueWithCopy copyValue={copyValue} copyNotice={<CopyHueNotice />}>
-            <ValueView />
-        </ValueWithCopy>
-    </>);
+function ColorNamespaceButton({ copyValue }: { copyValue: string; }) {
+    return (
+        <div className="h-5">
+            <ValueWithCopy valueToCopy={copyValue} copyNotice={<CopyHueNotice />} />
+        </div>
+    );
 }
 
-function ColorPreview() {
+function ColorNamespaceButtons() {
     const color = useAtomValue(viewHueAtoms.colorAtom);
     const borderColor = () => color ? color.dark ? 'white' : 'black' : 'transparent';
     return (
@@ -44,10 +46,10 @@ function ColorPreview() {
             {/* <CopyHueNotice /> */}
             {color &&
                 <div className="flex flex-col text-xs">
-                    <SingleValue copyValue={color.name} />
-                    <SingleValue copyValue={color.hex} />
-                    <SingleValue copyValue={formatRGB(color.rgb)} />
-                    <SingleValue copyValue={formatHSL(color.hsl)} />
+                    <ColorNamespaceButton copyValue={color.name} />
+                    <ColorNamespaceButton copyValue={color.hex} />
+                    <ColorNamespaceButton copyValue={formatRGB(color.rgb)} />
+                    <ColorNamespaceButton copyValue={formatHSL(color.hsl)} />
                 </div>
             }
         </div>
@@ -101,7 +103,7 @@ export function ColorInfoPanel() {
                 </div>
 
                 <div className="flex items-center space-x-4 text-sm">
-                    <ColorPreview />
+                    <ColorNamespaceButtons />
                     {/* <ColorValueInfo /> */}
                 </div>
 

@@ -29,13 +29,11 @@ function PreviewBox() {
 }
 
 function SelectedColorValue({ currentTwColor }: { currentTwColor: CurrentTwColor | null; }) {
-    return (
-        <div className="text-xs flex items-center">
-            {currentTwColor && <>
-                <ValueWithCopy copyValue={currentTwColor.value.toUpperCase()} />
-            </>}
-        </div>
-    );
+    return (<>
+        {currentTwColor && (
+            <ValueWithCopy valueToCopy={currentTwColor.value.toUpperCase()} />
+        )}
+    </>);
 }
 
 function RowPalette({ groupName, className }: { groupName: string; } & HTMLAttributes<HTMLDivElement>) {

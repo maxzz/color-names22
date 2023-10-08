@@ -1,10 +1,16 @@
 import React, { HTMLAttributes, useState } from "react";
 import { useAtom } from "jotai";
-import { viewHueAtoms } from "../../store";
+import { viewHueAtoms } from "../../../store";
 import { a, useSpring } from "@react-spring/web";
-import { classNames } from "../../utils/classnames";
+import { classNames } from "../../../utils/classnames";
 
-function Cell({ label, active, setValue, className, ...rest }: { label: string; active: boolean; setValue: () => void; } & HTMLAttributes<HTMLDivElement>) {
+type MonoSwitchCellProps = {
+    label: string;
+    active: boolean;
+    setValue: () => void;
+};
+
+function MonoSwitchCell({ label, active, setValue, className, ...rest }: MonoSwitchCellProps & HTMLAttributes<HTMLDivElement>) {
     return (
         <div
             className={classNames(
@@ -22,7 +28,11 @@ function Cell({ label, active, setValue, className, ...rest }: { label: string; 
 
 export function MonoSwitch({ className }: HTMLAttributes<HTMLDivElement>) {
     const [mono, setMono] = useAtom(viewHueAtoms.monoAtom);
-    const styles = useSpring({ from: { x: '0%', }, to: { x: mono ? '0%' : '100%', }, config: { duration: 150 } });
+    const styles = useSpring({
+        from: { x: '0%', },
+        to: { x: mono ? '0%' : '100%', },
+        config: { duration: 150 }
+    });
     return (
         <div
             className={classNames(
@@ -31,11 +41,11 @@ export function MonoSwitch({ className }: HTMLAttributes<HTMLDivElement>) {
             )}
         >
             <div className="flex">
-                <Cell label="Mono" title="Monochrome" active={mono} setValue={() => setMono((v) => !v)} />
-                <Cell label="Color" title="Hue" className="border-l border-primary-400" active={!mono} setValue={() => setMono((v) => !v)} />
+                <MonoSwitchCell label="Mono" title="Monochrome" active={mono} setValue={() => setMono((v) => !v)} />
+                <MonoSwitchCell label="Color" title="Hue" className="border-l border-primary-400" active={!mono} setValue={() => setMono((v) => !v)} />
             </div>
 
-            <a.div style={styles} className={classNames("absolute bottom-0 w-1/2 h-full bg-primary-400/40")}></a.div>
+            <a.div style={styles} className={classNames("absolute bottom-0 w-1/2 h-full bg-primary-400/40")} />
         </div>
     );
 }
