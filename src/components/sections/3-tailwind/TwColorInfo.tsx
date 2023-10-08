@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { allColorsAtom, colorNameCntAtom, CurrentTwColor, currentTwColorAtom } from '@/store';
-import { ValueWithCopy } from '@/components/UI/ValueWithCopy';
+import { ValueWithCopy } from '@/components/ui/ValueWithCopy';
 import { classNames } from '@/utils/classnames';
 import { isLightColor } from '@/utils-color';
 import useMeasure from 'react-use-measure';

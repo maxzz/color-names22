@@ -1,7 +1,7 @@
-import { classNames } from "@/utils/classnames";
-import { a, easings, useTransition } from "@react-spring/web";
 import { cloneElement, HTMLAttributes, ReactNode, useState } from "react";
-import { IconClipboard } from "./UIIcons";
+import { a, easings, useTransition } from "@react-spring/web";
+import { classNames } from "@/utils/classnames";
+import { IconClipboard } from "./icons/normal";
 
 function MountCopyNotice({ show, setShow, children }: { show: boolean; setShow?: (v: boolean) => void; } & React.HTMLAttributes<HTMLDivElement>) {
     const transitions = useTransition(Number(show), {

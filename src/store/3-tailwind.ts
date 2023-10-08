@@ -1,4 +1,4 @@
-import { ColorGroups } from "@/components/UI/TailwindColorsBridge";
+import { ColorGroups } from "@/components/ui/tailwind-colors-bridge";
 import { atom } from "jotai";
 
 //#region Tailwind

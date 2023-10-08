@@ -4,8 +4,8 @@ import { viewHueAtoms } from '@/store';
 import { a, easings, useTransition } from '@react-spring/web';
 import { classNames } from '@/utils/classnames';
 import { formatHSL, formatRGB } from '@/utils-color';
-import { MonoSwitch } from '@/components/UI/UIMonoSwitch';
-import { ValueView, ValueWithCopy } from '@/components/UI/ValueWithCopy';
+import { MonoSwitch } from '@/components/ui/UIMonoSwitch';
+import { ValueView, ValueWithCopy } from '@/components/ui/ValueWithCopy';
 import { HueSlider } from './HueSlider/HueSlider';
 
 const copyHueNoticeTextShadow = {

@@ -1,11 +1,11 @@
 import { useAtomValue } from 'jotai';
 import { dataLoadAtom } from './store';
-import { TailwindColorsBridge } from './components/UI/TailwindColorsBridge';
-import { App1_Header } from './components/App1_Header';
-import { App2_Main } from './components/App2_Main';
-import { App3_Footer } from './components/App3_Footer';
+import { TailwindColorsBridge } from './components/ui/tailwind-colors-bridge';
+import { App1_Header } from './components/app/1-header';
+import { App2_Main } from './components/app/2-main';
+import { App3_Footer } from './components/app/3-footer';
 import { classNames } from './utils/classnames';
-import './App.scss';
+import './App.css';
 
 const headerShadow1 = "shadow-[1px_0px_3px_0px__#000]";
 const headerShadow2 = "shadow-[1px_0px_3px_0px__#000]";
@@ -16,13 +16,17 @@ function App() {
     useAtomValue(dataLoadAtom);
     return (<>
         <TailwindColorsBridge />
+
         <div className="h-screen flex flex-col md:flex-row bg-slate-50">
+
             <App1_Header className="md:w-80 lg:w-[33rem] transition-all" />
             {/* <App1_Header className={classNames("md:w-80 lg:w-[33rem] transition-all", headerShadow1)} /> */}
             {/* <App1_Header className={classNames("md:w-80 lg:w-[33rem] transition-all")} style={headerShadowStyle} /> */}
 
             <div className="flex-1 flex flex-col overflow-hidden">
+
                 <App2_Main className="flex-1" />
+                
                 <div className="md:hidden">
                     <App3_Footer />
                 </div>

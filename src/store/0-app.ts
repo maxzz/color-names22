@@ -2,8 +2,8 @@ import { Atomize, atomLoader, atomWithCallback } from "@/hooks/atomsX";
 import { Getter, Setter } from "jotai";
 import { AppOptions, initialData } from "./store-initial-data";
 import { saveStore } from "./store-save";
-import { setColorList, _hueAtom, _monoAtom } from "./store1_hue";
-import { viewListAtoms, _colorListSortByAtom } from "./store2_sorted-colors";
+import { setColorList, _hueAtom, _monoAtom } from "./1-hue";
+import { viewListAtoms, _colorListSortByAtom } from "./2-sorted-colors";
 
 //#region App options
 
