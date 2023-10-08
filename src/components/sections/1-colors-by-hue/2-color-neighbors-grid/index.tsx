@@ -1,13 +1,14 @@
-import { useAtom, useSetAtom } from 'jotai';
-import { viewHueAtoms } from '../../../../store';
-import './color-neighbors.scss';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { viewHueAtoms } from '@/store';
+import './color-neighbors-grid.scss';
 
-export function ColorNeighbors() {
-    const [colorsGroups] = useAtom(viewHueAtoms.colorGroupsAtom);
+export function ColorNeighborsGrid() {
+    const colorsGroups = useAtomValue(viewHueAtoms.colorGroupsAtom);
     const setGlobalColor = useSetAtom(viewHueAtoms.colorAtom);
     return (
         <div className="place-self-center relative w-3/4 max-w-[42rem] aspect-square">
             <div className="w-full h-full grid border border-slate-200 shadow-md">
+
                 {colorsGroups.map((group, groupIdx) => (
                     <div className="grid grid-flow-col" key={groupIdx}>
                         {group.map((color, colorIdx) => (
@@ -25,6 +26,7 @@ export function ColorNeighbors() {
                         ))}
                     </div >
                 ))}
+
             </div>
             <div className="axis axis-lightness">lightness</div>
             <div className="axis axis-saturation">saturation</div>
