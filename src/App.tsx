@@ -4,7 +4,6 @@ import { TailwindColorsBridge } from './components/ui/tailwind-colors-bridge';
 import { App1_Header } from './components/app/1-header';
 import { App2_Main } from './components/app/2-main';
 import { App3_Footer } from './components/app/3-footer';
-import { classNames } from './utils/classnames';
 import './App.css';
 
 const headerShadow1 = "shadow-[1px_0px_3px_0px__#000]";

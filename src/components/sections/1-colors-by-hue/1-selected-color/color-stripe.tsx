@@ -2,8 +2,8 @@ import { HTMLAttributes } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { a, easings, useTransition } from '@react-spring/web';
 import { viewHueAtoms } from '@/store';
-import { classNames } from '@/utils/classnames';
 import { HueSlider } from './hue-slider';
+import { classNames } from '@/utils';
 
 function HueToleranceInfo({ className }: HTMLAttributes<HTMLDivElement>) {
     const [hue, setHue] = useAtom(viewHueAtoms.hueAtom); //TODO: const [localHue, setLocalHue] = useState(0);

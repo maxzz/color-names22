@@ -1,5 +1,3 @@
-//#region By Hue
-
 import { Atomize, atomWithCallback } from "@/hooks/atomsX";
 import { allColorsWoAlternatives, ColorItem, groupColors } from "@/utils-color";
 import { atom, SetStateAction, Setter } from "jotai";
@@ -40,5 +38,3 @@ export function setColorList(hue: number, mono: boolean, set: Setter) {
     set(viewHueAtoms.toleranceAtom, groups.tolerance);
     set(viewHueAtoms.colorAtom, groups?.list?.[0]?.[0] || null);
 }
-
-//#endregion By Hue

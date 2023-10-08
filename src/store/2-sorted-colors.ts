@@ -1,8 +1,6 @@
-//#region Sorted colors list
-
+import { atom, SetStateAction } from "jotai";
 import { Atomize, atomWithCallback } from "@/hooks/atomsX";
 import { allColorsWoAlternatives, ColorItem, SortBy, sortColorItemsFn } from "@/utils-color";
-import { atom, SetStateAction } from "jotai";
 import { initialData, ViewListOptions } from "./store-initial-data";
 import { saveStore } from "./store-save";
 
@@ -23,6 +21,3 @@ export const viewListAtoms: Atomize<ViewListOptions & {
     ),
     colorListAtom: atom<ColorItem[]>([]),
 };
-
-//#endregion Sorted colors list
-

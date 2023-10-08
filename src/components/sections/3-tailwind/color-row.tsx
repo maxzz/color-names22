@@ -1,10 +1,10 @@
-import React, { HTMLAttributes } from 'react';
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { HTMLAttributes } from 'react';
+import { useAtom, useAtomValue } from 'jotai';
+import useMeasure from 'react-use-measure';
 import { allColorsAtom, colorNameCntAtom, CurrentTwColor, currentTwColorAtom } from '@/store';
 import { CopyColorButton } from '@/components/ui/copy-color-button';
-import { classNames } from '@/utils/classnames';
 import { isLightColor } from '@/utils-color';
-import useMeasure from 'react-use-measure';
+import { classNames } from '@/utils';
 
 function PreviewBox() {
     const currentTwColor = useAtomValue(currentTwColorAtom);

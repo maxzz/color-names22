@@ -1,7 +1,7 @@
-import React, { HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
 import * as Prim from '@radix-ui/react-switch';
 import { styled } from '@/stitches.config';
-import { classNames } from '@/utils/classnames';
+import { classNames } from '@/utils';
 
 const blackA = {
     blackA7: '#00000080',
@@ -84,7 +84,7 @@ export function UISwitch({ value, onChange, className, ...rest }: SetValueProps 
     );
 }
 
-export function UISwitchWithLabel({ value, onChange, children, className, onLeft, ...rest }: { onLeft?: boolean; } & SetValueProps & React.HTMLAttributes<HTMLLabelElement>) {
+export function UISwitchWithLabel({ value, onChange, children, className, onLeft, ...rest }: { onLeft?: boolean; } & SetValueProps & HTMLAttributes<HTMLLabelElement>) {
     return (
         <label className={classNames("flex items-center md:flex-col md:text-[.65rem] md:pb-2 lg:flex-row lg:text-sm lg:pb-0 select-none", className)} {...rest}>
             {onLeft && <UISwitch value={value} onChange={onChange} />}

@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
+import { Fragment, HTMLAttributes } from 'react';
 import { useAtomValue } from 'jotai';
 import { viewListAtoms } from '@/store';
-import { formatHSL, } from '@/utils-color';
-import { classNames } from '@/utils/classnames';
 import { ColorListInfoPanel } from './ColorListInfoPanel';
+import { formatHSL, } from '@/utils-color';
+import { classNames } from '@/utils';
 
 function List() {
     const colorList = useAtomValue(viewListAtoms.colorListAtom);
@@ -22,7 +22,7 @@ function List() {
     );
 }
 
-export function Section2_ColorsList({ className }: React.HTMLAttributes<HTMLUListElement>) {
+export function Section2_ColorsList({ className }: HTMLAttributes<HTMLUListElement>) {
     return (
         <div className={classNames("flex flex-col bg-primary-100 overflow-hidden", className)}>
             <ColorListInfoPanel />

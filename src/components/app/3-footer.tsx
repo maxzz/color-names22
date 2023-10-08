@@ -2,7 +2,7 @@ import React, { HTMLAttributes } from 'react';
 import { useAtomValue } from 'jotai';
 import { AppAtoms, SectionName } from '@/store';
 import { IconGithubLogo } from '@/components/ui/icons/normal';
-import { classNames } from '@/utils/classnames';
+import { classNames } from '@/utils';
 
 function Section1_HueLinks() {
     return (<>

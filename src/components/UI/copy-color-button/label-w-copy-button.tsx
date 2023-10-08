@@ -1,4 +1,4 @@
-import { classNames } from "@/utils/classnames";
+import { classNames } from "@/utils";
 import { IconClipboard } from "@/components/ui/icons/normal";
 
 export function ValueViewIcon({ valueToCopy, isHovered }: { valueToCopy?: string; isHovered?: boolean; }) {

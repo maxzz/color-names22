@@ -1,9 +1,9 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import { useAtom } from 'jotai';
+import * as Prim from '@radix-ui/react-radio-group';
 import { viewListAtoms } from '@/store';
 import { SortBy } from '@/utils-color';
-import { classNames } from '@/utils/classnames';
-import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
+import { classNames } from '@/utils';
 
 // function SortOrderSwitch({className}: React.HTMLAttributes<HTMLUListElement>) {
 //     const [sortBy, setSortBy] = useAtom(viewListAtoms.sortByAtom);
@@ -31,9 +31,9 @@ import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 type StringNumberValue = { value: string | number | undefined; };
 type FixValue<T> = Omit<T, 'value'> & StringNumberValue;
 
-const Root = RadioGroupPrimitive.Root as React.ForwardRefExoticComponent<FixValue<RadioGroupPrimitive.RadioGroupProps> & React.RefAttributes<HTMLDivElement>>;
-const Item = RadioGroupPrimitive.Item as React.ForwardRefExoticComponent<FixValue<RadioGroupPrimitive.RadioGroupItemProps> & React.RefAttributes<HTMLButtonElement>>;
-const Indicator = RadioGroupPrimitive.Indicator;
+const Root = Prim.Root as React.ForwardRefExoticComponent<FixValue<Prim.RadioGroupProps> & React.RefAttributes<HTMLDivElement>>;
+const Item = Prim.Item as React.ForwardRefExoticComponent<FixValue<Prim.RadioGroupItemProps> & React.RefAttributes<HTMLButtonElement>>;
+const Indicator = Prim.Indicator;
 
 function ItemCell({ label, value }: { label: string; } & StringNumberValue) {
     return (

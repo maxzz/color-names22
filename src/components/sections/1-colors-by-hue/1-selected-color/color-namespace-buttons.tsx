@@ -1,7 +1,7 @@
 import { useAtomValue } from 'jotai';
 import { viewHueAtoms } from '@/store';
-import { formatHSL, formatRGB } from '@/utils-color';
 import { CopyColorButton } from '@/components/ui/copy-color-button';
+import { formatHSL, formatRGB } from '@/utils-color';
 
 const copyHueNoticeTextShadow = {
     textShadow: '#98989887 1px 1px, #4141412e -1px -1px 0px'

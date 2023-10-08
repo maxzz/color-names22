@@ -1,10 +1,10 @@
 import { useAtomValue } from 'jotai';
 import { AppAtoms, SectionName } from '@/store';
-import { classNames } from '@/utils/classnames';
 import { Section1_ColorsByHue } from '../sections/1-colors-by-hue';
 import { Section2_ColorsList } from '../sections/2-colors-list';
 import { Section3_Tailwind } from '../sections/3-tailwind';
 import { Experiments } from '../ui/experiments/Experiments';
+import { classNames } from '@/utils';
 
 export function App2_Main({ className }: React.HTMLAttributes<HTMLDivElement>) {
     const currentSection = useAtomValue(AppAtoms.currentSectionAtom);

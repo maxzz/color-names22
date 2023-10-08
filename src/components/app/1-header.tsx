@@ -1,8 +1,8 @@
 import { HTMLAttributes } from 'react';
 import { useAtom } from 'jotai';
 import { AppAtoms, SectionName } from '@/store';
-import { classNames } from '@/utils/classnames';
 import { App3_Footer } from './3-footer';
+import { classNames } from '@/utils';
 
 const btnStyle = {
     "hi": {

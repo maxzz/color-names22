@@ -1,10 +1,10 @@
-import { debounce } from "@/utils/debounce";
 import { Getter } from "jotai";
 import { Store } from "./store-initial-data";
 import { STORAGE_KEY } from "./store-load";
 import { AppAtoms } from "./0-app";
 import { viewHueAtoms, _hueAtom, _monoAtom } from "./1-hue";
 import { viewListAtoms } from "./2-sorted-colors";
+import { debounce } from "@/utils";
 
 const saveDebounced = debounce(function _save(get: Getter) {
     let newStore: Store = {
