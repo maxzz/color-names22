@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useAtom } from "jotai";
 import { viewHueAtoms } from "../../../../store";
-import './HueSlider.scss';
+import './hue-slider.scss';
 
 export function HueSlider() {
     const [hue, setHue] = useAtom(viewHueAtoms.hueAtom);

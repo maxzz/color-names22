@@ -1,7 +1,6 @@
-import React from 'react';
 import { useAtom, useSetAtom } from 'jotai';
 import { viewHueAtoms } from '../../../../store';
-import './ColorNeighbors.scss';
+import './color-neighbors.scss';
 
 export function ColorNeighbors() {
     const [colorsGroups] = useAtom(viewHueAtoms.colorGroupsAtom);

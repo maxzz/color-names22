@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { allColorsAtom, colorNameCntAtom, CurrentTwColor, currentTwColorAtom } from '@/store';
-import { ValueWithCopy } from '@/components/ui/ValueWithCopy';
+import { CopyColorButton } from '@/components/ui/copy-color-button';
 import { classNames } from '@/utils/classnames';
 import { isLightColor } from '@/utils-color';
 import useMeasure from 'react-use-measure';
@@ -29,9 +29,10 @@ function PreviewBox() {
 }
 
 function SelectedColorValue({ currentTwColor }: { currentTwColor: CurrentTwColor | null; }) {
+    //TODO: show color value in hex, rgb, hsl
     return (<>
         {currentTwColor && (
-            <ValueWithCopy valueToCopy={currentTwColor.value.toUpperCase()} />
+            <CopyColorButton valueToCopy={currentTwColor.value.toUpperCase()} />
         )}
     </>);
 }

@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { classNames } from '../../../utils/classnames';
-import { TwColorsGrid } from './TwColorsGrid';
-import { TwColorInfoContainer } from './TwColorInfo';
+import { TwColorsGrid } from './colors-grid';
+import { TwColorInfoContainer } from './color-row';
 import useMeasure from 'react-use-measure';
 
 function VerticalOverflowFix({ children }: { children: ReactNode; }) {

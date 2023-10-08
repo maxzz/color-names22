@@ -2,8 +2,8 @@ import React from 'react';
 import { useAtomValue } from 'jotai';
 import { viewListAtoms } from '../../../store';
 import { classNames } from '../../../utils/classnames';
-import { ColorInfoPanel } from './ColorInfoPanel';
-import { ColorNeighbors } from './ColorNeighbors/ColorNeighbors';
+import { ColorInfoPanel } from './1-selected-color';
+import { ColorNeighbors } from './2-color-neighbors';
 
 export function Section1_ColorsByHue({ className, ...rest }: React.HTMLAttributes<HTMLDivElement>) {
     useAtomValue(viewListAtoms.sortByAtom);

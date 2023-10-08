@@ -4,9 +4,9 @@ import { a, easings, useTransition } from '@react-spring/web';
 import { viewHueAtoms } from '@/store';
 import { classNames } from '@/utils/classnames';
 import { formatHSL, formatRGB } from '@/utils-color';
-import { MonoSwitch } from './mono-color-switch';
-import { ValueViewIcon, ValueWithCopy } from '@/components/ui/ValueWithCopy';
-import { HueSlider } from './HueSlider/HueSlider';
+import { MonoSwitch } from '../mono-color-switch';
+import { CopyColorButton } from '@/components/ui/copy-color-button';
+import { HueSlider } from '../hue-slider';
 
 const copyHueNoticeTextShadow = {
     textShadow: '#98989887 1px 1px, #4141412e -1px -1px 0px'
@@ -26,7 +26,7 @@ function CopyHueNotice() {
 function ColorNamespaceButton({ copyValue }: { copyValue: string; }) {
     return (
         <div className="h-5">
-            <ValueWithCopy valueToCopy={copyValue} copyNotice={<CopyHueNotice />} />
+            <CopyColorButton valueToCopy={copyValue} copyNotice={<CopyHueNotice />} />
         </div>
     );
 }
