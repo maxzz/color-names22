@@ -10,6 +10,9 @@ export interface ColorItem {
 
 export const formatRGB = (rgb: ColorTuple3) => `rgb(${rgb.join(', ')})`;
 export const formatHSL = (hsl: ColorTuple3) => `hsl(${hsl.map((item, idx) => !idx ? item : `${item}%`).join(', ')})`;
+export const formatHSLMono = (hsl: ColorTuple3) => `hsl(${hsl.map((item, idx) => {
+    return !idx ? `${item}`.padStart(3, ' ') : `${`${item}`.padStart(4, ' ')}%`;
+}).join(', ')})`;
 
 export * from './sortColors';
 export { allColorsWoAlternatives } from './allColors';
