@@ -1,8 +1,5 @@
-import React, { useState } from 'react'; //https://codepen.io/raphaelgoetter/pen/rGjOOg
+import { useState } from 'react'; //https://codepen.io/raphaelgoetter/pen/rGjOOg
 import styles from './UISwitch.module.scss';
-
-console.log('styles', styles);
-
 
 export function UISwitch() {
     const [on, setOn] = useState(false);

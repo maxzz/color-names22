@@ -1,7 +1,4 @@
-import React from 'react'; //https://www.ctrl.blog/entry/apple-music-nullbytes.html
-import styles from './UICoffeAnimation.module.scss';
-
-//console.log(styles);
+import styles from './UICoffeAnimation.module.scss'; //https://www.ctrl.blog/entry/apple-music-nullbytes.html
 
 export function UICoffeAnimation() {
     return (

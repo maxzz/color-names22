@@ -1,5 +1,5 @@
-import React, { useState } from 'react'; //https://codepen.io/raphaelgoetter/pen/rGjOOg
-import styles from './UISwitch.module.scss';
+import { useState } from 'react'; 
+import styles from './UISwitch.module.scss'; //https://codepen.io/raphaelgoetter/pen/rGjOOg
 
 export function UISwitchCheck() {
     const [on, setOn] = useState(false);

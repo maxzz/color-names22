@@ -1,11 +1,11 @@
-import React from 'react';
+import { ForwardRefExoticComponent, HTMLAttributes, RefAttributes } from 'react';
 import { useAtom } from 'jotai';
 import * as Prim from '@radix-ui/react-radio-group';
 import { viewListAtoms } from '@/store';
 import { SortBy } from '@/utils-color';
 import { classNames } from '@/utils';
 
-// function SortOrderSwitch({className}: React.HTMLAttributes<HTMLUListElement>) {
+// function SortOrderSwitch({className}: HTMLAttributes<HTMLUListElement>) {
 //     const [sortBy, setSortBy] = useAtom(viewListAtoms.sortByAtom);
 //     const onChange = (event: ChangeEvent<HTMLInputElement>) => setSortBy(+event.target.value);
 //     return (
@@ -31,8 +31,8 @@ import { classNames } from '@/utils';
 type StringNumberValue = { value: string | number | undefined; };
 type FixValue<T> = Omit<T, 'value'> & StringNumberValue;
 
-const Root = Prim.Root as React.ForwardRefExoticComponent<FixValue<Prim.RadioGroupProps> & React.RefAttributes<HTMLDivElement>>;
-const Item = Prim.Item as React.ForwardRefExoticComponent<FixValue<Prim.RadioGroupItemProps> & React.RefAttributes<HTMLButtonElement>>;
+const Root = Prim.Root as ForwardRefExoticComponent<FixValue<Prim.RadioGroupProps> & RefAttributes<HTMLDivElement>>;
+const Item = Prim.Item as ForwardRefExoticComponent<FixValue<Prim.RadioGroupItemProps> & RefAttributes<HTMLButtonElement>>;
 const Indicator = Prim.Indicator;
 
 function ItemCell({ label, value }: { label: string; } & StringNumberValue) {
@@ -46,7 +46,7 @@ function ItemCell({ label, value }: { label: string; } & StringNumberValue) {
     );
 }
 
-function SortOrderSwitch({ className }: React.HTMLAttributes<HTMLDivElement>) {
+function SortOrderSwitch({ className }: HTMLAttributes<HTMLDivElement>) {
     const [sortBy, setSortBy] = useAtom(viewListAtoms.sortByAtom);
     const onChange = (v: string) => setSortBy(+v);
     return (
